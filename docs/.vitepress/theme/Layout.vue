@@ -1,4 +1,23 @@
 <template>
-  <h1>Custom Layout!</h1>
-  <Content /><!-- this is where markdown content will be rendered -->
+  <v-app>
+    <v-navigation-drawer v-model="drawer" app>
+      <!--  -->
+    </v-navigation-drawer>
+
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-app-bar>
+
+    <v-main>
+      <Content />
+    </v-main>
+  </v-app>
 </template>
+
+<script>
+export default {
+  data: () => ({ drawer: null }),
+};
+</script>
