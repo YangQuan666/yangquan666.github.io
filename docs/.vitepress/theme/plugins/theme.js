@@ -13,7 +13,7 @@ function initTheme() {
 }
 export default {
     theme: theme,
-    initTheme: initTheme,
+    initTheme: () => initTheme(),
     toggleTheme: () =>
         (theme.value = theme.value === "light" ? "dark" : "light")
 }
