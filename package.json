@@ -15,9 +15,10 @@
     "vuetify": "3.0.0-alpha.10"
   },
   "devDependencies": {
+    "@mdi/font": "^5.9.55",
     "deepmerge": "^4.2.2",
     "sass": "^1.37.5",
     "sass-loader": "^12.1.0",
-    "vitepress": "^0.15.6"
+    "vitepress": "^0.16.1"
   }
 }
