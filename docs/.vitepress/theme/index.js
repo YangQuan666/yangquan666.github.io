@@ -1,6 +1,6 @@
-import Layout from './Layout.vue'
-import DefaultTheme from 'vitepress/theme'
 import vuetify from './plugins/vuetify';
+import DefaultTheme from 'vitepress/theme'
+import Layout from './Layout.vue'
 
 export default {
   ...DefaultTheme,

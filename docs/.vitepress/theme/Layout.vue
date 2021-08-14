@@ -42,6 +42,11 @@
 
     <v-main>
       <v-container fluid>
+        <ul>
+          <li v-for="item in page.headers" :key="item">
+            <a :href="'#' + item.slug">{{ item.title }}</a>
+          </li>
+        </ul>
         <Content />
       </v-container>
     </v-main>
@@ -55,14 +60,17 @@
 
 <script>
 import { ref } from "vue";
+import { useData } from "vitepress";
 export default {
   data: () => ({
     drawer: null,
   }),
   setup() {
     const theme = ref();
+    const { page } = useData();
 
     return {
+      page,
       theme,
       toggleTheme: () =>
         (theme.value = theme.value === "light" ? "dark" : "light"),
