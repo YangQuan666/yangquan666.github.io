@@ -1,4 +1,4 @@
-import vuetify from './plugins/vuetify';
+import vuetify from './plugins/vuetify'
 import DefaultTheme from 'vitepress/theme'
 import Layout from './Layout.vue'
 

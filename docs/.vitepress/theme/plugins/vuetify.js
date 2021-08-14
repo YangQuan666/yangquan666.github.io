@@ -2,6 +2,7 @@
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/lib/styles/main.sass'
 
+import theme from './theme'
 // Vuetify
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/lib/components/index.mjs'
@@ -13,6 +14,6 @@ export default createVuetify({
   defaults: {
   },
   theme: {
-    defaultTheme: 'dark'
+    defaultTheme: theme.initTheme(),
   }
 })
