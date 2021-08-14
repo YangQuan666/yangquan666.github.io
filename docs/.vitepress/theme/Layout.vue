@@ -59,21 +59,25 @@
 </template>
 
 <script>
-import theme from './plugins/theme'
-import { useData } from "vitepress"
+import { ref } from "vue";
+import { useData } from "vitepress";
 export default {
   data: () => ({
     drawer: null,
-    theme : theme.theme,
   }),
   setup() {
+    const theme = ref()
     const { page } = useData();
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        theme.value = e.matches ? "dark" : "light";
+      });
     return {
-      page
+      page,
+      theme,
+      toggleTheme: () => theme.value = theme.value === 'light' ? 'dark' : 'light'
     };
-  },
-  methods: {
-    toggleTheme: theme.toggleTheme
-  },
+  }
 };
 </script>
