@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="item in page" :key="item">
+    <li v-for="item in page.headers" :key="item">
       <a class="level level-2" v-if="item.level == 2" :href="'#' + item.slug">{{
         item.title
       }}</a>
@@ -9,6 +9,7 @@
       }}</a>
     </li>
   </ul>
+  <Content />
 </template>
 <script>
 import { useData } from "vitepress";

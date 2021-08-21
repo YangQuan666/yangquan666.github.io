@@ -42,12 +42,7 @@
 
     <v-main>
       <v-container fluid>
-        <ul>
-          <li v-for="item in page.headers" :key="item">
-            <a :href="'#' + item.slug">{{ item.title }}</a>
-          </li>
-        </ul>
-        <Content />
+        <Post/>
       </v-container>
     </v-main>
 
@@ -60,21 +55,20 @@
 
 <script>
 import { ref } from "vue";
-import { useData } from "vitepress";
+import Post from './components/Post.vue';
 export default {
+  components: { Post },
   data: () => ({
     drawer: null,
   }),
   setup() {
     const theme = ref()
-    const { page } = useData();
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (e) => {
-        theme.value = e.matches ? "dark" : "light";
-      });
+    // window
+    //   .matchMedia("(prefers-color-scheme: dark)")
+    //   .addEventListener("change", (e) => {
+    //     theme.value = e.matches ? "dark" : "light";
+    //   });
     return {
-      page,
       theme,
       toggleTheme: () => theme.value = theme.value === 'light' ? 'dark' : 'light'
     };

@@ -1,6 +1,7 @@
 module.exports = {
     title: 'YangQuan\'s blog',
     description: 'This is my personal blog site',
+    lang: 'zh-CN',
     head: [
         ['meta',
             { charset: 'utf-8' },
