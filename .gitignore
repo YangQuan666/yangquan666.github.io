@@ -1,3 +1,6 @@
-
+# node依赖
 node_modules/
+# 编译文件
 docs/.vitepress/dist/
+# lock文件不需要
+yarn.lock

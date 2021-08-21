@@ -42,7 +42,7 @@
 
     <v-main>
       <v-container fluid>
-        <Post/>
+        <Post />
       </v-container>
     </v-main>
 
@@ -53,25 +53,10 @@
   </v-app>
 </template>
 
-<script>
-import { ref } from "vue";
-import Post from './components/Post.vue';
-export default {
-  components: { Post },
-  data: () => ({
-    drawer: null,
-  }),
-  setup() {
-    const theme = ref()
-    // window
-    //   .matchMedia("(prefers-color-scheme: dark)")
-    //   .addEventListener("change", (e) => {
-    //     theme.value = e.matches ? "dark" : "light";
-    //   });
-    return {
-      theme,
-      toggleTheme: () => theme.value = theme.value === 'light' ? 'dark' : 'light'
-    };
-  }
-};
+<script setup>
+import { ref } from "vue"
+import {theme, toggleTheme} from './plugins/theme'
+import Post from "./components/Post.vue"
+
+const drawer = ref();
 </script>

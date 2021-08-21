@@ -8,11 +8,7 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/lib/components/index.mjs'
 import * as directives from 'vuetify/lib/directives/index.mjs'
 
-function initTheme() {
-  const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
-  const theme = darkTheme.matches ? 'dark' : 'light';
-  return theme;
-}
+// import { initTheme } from './theme'
 
 export default createVuetify({
   components,
@@ -20,6 +16,6 @@ export default createVuetify({
   defaults: {
   },
   theme: {
-    defaultTheme: initTheme(),
+    defaultTheme: 'dark',
   }
 })
