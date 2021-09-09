@@ -14,6 +14,9 @@ export default createVuetify({
   components,
   directives,
   defaults: {
+    global: {
+      ripple: true,
+    },
   },
   theme: {
     defaultTheme: 'dark',

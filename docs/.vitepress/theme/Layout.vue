@@ -27,17 +27,11 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      <v-btn icon="mdi-magnify" />
 
-      <v-btn icon @click="toggleTheme">
-        <v-icon>mdi-theme-light-dark</v-icon>
-      </v-btn>
+      <v-btn icon="mdi-theme-light-dark" @click="toggleTheme" />
 
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-btn icon=mdi-dots-vertical />
     </v-app-bar>
 
     <v-main>
@@ -47,7 +41,7 @@
     </v-main>
 
     <!--footer-->
-    <v-footer app>
+    <v-footer padless>
       <span>&copy; {{ new Date() }}</span>
     </v-footer>
   </v-app>
@@ -58,5 +52,5 @@ import { ref } from "vue"
 import {theme, toggleTheme} from './plugins/theme'
 import Post from "./components/Post.vue"
 
-const drawer = ref();
+const drawer = ref()
 </script>
