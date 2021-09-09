@@ -1,19 +1,6 @@
 <template>
-  <v-app :theme="theme">
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list nav dense>
-        <v-list-item>
-          <v-icon>mdi-home</v-icon>
-          <v-list-item-title>Home</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-icon>mdi-account</v-icon>
-          <v-list-item-title>Account</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
+  <v-app :theme="mode">
+    <NavBar :drawer="drawer" />
     <v-app-bar
       shrink-on-scroll
       prominent
@@ -23,15 +10,15 @@
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-app-bar-title>Application</v-app-bar-title>
+      <v-app-bar-title>{{ site.title }}</v-app-bar-title>
 
       <v-spacer></v-spacer>
 
       <v-btn icon="mdi-magnify" />
 
-      <v-btn icon="mdi-theme-light-dark" @click="toggleTheme" />
+      <v-btn icon="mdi-theme-light-dark" @click="toggle" />
 
-      <v-btn icon=mdi-dots-vertical />
+      <v-btn icon="mdi-dots-vertical" />
     </v-app-bar>
 
     <v-main>
@@ -47,10 +34,15 @@
   </v-app>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue"
-import {theme, toggleTheme} from './plugins/theme'
+import { useData } from "vitepress"
+import { mode, toggle } from './plugins/theme'
 import Post from "./components/Post.vue"
+import NavBar from "./components/NavBar.vue"
 
-const drawer = ref()
+const { site } = useData()
+console.log(useData());
+
+const drawer = ref(null)
 </script>

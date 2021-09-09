@@ -1,37 +1,25 @@
 ## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/YangQuan666/yangquan666.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+## Build Setup
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+```bash
+# install dependencies
+$ yarn install
 
-### Markdown
+# serve with hot reload at localhost:3000
+$ yarn run docs:dev
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+# build for production and launch server
+$ yarn run docs:build
+$ yarn run docs:serve
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Changelog
 
-### Jekyll Themes
+Detailed changes for each release are documented in the [release notes](./CHANGELOG.md).
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/YangQuan666/yangquan666.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## License
 
-### Support or Contact
+[GPL-3.0](https://opensource.org/licenses/GPL-3.0)
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Copyright (c) 2019-present, YangQuan666

@@ -11,14 +11,10 @@
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
   },
-  "dependencies": {
-    "vuetify": "3.0.0-alpha.11"
-  },
   "devDependencies": {
+    "vitepress": "^0.17.2",
+    "vuetify": "3.0.0-alpha.11",
     "@mdi/font": "^5.9.55",
-    "deepmerge": "^4.2.2",
-    "sass": "^1.37.5",
-    "sass-loader": "^12.1.0",
-    "vitepress": "^0.17.2"
+    "sass": "^1.37.5"
   }
 }

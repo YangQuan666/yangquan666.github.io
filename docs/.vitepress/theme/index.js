@@ -1,9 +1,7 @@
 import vuetify from './plugins/vuetify'
-import DefaultTheme from 'vitepress/theme'
 import Layout from './Layout.vue'
 
 export default {
-  ...DefaultTheme,
   Layout: Layout,
   NotFound: () => 'custom 404', // <- this is a Vue 3 functional component
   enhanceApp({ app, router, siteData }) {

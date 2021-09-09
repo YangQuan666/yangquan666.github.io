@@ -1,6 +1,6 @@
 module.exports = {
     title: 'YangQuan\'s blog',
-    description: 'This is my personal blog site',
+    description: 'YangQuan666\'s person blog site',
     lang: 'zh-CN',
     head: [
         ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
