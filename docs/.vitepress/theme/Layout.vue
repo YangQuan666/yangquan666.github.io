@@ -12,7 +12,7 @@
 
       <v-app-bar-title>{{ site.title }}</v-app-bar-title>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-btn icon="mdi-magnify" />
 
@@ -42,7 +42,6 @@ import Post from "./components/Post.vue"
 import NavBar from "./components/NavBar.vue"
 
 const { site } = useData()
-console.log(useData());
 
 const drawer = ref(null)
 </script>

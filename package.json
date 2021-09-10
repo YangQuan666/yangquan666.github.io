@@ -12,7 +12,7 @@
     "docs:serve": "vitepress serve docs"
   },
   "devDependencies": {
-    "vitepress": "^0.17.2",
+    "vitepress": "^0.17.3",
     "vuetify": "3.0.0-alpha.11",
     "@mdi/font": "^5.9.55",
     "sass": "^1.37.5"
