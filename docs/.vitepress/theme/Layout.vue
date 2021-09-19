@@ -35,8 +35,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { useData } from "vitepress"
+import { ref, computed } from "vue"
+import { useData, useRoute } from "vitepress"
 import { mode, toggle } from './plugins/theme'
 import Post from "./components/Post.vue"
 import NavBar from "./components/NavBar.vue"
@@ -44,4 +44,8 @@ import NavBar from "./components/NavBar.vue"
 const { site } = useData()
 
 const drawer = ref(null)
+
+const route = useRoute()
+const isIndex = computed(() => route.path.replace(/index.html$/, '') === '/')
+
 </script>

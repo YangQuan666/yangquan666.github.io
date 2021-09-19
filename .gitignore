@@ -4,3 +4,4 @@ node_modules/
 docs/.vitepress/dist/
 # lock文件不需要
 yarn.lock
+docs/posts/metadata.json

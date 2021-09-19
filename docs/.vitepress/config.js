@@ -1,3 +1,6 @@
+// @ts-check
+require('./theme/plugins/metadata.js').genMetadata()
+
 module.exports = {
     title: 'YangQuan\'s blog',
     description: 'YangQuan666\'s person blog site',
@@ -38,19 +41,6 @@ module.exports = {
                 '2018',
                 '2017',
             ]
-        },
-        sidebarDepth: 2,
-        lastUpdated: 'Last Updated',
-        repo: '',
-        repoLabel: 'Github',
-        docsDir: 'docs',
-        editLinks: true,
-        editLinkText: 'Edit this page on Github',
-        serviceWorker: {
-            updatePopup: {
-                message: "New content is available.",
-                buttonText: "Refresh"
-            }
         }
     },
 }
