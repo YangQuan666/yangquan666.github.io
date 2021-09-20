@@ -10,11 +10,10 @@ module.exports = {
     ],
     themeConfig: {
         nav: [
-            {text: 'Home', link: '/'},
-            {text: 'About', link: '/about/'},
-            {text: 'Tags', link: '/tags/'},
-            {text: 'Archive', link: '/archive/'},
-            {text: 'Contact', link: '/contact/'},
+            {title: 'Home', link: '/', icon: 'mdi-home'},
+            {title: 'Java', link: '/tags/',icon: 'mdi-language-java'},
+            {title: 'Phone', link: '/tags/',icon: 'mdi-cellphone-iphone'},
+            {title: 'About', link: '/about/', icon: 'mdi-account'},
         ],
         sidebar: {
             '/about/': [

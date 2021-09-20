@@ -22,7 +22,7 @@ function getPost(file) {
     const {data} = matter(src)
     const post = {
         title: data.title,
-        href: `/posts/${file.replace(/\.md$/, '.html')}`,
+        link: `/posts/${file.replace(/\.md$/, '.html')}`,
         time: data.date.getTime(),
         excerpt: data.excerpt
     }
@@ -42,23 +42,6 @@ function getPosts() {
         .sort((a, b) => b.time - a.time)
 }
 
-/**
- * @param {string | number | Date} date
- */
-function formatDate(date) {
-    if (!(date instanceof Date)) {
-        date = new Date(date)
-    }
-    date.setUTCHours(12)
-    return {
-        time: +date,
-        string: date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        })
-    }
-}
 
 function genMetadata() {
     fs.writeFileSync(

@@ -10,7 +10,7 @@
       <v-card class="elevation-2">
         <v-card-title class="text-h5">{{ item.title }}</v-card-title>
         <v-card-text>{{ item.excerpt }}</v-card-text>
-        <v-btn variant="outlined" color="primary" @click="router.go(item.href)">
+        <v-btn variant="outlined" color="primary" @click="router.go(item.link)">
           阅读全文
         </v-btn>
       </v-card>

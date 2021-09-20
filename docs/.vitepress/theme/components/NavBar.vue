@@ -19,24 +19,23 @@
     </v-col>
     <v-divider/>
     <v-list nav dense>
-      <v-list-item href="/">
-        <v-icon>mdi-home</v-icon>
-        <v-list-item-title>Home</v-list-item-title>
-      </v-list-item>
-
-      <v-list-item href="/posts/resume">
-        <v-icon>mdi-account</v-icon>
-        <v-list-item-title>Account</v-list-item-title>
+      <v-list-item
+          v-for="item in nav"
+          :key="item"
+          @click="router.go(item.link)">
+        <v-icon>{{ item.icon }}</v-icon>
+        <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
-import {useData} from "vitepress"
+import {useData, useRouter} from "vitepress"
 
 const props = defineProps<{ drawer?: boolean }>()
 
 const {site} = useData()
-
+const {themeConfig: {nav}} = site.value;
+const router = useRouter()
 </script>
