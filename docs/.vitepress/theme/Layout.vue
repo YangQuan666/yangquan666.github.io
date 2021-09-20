@@ -22,8 +22,9 @@
     </v-app-bar>
 
     <v-main>
-      <v-container fluid>
-        <Post/>
+      <v-container>
+        <Timeline v-if="isIndex"/>
+        <Post v-else/>
       </v-container>
     </v-main>
 
@@ -40,12 +41,15 @@ import {useData, useRoute} from "vitepress"
 import {mode, toggle} from './plugins/theme'
 import Post from "./components/Post.vue"
 import NavBar from "./components/NavBar.vue"
+import Timeline from "./components/Timeline.vue";
 
 const {site} = useData()
 
 const drawer = ref(null)
 
 const route = useRoute()
-const isIndex = computed(() => route.path.replace(/index.html$/, '') === '/')
+const isIndex = computed(() => {
+  return route.path.replace(/index.html$/, '') === '/'
+})
 
 </script>

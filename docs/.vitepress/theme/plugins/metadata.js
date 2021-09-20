@@ -19,12 +19,12 @@ function getPost(file) {
     }
 
     const src = fs.readFileSync(fullePath, 'utf-8')
-    const {data, excerpt} = matter(src, {excerpt: true})
+    const {data} = matter(src)
     const post = {
         title: data.title,
         href: `/posts/${file.replace(/\.md$/, '.html')}`,
-        date: formatDate(data.date),
-        excerpt
+        time: data.date.getTime(),
+        excerpt: data.excerpt
     }
 
     cache.set(fullePath, {
@@ -39,7 +39,7 @@ function getPosts() {
         .readdirSync(postDir)
         .filter(file => file.match(/\.md$/))
         .map((file) => getPost(file))
-        .sort((a, b) => b.date.time - a.date.time)
+        .sort((a, b) => b.time - a.time)
 }
 
 /**

@@ -27,13 +27,3 @@ const isBrowser = () => typeof window !== "undefined"
 
 initTheme()
 themeChangeListener()
-// function toggle() {
-//     mode.value = mode.value === "light" ? "dark" : "light"
-// }
-// function initTheme() {
-//     if (isBrowser()) {
-//         const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
-//         darkMode.matches ? 'dark' : 'light';
-//     }
-// }
-// module.exports = { mode: mode, initTheme, toggle };
