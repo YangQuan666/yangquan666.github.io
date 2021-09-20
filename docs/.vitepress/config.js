@@ -6,15 +6,15 @@ module.exports = {
     description: 'YangQuan666\'s person blog site',
     lang: 'zh-CN',
     head: [
-        ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+        ['link', {rel: 'icon', type: 'image/svg+xml', href: '/logo.svg'}],
     ],
     themeConfig: {
         nav: [
-            { text: 'Home', link: '/' },
-            { text: 'About', link: '/about/' },
-            { text: 'Tags', link: '/tags/' },
-            { text: 'Archive', link: '/archive/' },
-            { text: 'Contact', link: '/contact/' },
+            {text: 'Home', link: '/'},
+            {text: 'About', link: '/about/'},
+            {text: 'Tags', link: '/tags/'},
+            {text: 'Archive', link: '/archive/'},
+            {text: 'Contact', link: '/contact/'},
         ],
         sidebar: {
             '/about/': [
