@@ -2,6 +2,7 @@
 node_modules/
 # 编译文件
 docs/.vitepress/dist/
-# lock文件不需要
 yarn.lock
 docs/posts/metadata.json
+# webstorm 生成的信息
+.idea/
