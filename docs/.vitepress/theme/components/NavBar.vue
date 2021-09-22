@@ -4,7 +4,7 @@
     <v-col align-self="stretch">
       <v-row>
         <v-avatar size="250">
-          <v-img src="https://avatars.githubusercontent.com/u/27985301"></v-img>
+          <v-img src="avatar.png"></v-img>
         </v-avatar>
       </v-row>
       <v-row>

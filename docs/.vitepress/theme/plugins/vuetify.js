@@ -9,7 +9,6 @@ import {createVuetify} from 'vuetify'
 import * as components from 'vuetify/lib/components/index.mjs'
 import * as directives from 'vuetify/lib/directives/index.mjs'
 
-// import { initTheme } from './theme'
 
 export default createVuetify({
     components,
