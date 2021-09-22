@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import {useData, useRouter} from "vitepress"
 
-const props = defineProps<{ drawer?: boolean }>()
+defineProps<{ drawer: boolean }>()
 
 const {site} = useData()
 const {themeConfig: {nav}} = site.value;
