@@ -1,37 +1,25 @@
 // @ts-check
 const fs = require('fs')
 const path = require('path')
-const matter = require('gray-matter')
+const matter = require('front-matter')
 
-const postDir = path.resolve(__dirname, '../../../posts')
-const cache = new Map()
+const postDir = path.resolve(__dirname, '../../../posts/')
 
 /**
  * @param {string} file
  */
 function getPost(file) {
-    const fullePath = path.join(postDir, file)
-    const timestamp = fs.statSync(fullePath).mtimeMs
+    const fullPath = path.join(postDir, file)
 
-    const cached = cache.get(fullePath)
-    if (cached && timestamp === cached.timestamp) {
-        return cached.post
-    }
+    const src = fs.readFileSync(fullPath, 'utf-8')
+    const {attributes} = matter(src)
 
-    const src = fs.readFileSync(fullePath, 'utf-8')
-    const {data} = matter(src)
-    const post = {
-        title: data.title,
+    return {
+        title: attributes.title,
         link: `/posts/${file.replace(/\.md$/, '.html')}`,
-        time: data.date.getTime(),
-        excerpt: data.excerpt
+        time: attributes.date.getTime(),
+        excerpt: attributes.excerpt
     }
-
-    cache.set(fullePath, {
-        timestamp,
-        post
-    })
-    return post
 }
 
 function getPosts() {
