@@ -37,5 +37,6 @@ const props = defineProps<{ drawer?: boolean }>()
 
 const {site} = useData()
 const {themeConfig: {nav}} = site.value;
+
 const router = useRouter()
 </script>
