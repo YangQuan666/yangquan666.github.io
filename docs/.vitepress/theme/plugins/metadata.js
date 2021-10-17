@@ -1,7 +1,6 @@
-// @ts-check
-const fs = require('fs')
-const path = require('path')
-const matter = require('front-matter')
+import fs from 'fs'
+import path from 'path'
+import matter from 'front-matter'
 
 const postDir = path.resolve(__dirname, '../../../posts/')
 
@@ -37,7 +36,3 @@ function genMetadata() {
         JSON.stringify(getPosts())
     )
 }
-
-
-exports.getPosts = getPosts
-exports.genMetadata = genMetadata

@@ -1,7 +1,7 @@
-// @ts-check
-require('./theme/plugins/metadata.js').genMetadata()
+// import {genMetadata} from './theme/plugins/metadata'
+// genMetadata()
 
-module.exports = {
+export default {
     title: 'YangQuan\'s blog',
     description: 'YangQuan666\'s person blog site',
     lang: 'zh-CN',
@@ -10,22 +10,12 @@ module.exports = {
     ],
     themeConfig: {
         nav: [
-            {title: 'Home', link: '/', icon: 'mdi-home'},
-            {title: 'Java', link: '/tags/',icon: 'mdi-language-java'},
-            {title: 'Phone', link: '/tags/',icon: 'mdi-cellphone-iphone'},
-            {title: 'About', link: '/about/', icon: 'mdi-account'},
+            {title: 'Home', link: '/', icon: 'home'},
+            {title: 'Java', link: '/java/', icon: 'code'},
+            {title: 'Phone', link: '/phone/', icon: 'devices'},
+            {title: 'About', link: '/about/', icon: 'person'},
         ],
         sidebar: {
-            '/about/': [
-                '',
-                'introduction',
-                'resume',
-                'experience',
-                'education',
-                'skills',
-                'hobbies',
-                'links',
-            ],
             '/tags/': [
                 '',
                 'vuetify',
@@ -33,13 +23,7 @@ module.exports = {
                 'nodejs',
                 'git',
                 'linux',
-            ],
-            '/archive/': [
-                '',
-                '2019',
-                '2018',
-                '2017',
             ]
         }
-    },
+    }
 }

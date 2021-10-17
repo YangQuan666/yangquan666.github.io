@@ -6,19 +6,19 @@
   "repository": "https://github.com/YangQuan666/yangquan666.github.io.git",
   "author": "NullPointerException <quark.yeung@icloud.com>",
   "license": "GPL-3.0",
+  "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "docs:deploy": "vitepress build docs && vitepress serve docs"
   },
-  "dependencies": {
-    "vuetify": "3.0.0-alpha.11"
-  },
   "devDependencies": {
-    "@mdi/font": "^5.9.55",
     "front-matter": "^4.0.2",
-    "sass": "^1.37.5",
-    "vitepress": "latest"
+    "vitepress": "^0.20.0"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.11.2",
+    "quasar": "^2.1.4"
   }
 }

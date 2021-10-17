@@ -1,21 +1,9 @@
 <template>
-  <v-navigation-drawer v-model="drawer" right>
-    <v-list>
-      <template v-for="(item, index) in page.headers" :key="item">
-        <v-list-item :href="'#' + item.slug">
-          <div :class="`text-${classes[item.level]}`">{{ item.title }}</div>
-        </v-list-item>
-        <v-divider v-if="index < page.headers.length - 1" :key="index"/>
-      </template>
-    </v-list>
-  </v-navigation-drawer>
-  <v-btn
-      v-if="!drawer"
-      @click="drawer = !drawer"
-      icon="mdi-format-list-bulleted-square"
-      color="green"
-  />
   <Content/>
+  <!-- place QPageScroller at end of page -->
+  <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+    <q-btn fab icon="keyboard_arrow_up" color="accent"/>
+  </q-page-scroller>
 </template>
 <script setup>
 import {useData} from 'vitepress';
@@ -23,5 +11,4 @@ import {ref} from 'vue';
 
 const {page} = useData();
 const drawer = ref();
-const classes = ['h1', 'h2', 'h6', 'caption'];
 </script>
