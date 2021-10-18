@@ -22,4 +22,4 @@ Detailed changes for each release are documented in the [release notes](./CHANGE
 
 [GPL-3.0](https://opensource.org/licenses/GPL-3.0)
 
-Copyright (c) 2019-present, YangQuan666
+Copyright (c) 2021-present, YangQuan666
