@@ -4,7 +4,7 @@
   "description": "Yangquan666's person blog site",
   "main": "index.js",
   "repository": "https://github.com/YangQuan666/yangquan666.github.io.git",
-  "author": "NullPointerException <quark.yeung@icloud.com>",
+  "author": "YangQuan666 <quark.yeung@icloud.com>",
   "license": "GPL-3.0",
   "type": "module",
   "scripts": {
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.11.2",
-    "quasar": "^2.1.4"
+    "animate.css": "^4.1.1",
+    "quasar": "^2.1.7"
   }
 }
