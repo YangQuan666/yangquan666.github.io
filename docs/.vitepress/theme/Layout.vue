@@ -3,21 +3,25 @@
 
     <q-header elevated>
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="drawer = !drawer"/>
+        <q-btn flat round icon="menu" @click="drawer = !drawer"/>
 
         <q-toolbar-title shrink class="row items-center no-wrap">
           <span class="q-ml-sm">Yang Quan</span>
         </q-toolbar-title>
         <q-space/>
 
-        <q-input dense v-model="search" placeholder="Search">
+        <q-input class="gt-xs" dense v-model="search" placeholder="Search">
           <template v-slot:prepend>
             <q-icon v-if="search === ''" name="search"/>
             <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''"/>
           </template>
         </q-input>
 
-        <q-btn dense flat round icon="menu" @click="toc = !toc"/>
+        <q-space/>
+
+        <q-btn flat round icon="menu" @click="toc = !toc"/>
+        <q-btn flat round icon="search"/>
+        <q-btn flat round icon="more_vert"/>
       </q-toolbar>
     </q-header>
 
@@ -71,6 +75,7 @@
         </q-breadcrumbs>
       </div>
       <q-page padding>
+        <Debug/>
         <Timeline v-if="isIndex"/>
         <Post v-else/>
       </q-page>
@@ -83,7 +88,6 @@
         </q-toolbar-title>
       </q-toolbar>
     </q-footer>
-
   </q-layout>
 </template>
 
