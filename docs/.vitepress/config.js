@@ -10,9 +10,11 @@ export default {
         ['link', {rel: 'icon', type: 'image/svg+xml', href: '/logo.svg'}],
     ],
     themeConfig: {
+        author: 'YangQuan',
+        email: 'quark.yeung@icloud.com',
         nav: [
             {title: 'Home', link: '/', icon: 'home'},
-            {title: 'Java', link: '/java/', icon: 'code'},
+            {title: 'Code', link: '/code/', icon: 'code'},
             {title: 'Phone', link: '/phone/', icon: 'devices'},
             {title: 'About', link: '/about/', icon: 'person'},
         ],

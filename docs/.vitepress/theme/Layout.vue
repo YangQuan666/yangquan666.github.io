@@ -28,37 +28,41 @@
     <q-drawer
         v-model="drawer"
         show-if-above
+        no-swipe-close
         elevated
         side="left"
     >
-      <q-img src="https://cdn.quasar.dev/img/material.png">
-        <div class="absolute-bottom bg-transparent">
-          <q-avatar size="56px" class="q-mb-sm">
-            <img src="/avatar.png" alt="avatar">
-          </q-avatar>
-          <div class="text-weight-bold">Razvan Stoenescu</div>
-          <div>@rstoenescu</div>
-        </div>
-      </q-img>
+      <q-scroll-area class="fit">
+        <q-img src="https://cdn.quasar.dev/img/material.png">
+          <div class="absolute-bottom bg-transparent">
+            <q-avatar size="150px" class="q-mb-sm">
+              <img src="/avatar.png" alt="avatar">
+            </q-avatar>
+            <div class="text-weight-bold">{{ themeConfig.author }}</div>
+            <div>{{ themeConfig.email }}</div>
+          </div>
+        </q-img>
 
-      <q-list padding>
-        <q-item
-            clickable
-            v-ripple
-            v-for="item in nav"
-            :key="item"
-            @click="router.go(item.link)"
-        >
-          <q-item-section avatar>
-            <q-icon :name="item.icon"/>
-          </q-item-section>
+        <q-list padding class="q-item">
+          <q-item
+              v-for="item in nav"
+              :key="item"
+              @click="router.go(item.link)"
+              :active="route.path === item.link"
+              clickable
+              v-ripple
+          >
+            <q-item-section avatar>
+              <q-icon :name="item.icon"/>
+            </q-item-section>
 
-          <q-item-section>
-            {{ item.title }}
-          </q-item-section>
-        </q-item>
+            <q-item-section>
+              {{ item.title }}
+            </q-item-section>
+          </q-item>
 
-      </q-list>
+        </q-list>
+      </q-scroll-area>
     </q-drawer>
 
     <q-drawer show-if-above v-model="toc" side="right" bordered>
@@ -109,6 +113,12 @@ const toc = ref(false)
 
 const isIndex = computed(() => route.path.replace(/index.html$/, '') === '/')
 
-const {themeConfig: {nav}} = site.value;
+const {themeConfig} = site.value;
+const {nav} = themeConfig
 const search = ref('')
 </script>
+<style scoped>
+.q-item {
+  border-radius: 0 32px 32px 0;
+}
+</style>
