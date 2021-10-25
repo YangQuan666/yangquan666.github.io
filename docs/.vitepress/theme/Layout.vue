@@ -6,28 +6,28 @@
         <q-btn flat round icon="menu" @click="drawer = !drawer"/>
 
         <q-toolbar-title shrink class="row items-center no-wrap">
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg">
+          </q-avatar>
           <span class="q-ml-sm">Yang Quan</span>
         </q-toolbar-title>
         <q-space/>
 
-        <q-input class="gt-xs" dense v-model="search" placeholder="Search">
-          <template v-slot:prepend>
-            <q-icon v-if="search === ''" name="search"/>
-            <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''"/>
-          </template>
-        </q-input>
-
+        <Search/>
         <q-space/>
 
         <q-btn flat round icon="menu" @click="toc = !toc"/>
-        <q-btn flat round icon="search"/>
-        <q-btn flat round icon="more_vert"/>
+        <div class="lt-sm">
+          <q-btn flat round icon="search"/>
+          <q-btn flat round icon="more_vert"/>
+        </div>
       </q-toolbar>
     </q-header>
 
     <q-drawer
         v-model="drawer"
         show-if-above
+        no-swipe-open
         no-swipe-close
         elevated
         side="left"
@@ -43,7 +43,7 @@
           </div>
         </q-img>
 
-        <q-list padding class="q-item">
+        <q-list padding>
           <q-item
               v-for="item in nav"
               :key="item"
@@ -65,8 +65,12 @@
       </q-scroll-area>
     </q-drawer>
 
-    <q-drawer show-if-above v-model="toc" side="right" bordered>
-      <!-- drawer content -->
+    <q-drawer
+        v-model="toc"
+        side="right"
+        show-if-above
+        bordered>
+      <!-- table of contents -->
     </q-drawer>
 
     <q-page-container>
@@ -102,6 +106,7 @@ import {useQuasar} from 'quasar'
 
 import Post from "./components/Post.vue"
 import Timeline from "./components/Timeline.vue";
+import Search from "./components/Search.vue";
 
 const $q = useQuasar()
 const route = useRoute()
@@ -115,10 +120,4 @@ const isIndex = computed(() => route.path.replace(/index.html$/, '') === '/')
 
 const {themeConfig} = site.value;
 const {nav} = themeConfig
-const search = ref('')
 </script>
-<style scoped>
-.q-item {
-  border-radius: 0 32px 32px 0;
-}
-</style>
