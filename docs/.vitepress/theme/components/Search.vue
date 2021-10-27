@@ -6,7 +6,7 @@
       @filter="filter"
       placeholder="Search"
       class="gt-sm"
-      filled
+      standout
       use-input
       dense
       hide-dropdown-icon
