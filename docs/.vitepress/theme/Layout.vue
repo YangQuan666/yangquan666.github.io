@@ -9,7 +9,7 @@
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg">
           </q-avatar>
-          <span class="q-ml-sm">Yang Quan</span>
+          <span class="gt-sm">Yang Quan</span>
         </q-toolbar-title>
         <q-space/>
 

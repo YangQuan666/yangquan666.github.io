@@ -5,7 +5,6 @@
       :options="options"
       @filter="filter"
       placeholder="Search"
-      class="gt-sm"
       standout
       use-input
       dense
