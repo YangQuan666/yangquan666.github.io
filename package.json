@@ -18,8 +18,8 @@
     "vitepress": "^0.20.0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.11.2",
+    "@quasar/extras": "^1.11.3",
     "animate.css": "^4.1.1",
-    "quasar": "^2.1.7"
+    "quasar": "^2.2.1"
   }
 }
