@@ -33,14 +33,66 @@
     </q-btn-dropdown>
   </div>
   <div class="lt-sm">
-    <q-btn flat round icon="more_vert"/>
+    <q-btn flat round icon="more_vert">
+      <q-menu
+          transition-show="jump-down"
+          transition-hide="jump-up"
+      >
+        <q-list>
+          <q-item
+              v-for="menu in menus"
+              :key="menu"
+              clickable
+              v-close-popup>
+            <q-item-section>{{ menu.label }}</q-item-section>
+            <q-item-section side v-if="menu.children">
+              <q-icon name="keyboard_arrow_right"/>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable>
+            <q-item-section>Preferences</q-item-section>
+            <q-item-section side>
+              <q-icon name="keyboard_arrow_right"/>
+            </q-item-section>
+
+            <q-menu anchor="top end" self="top start">
+              <q-list>
+                <q-item
+                    v-for="n in 3"
+                    :key="n"
+                    dense
+                    clickable
+                >
+                  <q-item-section>Submenu Label</q-item-section>
+                  <q-item-section side>
+                    <q-icon name="keyboard_arrow_right"/>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+
+          </q-item>
+        </q-list>
+      </q-menu>
+    </q-btn>
   </div>
 </template>
 
 <script lang="ts" setup>
 import {useQuasar} from 'quasar';
+import {ref} from "vue";
 
 const $q = useQuasar()
+const menus = [
+  {
+    label: 'Theme',
+    children: []
+  }, {
+    label: 'Language',
+    children: []
+  },
+]
 
 const themes = [
   {
