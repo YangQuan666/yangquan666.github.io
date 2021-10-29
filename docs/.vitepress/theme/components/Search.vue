@@ -1,21 +1,17 @@
 <template>
   <q-select
-      :stack-label="false"
       v-model="text"
       :options="options"
       @filter="filter"
-      placeholder="Search"
       standout
       use-input
       dense
       hide-dropdown-icon
-      hide-selected
       style="width: 50%"
   >
 
     <template v-slot:prepend>
-      <q-icon v-if="text === ''" name="search"/>
-      <q-icon v-else name="clear" class="cursor-pointer" @click="text = ''"/>
+      <q-icon name="search"/>
     </template>
 
     <template v-slot:no-option>
