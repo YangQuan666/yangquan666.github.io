@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'front-matter'
 
-const postDir = path.resolve(__dirname, '../../../posts/')
+const postDir = path.resolve(__dirname, '../../../post/')
 
 /**
  * @param {string} file

@@ -108,7 +108,7 @@
 <script setup>
 import { ref } from 'vue'
 import {useRouter} from 'vitepress'
-// import metadata from '../../../posts/metadata.json'
+// import metadata from '../../../post/metadata.json'
 
 const router = useRouter()
 
