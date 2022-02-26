@@ -9,18 +9,15 @@
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg">
           </q-avatar>
-          <span class="q-ml-sm">Yang Quan</span>
+          <span class="gt-sm">Yang Quan</span>
         </q-toolbar-title>
         <q-space/>
 
         <Search/>
+
         <q-space/>
 
-        <q-btn flat round icon="menu" @click="toc = !toc"/>
-        <div class="lt-sm">
-          <q-btn flat round icon="search"/>
-          <q-btn flat round icon="more_vert"/>
-        </div>
+        <Toolbar/>
       </q-toolbar>
     </q-header>
 
@@ -65,14 +62,6 @@
       </q-scroll-area>
     </q-drawer>
 
-    <q-drawer
-        v-model="toc"
-        side="right"
-        show-if-above
-        bordered>
-      <!-- table of contents -->
-    </q-drawer>
-
     <q-page-container>
       <div class="q-pa-md q-gutter-sm">
         <q-breadcrumbs>
@@ -101,12 +90,13 @@
 
 <script lang="ts" setup>
 import {ref, computed} from 'vue'
-import {useData, useRoute, useRouter} from "vitepress"
+import {useData, useRoute, useRouter} from 'vitepress'
 import {useQuasar} from 'quasar'
 
-import Post from "./components/Post.vue"
-import Timeline from "./components/Timeline.vue";
-import Search from "./components/Search.vue";
+import Post from './components/Post.vue'
+import Timeline from './components/Timeline.vue';
+import Search from './components/Search.vue';
+import Toolbar from './components/Toolbar.vue';
 
 const $q = useQuasar()
 const route = useRoute()
@@ -114,7 +104,6 @@ const router = useRouter()
 const {site} = useData()
 
 const drawer = ref(false)
-const toc = ref(false)
 
 const isIndex = computed(() => route.path.replace(/index.html$/, '') === '/')
 
