@@ -15,11 +15,12 @@
   },
   "devDependencies": {
     "front-matter": "^4.0.2",
-    "vitepress": "^0.20.0"
+    "vitepress": "^0.22.3"
   },
   "dependencies": {
-    "@quasar/extras": "^1.11.2",
+    "@quasar/extras": "^1.12.5",
     "animate.css": "^4.1.1",
-    "quasar": "^2.1.7"
-  }
+    "quasar": "^2.5.5"
+  },
+  "packageManager": "yarn@3.0.2"
 }

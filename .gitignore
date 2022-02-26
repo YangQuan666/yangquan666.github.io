@@ -6,3 +6,4 @@ yarn.lock
 docs/posts/metadata.json
 # webstorm 生成的信息
 .idea/
+/.yarn/
