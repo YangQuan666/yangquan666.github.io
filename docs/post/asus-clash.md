@@ -1,3 +1,12 @@
+---
+title: 华硕RT-AX56U V2路由器安装clash
+date: 2022-03-02
+excerpt: "暂时用作个人的知识收藏"
+tags:
+- ASUS
+- 路由器
+- clash
+---
 # 华硕RT-AX56U V2路由器安装clash
 
 1. 参考项目：[iloahz/asus-router-stock-firmware-clash](https://github.com/iloahz/asus-router-stock-firmware-clash)
