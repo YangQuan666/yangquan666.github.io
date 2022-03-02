@@ -1,5 +1,5 @@
-// import {genMetadata} from './theme/plugins/metadata'
-// genMetadata()
+import {genMetadata} from './theme/plugins/metadata.js'
+genMetadata()
 
 export default {
     title: 'YangQuan\'s blog',
@@ -14,8 +14,6 @@ export default {
         email: 'quark.yeung@icloud.com',
         nav: [
             {title: 'Home', link: '/', icon: 'home'},
-            {title: 'Code', link: '/code/', icon: 'code'},
-            {title: 'Phone', link: '/phone/', icon: 'devices'},
             {title: 'About', link: '/about/', icon: 'person'},
         ],
         sidebar: {

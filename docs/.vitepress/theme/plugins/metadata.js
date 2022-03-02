@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'front-matter'
 
-const postDir = path.resolve(__dirname, '../../../post/')
+const postDir = path.resolve('docs/post/')
 
 /**
  * @param {string} file
@@ -15,8 +15,8 @@ function getPost(file) {
 
     return {
         title: attributes.title,
-        link: `/posts/${file.replace(/\.md$/, '.html')}`,
-        time: attributes.date.getTime(),
+        link: `/post/${file.replace(/\.md$/, '.html')}`,
+        time: attributes.date,
         excerpt: attributes.excerpt
     }
 }
@@ -30,9 +30,6 @@ function getPosts() {
 }
 
 
-function genMetadata() {
-    fs.writeFileSync(
-        path.resolve(__dirname, postDir + '/metadata.json'),
-        JSON.stringify(getPosts())
-    )
+export function genMetadata() {
+    fs.writeFileSync(postDir + '/metadata.json', JSON.stringify(getPosts()))
 }
