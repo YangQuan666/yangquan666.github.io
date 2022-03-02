@@ -31,5 +31,5 @@ function getPosts() {
 
 
 export function genMetadata() {
-    fs.writeFileSync(postDir + '/metadata.json', JSON.stringify(getPosts()))
+    fs.writeFileSync(postDir + '/summary.json', JSON.stringify(getPosts()))
 }

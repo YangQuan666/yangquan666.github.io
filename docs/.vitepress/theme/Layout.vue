@@ -73,7 +73,8 @@
       </div>
       <q-page padding>
         <Debug/>
-        <Timeline v-if="isIndex"/>
+        <Timeline v-if="isHome"/>
+        <About v-else-if="isAbout"/>
         <Post v-else/>
       </q-page>
     </q-page-container>
@@ -97,6 +98,7 @@ import Post from './components/Post.vue'
 import Timeline from './components/Timeline.vue';
 import Search from './components/Search.vue';
 import Toolbar from './components/Toolbar.vue';
+import About from './components/About.vue';
 
 const $q = useQuasar()
 const route = useRoute()
@@ -105,7 +107,8 @@ const {site} = useData()
 
 const drawer = ref(false)
 
-const isIndex = computed(() => route.path.replace(/index.html$/, '') === '/')
+const isHome = computed(() => route.path === '/')
+const isAbout = computed(() => route.path === '/about/')
 
 const {themeConfig} = site.value;
 const {nav} = themeConfig
