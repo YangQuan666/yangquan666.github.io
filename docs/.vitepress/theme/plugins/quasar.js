@@ -7,16 +7,18 @@ import 'animate.css';
 // Import Quasar css
 import 'quasar/dist/quasar.css'
 
+import chinese from 'quasar/lang/zh-CN'
+
 
 export function initQuasar(app) {
     app.use(Quasar, {
         config: {
             brand: {
-                primary: '#1976d2',
+                primary: '#1976D2',
                 secondary: '#26A69A',
                 accent: '#9C27B0',
 
-                dark: '#1d1d1d',
+                dark: '#1D1D1D',
 
                 positive: '#21BA45',
                 negative: '#C10015',
@@ -29,6 +31,7 @@ export function initQuasar(app) {
             Dark,
             Notify,
         },
+        lang: chinese
     }, {
         req: {
             headers: {}
