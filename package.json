@@ -18,9 +18,9 @@
     "vitepress": "^0.20.9"
   },
   "dependencies": {
-    "@quasar/extras": "^1.12.5",
+    "@quasar/extras": "^1.13.6",
     "animate.css": "^4.1.1",
-    "quasar": "^2.5.5"
+    "quasar": "^2.6.6"
   },
   "packageManager": "yarn@3.0.2"
 }
