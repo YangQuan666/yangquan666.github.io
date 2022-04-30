@@ -1,6 +1,6 @@
 ---
 title: 华硕RT-AX56U V2路由器安装clash
-date: '2022-03-02'
+date: 2022-04-30T13:30:00+08:00
 excerpt: "暂时用作个人的知识收藏"
 tags:
 - ASUS

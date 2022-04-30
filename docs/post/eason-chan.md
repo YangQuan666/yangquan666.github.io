@@ -1,6 +1,6 @@
 ---
 title: 歌手陈奕迅
-date: '2021-09-20'
+date: 2021-09-20T12:20:00+08:00
 excerpt: "医生，yyds；医生，yyds；医生，yyds；医生，yyds；医生，yyds；医生，yyds；医生，yyds"
 tags:
 - 音乐
