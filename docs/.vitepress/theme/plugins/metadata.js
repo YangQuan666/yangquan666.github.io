@@ -1,11 +1,14 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'front-matter'
+import {date} from 'quasar'
 
 const postDir = path.resolve('docs/post/')
 
 /**
- * @param {string} file
+ *
+ * @param file 文章
+ * @returns {{link: string, time: string, title, excerpt: (string|*)}} 文章的摘要信息
  */
 function getPost(file) {
     const fullPath = path.join(postDir, file)
@@ -16,9 +19,9 @@ function getPost(file) {
     return {
         title: attributes.title,
         link: `/post/${file.replace(/\.md$/, '.html')}`,
-        time: attributes.date,
+        time: date.formatDate(attributes.date, 'YYYY-MM-DD'),
         excerpt: attributes.excerpt
-    }
+    };
 }
 
 function getPosts() {
