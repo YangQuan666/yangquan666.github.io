@@ -7,7 +7,7 @@
 
         <q-toolbar-title shrink class="row items-center no-wrap">
           <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg">
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" alt="logo">
           </q-avatar>
           <span class="gt-sm">Yang Quan</span>
         </q-toolbar-title>
@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, computed} from 'vue'
+import {computed, ref} from 'vue'
 import {useData, useRoute, useRouter} from 'vitepress'
 import {useQuasar} from 'quasar'
 
