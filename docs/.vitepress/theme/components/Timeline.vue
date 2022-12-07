@@ -1,30 +1,7 @@
 <template>
   <div class="q-pa-lg">
-    <div class="row q-gutter-md q-mb-sm">
-      <q-option-group
-          type="radio"
-          dense
-          v-model="layout"
-          :options="[
-          { label: 'Dense layout', value: 'dense' },
-          { label: 'Comfortable layout', value: 'comfortable' },
-          { label: 'Loose layout', value: 'loose' }
-        ]"
-      />
-      <q-option-group
-          type="radio"
-          dense
-          v-model="side"
-          :disable="layout === 'loose'"
-          :options="[
-          { label: 'Content on right', value: 'right' },
-          { label: 'Content on left', value: 'left' }
-        ]"
-      />
-    </div>
-
-    <q-timeline :layout="layout" :side="side" color="secondary">
-      <q-timeline-entry heading>Timeline heading</q-timeline-entry>
+    <q-timeline :layout="layout" color="secondary">
+      <q-timeline-entry heading>最新文章</q-timeline-entry>
 
       <q-timeline-entry
           title="Event Title"
@@ -32,7 +9,11 @@
           side="left"
       >
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </div>
       </q-timeline-entry>
 
@@ -43,7 +24,11 @@
           icon="delete"
       >
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </div>
       </q-timeline-entry>
 
@@ -56,7 +41,11 @@
           avatar="https://cdn.quasar.dev/img/avatar3.jpg"
       >
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </div>
       </q-timeline-entry>
 
@@ -66,7 +55,11 @@
           side="right"
       >
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </div>
       </q-timeline-entry>
 
@@ -78,7 +71,11 @@
           icon="done_all"
       >
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </div>
       </q-timeline-entry>
 
@@ -88,7 +85,11 @@
           side="right"
       >
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </div>
       </q-timeline-entry>
 
@@ -98,7 +99,7 @@
           :subtitle="s.time"
           side="left"
       >
-        <div>{{s.excerpt}}</div>
+        <div>{{ s.excerpt }}</div>
         <q-btn flat :href="s.link">阅读全文</q-btn>
       </q-timeline-entry>
     </q-timeline>
@@ -106,12 +107,54 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {computed} from 'vue'
 import {useRouter} from 'vitepress'
+import {date, useQuasar} from 'quasar'
 import summary from '../../../post/summary.json'
 
 const router = useRouter()
+const $q = useQuasar()
 
-const layout = ref('comfortable')
-const side = ref('right')
+const layout = computed(() => $q.screen.lt.sm ? 'dense' : 'comfortable')
+
+function getDateDiff(timestamp) {
+  const now = new Date()
+  let diff = date.getDateDiff(now, timestamp, 'days')
+  if (diff < 7) {
+    return '0$day'
+  }
+  // 一周前
+  if (diff >= 7 && diff < 30) {
+    return '1$week'
+  }
+  diff = date.getDateDiff(now, timestamp, 'months')
+  // 一个月前
+  if (diff < 6) {
+    return '2$month'
+  }
+  // 半年前
+  if (diff >= 6 && diff < 12) {
+    return '3$half'
+  }
+  // 每年划分一次
+  return '4$' + date.formatDate(timestamp, "YYYY")
+
+}
+
+function groupByTime(summary) {
+  const reduce = summary
+      .reduce((group, value) => {
+        const type = getDateDiff(value.time)
+        group[type] = group[type] || []
+        group[type].push(value)
+        return group
+      }, {});
+
+  const newArray = []
+  Object.keys(reduce).sort().forEach(key => {
+    newArray.push({type: key.substring(2), excerpt: '自定义标题'})
+    newArray.push(reduce[key])
+  })
+  return newArray.flat(1)
+}
 </script>
