@@ -58,6 +58,8 @@
             </q-item-section>
           </q-item>
 
+          <q-separator inset/>
+          <p>这里会在小屏幕下展示文章目录</p>
         </q-list>
       </q-scroll-area>
     </q-drawer>

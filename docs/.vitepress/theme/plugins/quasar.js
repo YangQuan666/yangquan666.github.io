@@ -1,5 +1,4 @@
-import {Quasar, Dark, Notify} from "quasar";
-
+import {Dark, Quasar} from "quasar";
 // Import icon libraries
 import '@quasar/extras/material-icons/material-icons.css'
 import '@quasar/extras/roboto-font/roboto-font.css'
@@ -28,8 +27,7 @@ export function initQuasar(app) {
             dark: 'auto'
         },
         plugins: {
-            Dark,
-            Notify,
+            Dark
         },
         lang: chinese
     }, {

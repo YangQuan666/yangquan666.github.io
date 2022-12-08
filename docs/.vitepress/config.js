@@ -7,7 +7,7 @@ export default {
     lang: 'zh-CN',
     head: [
         ['meta', {name: 'viewport', content: 'user-scalable=no, initial-scale=1, width=device-width'}],
-        ['link', {rel: 'icon', type: 'image/svg+xml', href: '/logo.svg'}],
+        ['link', {rel: 'icon', type: 'image/svg+xml', href: '/logo.svg'}]
     ],
     themeConfig: {
         author: 'YangQuan',
