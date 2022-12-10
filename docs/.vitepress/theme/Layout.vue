@@ -31,7 +31,7 @@
     >
       <q-scroll-area class="fit">
         <q-img src="https://cdn.quasar.dev/img/material.png">
-          <div class="absolute-bottom bg-transparent">
+          <div class="absolute-bottom bg-transparent" style="text-align: center">
             <q-avatar size="150px" class="q-mb-sm">
               <img src="/avatar.png" alt="avatar">
             </q-avatar>
@@ -61,8 +61,8 @@
           <q-separator inset/>
           <p>这里会展示文章目录</p>
 
-          <div class="row">
-            <div v-for="item in socialLinks" class="col justify-around" align="center">
+          <div class="row absolute-bottom">
+            <div v-for="item in socialLinks" class="col" style="text-align: center">
               <q-btn flat round :color="item.color" :icon="item.icon" :href="item.link"/>
             </div>
           </div>
@@ -85,10 +85,11 @@
       </q-page>
     </q-page-container>
 
-    <q-footer bordered class="bg-grey-8 text-white">
+    <q-footer bordered class="bg-dark text-white">
       <q-toolbar>
         <q-toolbar-title>
-          <div>Footer</div>
+          <p v-if="footer.message" class="message" v-html="footer.message"></p>
+          <p v-if="footer.copyright" class="copyright" v-html="footer.copyright"></p>
         </q-toolbar-title>
       </q-toolbar>
     </q-footer>
@@ -113,5 +114,22 @@ const {site} = useData()
 const drawer = ref(false)
 
 const {themeConfig} = site.value;
-const {nav, socialLinks} = themeConfig
+const {nav, socialLinks, footer} = themeConfig
 </script>
+<style>
+.message,
+.copyright {
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+}
+
+.message {
+  order: 2;
+}
+
+.copyright {
+  order: 1;
+}
+</style>

@@ -72,7 +72,6 @@
 
 <script lang="ts" setup>
 import {useQuasar} from 'quasar';
-import {ref} from "vue";
 
 const $q = useQuasar()
 const menus = [
