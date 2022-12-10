@@ -40,10 +40,38 @@
           </div>
         </q-img>
 
-        <q-list padding>
+        <q-list
+            padding
+            v-for="item in nav"
+            :key="item"
+        >
+          <q-expansion-item
+              expand-separator
+              default-opened
+              v-if="item.children"
+              :icon="item.icon"
+              :label="item.title"
+              :hide-expand-icon="item.children"
+          >
+            <q-item
+                v-for="child in item.children"
+                :key="child"
+                @click="router.go(child.link)"
+                :active="route.path === child.link"
+                clickable
+                v-ripple
+            >
+              <q-item-section avatar/>
+              <q-item-section>
+                {{ child.title }}
+              </q-item-section>
+              <q-item-section avatar>
+                <q-icon :name="item.icon"/>
+              </q-item-section>
+            </q-item>
+          </q-expansion-item>
           <q-item
-              v-for="item in nav"
-              :key="item"
+              v-else
               @click="router.go(item.link)"
               :active="route.path === item.link"
               clickable
@@ -56,18 +84,20 @@
             <q-item-section>
               {{ item.title }}
             </q-item-section>
+            <!--todo 这里如果是post文章，则展示目录-->
+            <!--          <q-separator inset/>-->
+            <!--          <p>这里会展示文章目录</p>-->
           </q-item>
-
-          <q-separator inset/>
-          <p>这里会展示文章目录</p>
-
-          <div class="row absolute-bottom">
-            <div v-for="item in socialLinks" class="col" style="text-align: center">
-              <q-btn flat round :color="item.color" :icon="item.icon" :href="item.link"/>
-            </div>
-          </div>
         </q-list>
+
+
       </q-scroll-area>
+      <!--      todo 这里要考虑当list长度过大的时候，需要跟随往下展示-->
+      <div class="row absolute-bottom">
+        <div v-for="item in socialLinks" class="col" style="text-align: center">
+          <q-btn flat round :color="item.color" :icon="item.icon" :href="item.link"/>
+        </div>
+      </div>
     </q-drawer>
 
     <q-page-container>
@@ -116,20 +146,3 @@ const drawer = ref(false)
 const {themeConfig} = site.value;
 const {nav, socialLinks, footer} = themeConfig
 </script>
-<style>
-.message,
-.copyright {
-  line-height: 24px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--vp-c-text-2);
-}
-
-.message {
-  order: 2;
-}
-
-.copyright {
-  order: 1;
-}
-</style>

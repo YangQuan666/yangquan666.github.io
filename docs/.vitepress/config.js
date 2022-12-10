@@ -1,5 +1,5 @@
 import {buildSummary} from './theme/plugins/metadata.js'
-import {biGithub, biTelegram, biTwitter} from '@quasar/extras/bootstrap-icons'
+import {biGithub, biTelegram, biTwitter, biBrowserChrome} from '@quasar/extras/bootstrap-icons'
 
 buildSummary()
 
@@ -15,9 +15,21 @@ export default {
         author: 'YangQuan',
         email: 'quark.yeung@icloud.com',
         nav: [
-            {title: 'Home', link: '/', icon: 'home'},
-            {title: 'Game', link: '/game/', icon: 'smart_toy'},
-            {title: 'Tool', link: '/tool/', icon: 'api'},
+            {
+                title: 'Home', link: '/', icon: 'home'
+            },
+            {
+                title: 'Game', icon: 'smart_toy', children: [
+                    {title: 'Chrome Dinosaur', link: '/game/dinosaur', icon: 'casino'},
+                    {title: 'Flappy Bird', link: '/game/flappyBird', icon: 'casino'},
+                    {title: '2048', link: '/game/2048', icon: 'casino'},
+                ]
+            },
+            {
+                title: 'Tool', link: '/tool/', icon: 'api', children: [
+                    {title: 'Json Formatter', link: '/tool/jsonFormatter', icon: 'hive'},
+                ]
+            },
         ],
         socialLinks: [
             {icon: biGithub, color: 'null', link: 'https://github.com/YangQuan666'},
