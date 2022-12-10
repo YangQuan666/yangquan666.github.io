@@ -12,21 +12,13 @@
       </div>
     </template>
   </q-parallax>
-
-  <q-markdown :src="mdStr">
-  </q-markdown>
   <Content/>
 </template>
 <script setup>
 import {useMeta} from 'quasar'
-import {QMarkdown} from '@quasar/quasar-ui-qmarkdown'
 
 //todo 搜索引擎优化
 const metaData = {}
 useMeta(metaData)
 
-const mdStr = ""
-
-
 </script>
-<style src="@quasar/quasar-ui-qmarkdown/dist/index.css"></style>
