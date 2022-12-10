@@ -2,105 +2,14 @@
   <div class="q-pa-lg">
     <q-timeline :layout="layout" color="secondary">
       <q-timeline-entry heading>最新文章</q-timeline-entry>
-
       <q-timeline-entry
-          title="Event Title"
-          subtitle="February 22, 1986"
+          v-for="summary in summaries"
+          :title="summary.title"
+          :subtitle="summary.time"
           side="left"
       >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry
-          title="Event Title"
-          subtitle="February 21, 1986"
-          side="right"
-          icon="delete"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry heading>November, 2017</q-timeline-entry>
-
-      <q-timeline-entry
-          title="Event Title"
-          subtitle="February 22, 1986"
-          side="left"
-          avatar="https://cdn.quasar.dev/img/avatar3.jpg"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry
-          title="Event Title"
-          subtitle="February 22, 1986"
-          side="right"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry
-          title="Event Title"
-          subtitle="February 22, 1986"
-          side="left"
-          color="orange"
-          icon="done_all"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry
-          title="Event Title"
-          subtitle="February 22, 1986"
-          side="right"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry
-          v-for="s in summary"
-          :title="s.title"
-          :subtitle="s.time"
-          side="left"
-      >
-        <div>{{ s.excerpt }}</div>
-        <q-btn flat :href="s.link">阅读全文</q-btn>
+        <div>{{ summary.excerpt }}</div>
+        <q-btn flat :href="summary.link">阅读全文</q-btn>
       </q-timeline-entry>
     </q-timeline>
   </div>
@@ -110,7 +19,7 @@
 import {computed} from 'vue'
 import {useRouter} from 'vitepress'
 import {date, useQuasar} from 'quasar'
-import summary from '../../../post/summary.json'
+import summaries from '../../../post/summary.json'
 
 const router = useRouter()
 const $q = useQuasar()

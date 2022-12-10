@@ -33,6 +33,6 @@ function getPosts() {
 }
 
 
-export function genMetadata() {
+export function buildSummary() {
     fs.writeFileSync(postDir + '/summary.json', JSON.stringify(getPosts()))
 }

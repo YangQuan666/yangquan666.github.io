@@ -59,7 +59,13 @@
           </q-item>
 
           <q-separator inset/>
-          <p>这里会在小屏幕下展示文章目录</p>
+          <p>这里会展示文章目录</p>
+
+          <div class="row">
+            <div v-for="item in socialLinks" class="col justify-around" align="center">
+              <q-btn flat round :color="item.color" :icon="item.icon" :href="item.link"/>
+            </div>
+          </div>
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -74,10 +80,8 @@
         </q-breadcrumbs>
       </div>
       <q-page padding>
-        <Debug/>
-        <Timeline v-if="isHome"/>
-        <About v-else-if="isAbout"/>
-        <Post v-else/>
+        <Timeline v-if="route.path === '/'"/>
+        <Post v-else-if="route.path.startsWith('/post')"/>
       </q-page>
     </q-page-container>
 
@@ -92,7 +96,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, ref} from 'vue'
+import {ref} from 'vue'
 import {useData, useRoute, useRouter} from 'vitepress'
 import {useQuasar} from 'quasar'
 
@@ -100,7 +104,6 @@ import Post from './components/Post.vue'
 import Timeline from './components/Timeline.vue';
 import Search from './components/Search.vue';
 import Toolbar from './components/Toolbar.vue';
-import About from './components/About.vue';
 
 const $q = useQuasar()
 const route = useRoute()
@@ -109,9 +112,6 @@ const {site} = useData()
 
 const drawer = ref(false)
 
-const isHome = computed(() => route.path === '/')
-const isAbout = computed(() => route.path === '/about/')
-
 const {themeConfig} = site.value;
-const {nav} = themeConfig
+const {nav, socialLinks} = themeConfig
 </script>

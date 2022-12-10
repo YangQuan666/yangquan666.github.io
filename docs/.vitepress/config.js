@@ -1,5 +1,7 @@
-import {genMetadata} from './theme/plugins/metadata.js'
-genMetadata()
+import {buildSummary} from './theme/plugins/metadata.js'
+import {biGithub, biTelegram, biTwitter} from '@quasar/extras/bootstrap-icons'
+
+buildSummary()
 
 export default {
     title: 'YangQuan\'s blog',
@@ -14,17 +16,17 @@ export default {
         email: 'quark.yeung@icloud.com',
         nav: [
             {title: 'Home', link: '/', icon: 'home'},
-            {title: 'About', link: '/about/', icon: 'person'},
+            {title: 'Game', link: '/game/', icon: 'smart_toy'},
+            {title: 'Tool', link: '/tool/', icon: 'api'},
         ],
-        sidebar: {
-            '/tags/': [
-                '',
-                'vuetify',
-                'vue',
-                'nodejs',
-                'git',
-                'linux',
-            ]
+        socialLinks: [
+            {icon: biGithub, color: 'null', link: 'https://github.com/YangQuan666'},
+            {icon: biTwitter, color: 'blue-6', link: 'https://twitter.com/QuarkYeung'},
+            {icon: biTelegram, color: 'light-blue-6', link: 'https://t.me/QuarkYeung'}
+        ],
+        footer: {
+            message: 'Released under the GPL License.',
+            copyright: 'Copyright © 2019-present Evan You'
         }
     }
 }
