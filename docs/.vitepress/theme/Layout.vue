@@ -40,20 +40,23 @@
           </div>
         </q-img>
 
-        <q-list
-            padding
-            v-for="item in nav"
-            :key="item"
-        >
+        <q-list padding>
           <q-expansion-item
-              expand-separator
               default-opened
-              v-if="item.children"
+              v-for="item in nav"
+              :key="item"
               :icon="item.icon"
               :label="item.title"
-              :hide-expand-icon="item.children"
+              :hide-expand-icon="!item.children"
+              @click="router.go(item.link)"
           >
+            <div v-if="false">
+              <!--todo 这里如果是post文章，则展示目录-->
+              <!--          <q-separator inset/>-->
+              <!--          <p>这里会展示文章目录</p>-->
+            </div>
             <q-item
+                v-else
                 v-for="child in item.children"
                 :key="child"
                 @click="router.go(child.link)"
@@ -70,24 +73,6 @@
               </q-item-section>
             </q-item>
           </q-expansion-item>
-          <q-item
-              v-else
-              @click="router.go(item.link)"
-              :active="route.path === item.link"
-              clickable
-              v-ripple
-          >
-            <q-item-section avatar>
-              <q-icon :name="item.icon"/>
-            </q-item-section>
-
-            <q-item-section>
-              {{ item.title }}
-            </q-item-section>
-            <!--todo 这里如果是post文章，则展示目录-->
-            <!--          <q-separator inset/>-->
-            <!--          <p>这里会展示文章目录</p>-->
-          </q-item>
         </q-list>
 
 

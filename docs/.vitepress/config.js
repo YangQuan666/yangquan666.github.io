@@ -16,7 +16,7 @@ export default {
         email: 'quark.yeung@icloud.com',
         nav: [
             {
-                title: 'Home', link: '/', icon: 'home'
+                title: 'Home', icon: 'home', link: '/'
             },
             {
                 title: 'Game', icon: 'smart_toy', children: [
@@ -26,7 +26,7 @@ export default {
                 ]
             },
             {
-                title: 'Tool', link: '/tool/', icon: 'api', children: [
+                title: 'Tool', icon: 'api', children: [
                     {title: 'Json Formatter', link: '/tool/jsonFormatter', icon: 'hive'},
                 ]
             },
