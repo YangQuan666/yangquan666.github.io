@@ -1,4 +1,5 @@
 <template>
+<!-- todo 移动页面只显示搜索icon，点击后展开并覆盖掉左边的logo -->
   <q-select
       v-model="text"
       :options="options"
@@ -6,7 +7,9 @@
       standout
       use-input
       dense
+      dark
       hide-dropdown-icon
+      hide-selected
       behavior="menu"
       style="width: 50%"
   >
@@ -15,6 +18,9 @@
       <q-icon name="search"/>
     </template>
 
+    <template v-slot:append>
+      cmd+k
+    </template>
     <template v-slot:no-option>
       <q-item>
         <q-item-section class="text-grey">
