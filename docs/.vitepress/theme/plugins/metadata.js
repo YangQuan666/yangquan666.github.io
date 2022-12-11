@@ -7,8 +7,8 @@ const postDir = path.resolve('docs/post/')
 
 /**
  *
- * @param file 文章
- * @returns {{link: string, time: string, title, excerpt: (string|*)}} 文章的摘要信息
+ * @param file md文章
+ * @returns {{link: string, time: string, title, excerpt: *}|null} 文章的摘要信息
  */
 function getPost(file) {
     const fullPath = path.join(postDir, file)
@@ -16,6 +16,9 @@ function getPost(file) {
     const src = fs.readFileSync(fullPath, 'utf-8')
     const {attributes} = matter(src)
 
+    if (attributes.display === false) {
+        return null;
+    }
     return {
         title: attributes.title,
         link: `/post/${file.replace(/\.md$/, '.html')}`,
@@ -28,7 +31,8 @@ function getPosts() {
     return fs
         .readdirSync(postDir)
         .filter(file => file.match(/\.md$/))
-        .map((file) => getPost(file))
+        .map(file => getPost(file))
+        .filter(json => json != null)
         .sort((a, b) => b.time - a.time)
 }
 
