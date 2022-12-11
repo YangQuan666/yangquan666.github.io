@@ -1,5 +1,5 @@
 import {buildSummary} from './theme/plugins/metadata.js'
-import {biGithub, biTelegram, biTwitter, biBrowserChrome} from '@quasar/extras/bootstrap-icons'
+import {biGithub, biTelegram, biTwitter} from '@quasar/extras/bootstrap-icons'
 
 buildSummary()
 
