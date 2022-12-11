@@ -7,6 +7,7 @@
       use-input
       dense
       hide-dropdown-icon
+      behavior="menu"
       style="width: 50%"
   >
 
@@ -44,7 +45,7 @@ const stringOptions = [
 ]
 
 const text = ref('')
-const options = ref(null)
+const options = ref([])
 
 function filter(val, update) {
 
