@@ -11,7 +11,7 @@
       hide-dropdown-icon
       hide-selected
       behavior="menu"
-      style="width: 50%"
+      :style="{ width: ($q.screen.gt.sm ? '50%' : '75%' ) }"
   >
 
     <template v-slot:prepend>
@@ -23,7 +23,7 @@
     </template>
     <template v-slot:no-option>
       <q-item>
-        <q-item-section class="text-grey">
+        <q-item-section>
           No results
         </q-item-section>
       </q-item>
@@ -35,7 +35,7 @@
           <q-icon name="collections_bookmark"/>
         </q-item-section>
         <q-item-section>
-          <q-item-label v-html="scope.opt.label"/>
+          <q-item-label v-html="scope.opt.label" @click="cli(scope.opt)"/>
         </q-item-section>
       </q-item>
     </template>
@@ -77,6 +77,10 @@ function filter(val, update) {
           })
     }
   })
+}
+
+function   cli(k) {
+  console.log(k)
 }
 
 </script>

@@ -5,11 +5,15 @@
       <q-toolbar>
         <q-btn flat round icon="menu" @click="drawer = !drawer"/>
 
-        <q-toolbar-title shrink class="row items-center no-wrap">
+        <q-toolbar-title
+            v-if="$q.screen.gt.sm"
+            shrink
+            class="row items-center no-wrap"
+        >
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" alt="logo">
           </q-avatar>
-          <span class="gt-sm">Yang Quan</span>
+          <span class="q-ml-sm">Yang Quan</span>
         </q-toolbar-title>
         <q-space/>
 
