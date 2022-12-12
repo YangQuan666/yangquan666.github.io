@@ -1,11 +1,13 @@
 ---
-title: 华硕RT-AX56U V2路由器安装clash
+title: 面向小白的一篇OpenWRT入门教程
 date: 2022-04-30T13:30:00+08:00
-excerpt: "暂时用作个人的知识收藏"
+excerpt: "OpenWrt是一款开源的路由器操作系统，能够把你们的路由器变成一台强大的网络工具。它的灵活性和可扩展性让用户能够定制路由器的功能，让路由器发挥最大的潜力。"
 tags:
-- ASUS
-- 路由器
-- clash
+- OpenWrt
+- 软路由
+- 翻墙
+- openClash
+- uu加速器
 ---
 # 华硕RT-AX56U V2路由器安装clash
 

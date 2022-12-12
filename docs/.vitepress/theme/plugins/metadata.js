@@ -33,7 +33,7 @@ function getPosts() {
         .filter(file => file.match(/\.md$/))
         .map(file => getPost(file))
         .filter(json => json != null)
-        .sort((a, b) => b.time - a.time)
+        .sort((a, b) => Date.parse(b.time) - Date.parse(a.time))
 }
 
 

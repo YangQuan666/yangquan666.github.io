@@ -8,8 +8,14 @@
           :subtitle="summary.time"
           side="left"
       >
-        <div>{{ summary.excerpt }}</div>
-        <q-btn flat :href="summary.link">阅读全文</q-btn>
+        <div class="text-caption">{{ summary.excerpt }}</div>
+        <q-btn
+            flat
+            color="primary"
+            @click="router.go(summary.link)"
+        >
+          阅读全文
+        </q-btn>
       </q-timeline-entry>
     </q-timeline>
   </div>
