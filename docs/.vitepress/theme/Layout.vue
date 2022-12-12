@@ -20,8 +20,6 @@
         <Search/>
 
         <q-space/>
-
-        <Toolbar/>
       </q-toolbar>
     </q-header>
 
@@ -123,7 +121,6 @@ import {useQuasar} from 'quasar'
 import Post from './components/Post.vue'
 import Timeline from './components/Timeline.vue';
 import Search from './components/Search.vue';
-import Toolbar from './components/Toolbar.vue';
 
 const $q = useQuasar()
 const route = useRoute()

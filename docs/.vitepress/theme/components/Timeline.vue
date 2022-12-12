@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-lg">
     <q-timeline :layout="layout" color="secondary">
-      <q-timeline-entry heading>最新文章</q-timeline-entry>
+      <q-timeline-entry heading>Timeline</q-timeline-entry>
       <q-timeline-entry
           v-for="summary in summaries"
           :title="summary.title"
