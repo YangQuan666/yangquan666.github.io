@@ -40,5 +40,10 @@ export default {
             message: 'Released under the GPL License.',
             copyright: 'Copyright © 2019-present Evan You'
         }
+    },
+    markdown: {
+        toc: {level: [1, 2]},
+        config: (md) => {
+        }
     }
 }

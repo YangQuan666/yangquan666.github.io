@@ -11,7 +11,7 @@
     </template>
   </q-parallax>
 
-  <Content/>
+  <Content class="markdown-body"/>
 
 </template>
 <script setup>
