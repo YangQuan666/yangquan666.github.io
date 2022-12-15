@@ -1,19 +1,17 @@
 <template>
   <q-parallax :height="300">
     <template v-slot:media>
-      <img src="https://cdn.quasar.dev/img/parallax2.jpg" alt="background">
+      <img src="/default.svg" alt="background">
     </template>
 
     <template v-slot:content="scope">
       <div class="absolute column items-center">
-        <h2 class="text-white">
-          “Talk is cheap. Show me the code.”
-        </h2>
+        <h2>“Talk is cheap. Show me the code.”</h2>
       </div>
     </template>
   </q-parallax>
 
-  <Content class="markdown-body"/>
+  <Content/>
 
 </template>
 <script setup>
