@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-lg">
     <q-timeline :layout="layout" color="secondary">
-      <q-timeline-entry heading>Timeline</q-timeline-entry>
+      <q-timeline-entry heading>时间轴</q-timeline-entry>
       <q-timeline-entry
           v-for="summary in summaries"
           :title="summary.title"
@@ -24,7 +24,7 @@
 <script setup>
 import {computed} from 'vue'
 import {useRouter} from 'vitepress'
-import {date, useQuasar} from 'quasar'
+import {useQuasar} from 'quasar'
 import summaries from '../../../post/summary.json'
 
 const router = useRouter()

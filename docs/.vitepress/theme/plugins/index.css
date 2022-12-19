@@ -1,0 +1,12 @@
+.search-field {
+    transition: width .36s;
+    width: 75%;
+}
+
+.search-field.search-closed {
+    width: 46px;
+}
+
+.search-field.search-closed .q-field__control {
+    background: transparent !important;
+}

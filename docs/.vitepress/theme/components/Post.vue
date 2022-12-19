@@ -10,13 +10,13 @@
       </div>
     </template>
   </q-parallax>
-
+  <!--todo 1.展示相关的标签，2.展示阅读需要的大概时间(根据字数估计)-->
   <Content class="markdown-body"/>
 
 </template>
-<script setup>
+<script lang="ts" setup>
 import {useMeta} from 'quasar'
 //todo 搜索引擎优化
-const metaData = {}
-useMeta(metaData)
+// const metaData = {}
+// useMeta(metaData)
 </script>

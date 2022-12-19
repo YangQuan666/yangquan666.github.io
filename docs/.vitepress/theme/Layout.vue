@@ -2,25 +2,7 @@
   <q-layout view="hHh LpR lfr">
 
     <q-header elevated>
-      <q-toolbar>
-        <q-btn flat round icon="menu" @click="drawer = !drawer"/>
-
-        <q-toolbar-title
-            v-if="$q.screen.gt.sm"
-            shrink
-            class="row items-center no-wrap"
-        >
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" alt="logo">
-          </q-avatar>
-          <span class="q-ml-sm">Yang Quan</span>
-        </q-toolbar-title>
-        <q-space/>
-
-        <Search/>
-
-        <q-space/>
-      </q-toolbar>
+      <Toolbar :drawer="drawer" @updateDrawer="updateDrawer"/>
     </q-header>
 
     <q-drawer
@@ -116,19 +98,19 @@
 <script lang="ts" setup>
 import {ref} from 'vue'
 import {useData, useRoute, useRouter} from 'vitepress'
-import {useQuasar} from 'quasar'
 
 import Post from './components/Post.vue'
 import Timeline from './components/Timeline.vue';
-import Search from './components/Search.vue';
+import Toolbar from "./components/Toolbar.vue";
 
-const $q = useQuasar()
 const route = useRoute()
 const router = useRouter()
 const {site} = useData()
 
 const drawer = ref(false)
-
+const updateDrawer = () => {
+  drawer.value = !drawer.value
+}
 const {themeConfig} = site.value;
 const {nav, socialLinks, footer} = themeConfig
 </script>
