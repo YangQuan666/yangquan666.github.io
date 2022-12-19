@@ -20,9 +20,9 @@
         placeholder="Search"
         dense hide-bottom-space
         class="search-field"
-        :class="{ 'search-closed': sfClose }"
-        @blur="sfClose = true; keyword = ''"
-        @focus="sfClose = false"
+        :class="{ 'search-closed': onDynamic}"
+        @blur="searchOpen = false"
+        @focus="searchOpen = true"
         clearable clear-icon="close"
     >
       <template #prepend>
@@ -35,19 +35,17 @@
 
 <script lang="ts" setup>
 import {useQuasar} from 'quasar';
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 defineProps({drawer: Boolean})
 
 const $q = useQuasar()
 const keyword = ref('')
-const sfClose = ref(true)
 
-const onBlur = function () {
+const smScreen = computed(() => $q.screen.lt.sm)
+const searchOpen = ref(false)
 
-}
-
-const onFocus = function () {
-
-}
+const onDynamic = computed(() => {
+  return smScreen.value && !(smScreen.value && searchOpen.value)
+})
 </script>
