@@ -28,17 +28,15 @@
         <q-icon name="search" class="cursor-pointer"></q-icon>
       </template>
     </q-input>
-    <q-space v-if="$q.screen.gt.sm"/>
+    <q-space class="gt-sm"/>
   </q-toolbar>
 </template>
 
 <script lang="ts" setup>
-import {useQuasar} from 'quasar';
-import {computed, ref} from "vue";
+import {ref} from "vue";
 
 defineProps({drawer: Boolean})
 
-const $q = useQuasar()
 const searchClose = ref(true)
 
 const keyword = ref('')
