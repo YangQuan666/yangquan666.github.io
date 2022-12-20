@@ -256,12 +256,15 @@ Boyer-Moore算法由Bob Boyer和J Strother Moore设计于1977年。一般情况�
 ### 代码解读
 #### 坏字符规则
 BM 算法是从后往前进行比较，我们来看一下具体过程，假设有原文为`"HERE IS A SIMPLE EXAMPLE"`，关键词为`"EXAMPLE`"：
+
 ![bm-1.png](..%2Fpublic%2Fpost%2Fkeyword-check%2Fbm-1.png)
 
-此时`"S"`与`"E"`不匹配，`"S"`就被称为**"坏字符"**，即不匹配的字符。我们还发现`"S"`不包含在关键词`"EXAMPLE"`之中，这意味着可以把关键词直接移到`"S"`的后一位。
+此时`"S"`与`"E"`不匹配，`"S"`就被称为 **"坏字符"** ，即不匹配的字符。我们还发现`"S"`不包含在关键词`"EXAMPLE"`之中，这意味着可以把关键词直接移到`"S"`的后一位。
+
 ![bm-2.png](..%2Fpublic%2Fpost%2Fkeyword-check%2Fbm-2.png)
-依然从尾部开始比较，发现`"P"`与`"E"`不匹配，所以`"P"`是**"坏字符"**。但是，`"P"`包含在搜索词`"EXAMPLE"`之中。所以将搜索词后移两位，两个`"P"`对齐。
-因此不难得出**"坏字符"**的规则：`后移位数 = 坏字符的位置 - 搜索词中的上一次出现位置`
+
+依然从尾部开始比较，发现`"P"`与`"E"`不匹配，所以`"P"`是 **"坏字符"** 。但是，`"P"`包含在搜索词`"EXAMPLE"`之中。所以将搜索词后移两位，两个`"P"`对齐。
+因此不难得出 **"坏字符"** 的规则：`后移位数 = 坏字符的位置 - 搜索词中的上一次出现位置`
 ```java
 // 坏字符规则表
 private int[] buildBadCharacter(char[] keyword) {
@@ -283,16 +286,26 @@ private int[] buildBadCharacter(char[] keyword) {
 #### 好后缀规则
 
 1. 依然从尾部开始比较，`"E"`与`"E"`匹配：
+
    ![bm-3.png](..%2Fpublic%2Fpost%2Fkeyword-check%2Fbm-3.png)
+
 2. 比较前面一位，`"LE"`与`"LE"`匹配：
+
    ![bm-4.png](..%2Fpublic%2Fpost%2Fkeyword-check%2Fbm-4.png)
+
 3. 比较前面一位，"PLE"与"PLE"匹配：
+
    ![bm-5.png](..%2Fpublic%2Fpost%2Fkeyword-check%2Fbm-5.png)
+
 4. 比较前面一位，"MPLE"与"MPLE"匹配：
+
    ![bm-6.png](..%2Fpublic%2Fpost%2Fkeyword-check%2Fbm-6.png)
-5. 我们把这种情况称为**"好后缀"**，`"MPLE"`、`"PLE"`、`"LE"`、`"E"`都是好后缀。
-6. 所有的**"好后缀"**之中，只有`"E"`在`"EXAMPLE"`中还出现在头部，所以后移 6位：
+
+5. 我们把这种情况称为 **"好后缀"** ，`"MPLE"`、`"PLE"`、`"LE"`、`"E"`都是好后缀。
+6. 所有的 **"好后缀"** 之中，只有`"E"`在`"EXAMPLE"`中还出现在头部，所以后移 6位：
+
    ![bm-7.png](..%2Fpublic%2Fpost%2Fkeyword-check%2Fbm-7.png)
+
 ```java
 // 好前缀规则表
 private int[] buildGoodSuffix(char[] keyword) {
