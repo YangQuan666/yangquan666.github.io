@@ -20,10 +20,9 @@
         placeholder="Search"
         dense hide-bottom-space
         class="search-field"
-        :class="{ 'search-closed': onDynamic}"
-        @blur="searchOpen = false"
-        @focus="searchOpen = true"
-        clearable clear-icon="close"
+        v-bind:class='{ "search-closed": searchClose}'
+        @blur="searchClose = true"
+        @focus="searchClose = false"
     >
       <template #prepend>
         <q-icon name="search" class="cursor-pointer"></q-icon>
@@ -40,12 +39,7 @@ import {computed, ref} from "vue";
 defineProps({drawer: Boolean})
 
 const $q = useQuasar()
+const searchClose = ref(true)
+
 const keyword = ref('')
-
-const smScreen = computed(() => $q.screen.lt.sm)
-const searchOpen = ref(false)
-
-const onDynamic = computed(() => {
-  return smScreen.value && !(smScreen.value && searchOpen.value)
-})
 </script>

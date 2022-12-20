@@ -3,10 +3,13 @@
     width: 75%;
 }
 
-.search-field.search-closed {
-    width: 46px;
-}
+@media (max-width: 1023.98px) {
 
-.search-field.search-closed .q-field__control {
-    background: transparent !important;
+    .search-field.search-closed {
+        width: 46px;
+    }
+
+    .search-field.search-closed .q-field__control {
+        background: transparent !important;
+    }
 }
