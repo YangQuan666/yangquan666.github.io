@@ -1,7 +1,8 @@
 import Layout from './Layout.vue'
 import Error404 from './components/Error404.vue'
 import 'github-markdown-css'
-import './plugins/index.css'
+import './plugins/custom.css'
+
 import {initQuasar} from './plugins/quasar'
 
 export default {
