@@ -38,7 +38,7 @@ export default {
         ],
         footer: {
             message: 'Released under the GPL License.',
-            copyright: 'Copyright © 2019-present Evan You'
+            copyright: 'Copyright © 2021-present, YangQuan666'
         }
     },
     markdown: {

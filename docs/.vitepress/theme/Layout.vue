@@ -14,7 +14,7 @@
         side="left"
     >
       <q-scroll-area class="fit">
-        <q-img src="https://cdn.quasar.dev/img/material.png">
+        <q-img src="/material.png">
           <div class="absolute-bottom bg-transparent" style="text-align: center">
             <q-avatar size="150px" class="q-mb-sm">
               <img src="/avatar.png" alt="avatar">
@@ -81,15 +81,15 @@
       <q-page padding>
         <Timeline v-if="route.path === '/'"/>
         <Post v-else-if="route.path.startsWith('/post')"/>
+        <Content v-else />
       </q-page>
     </q-page-container>
 
     <q-footer bordered class="bg-dark text-white">
       <q-toolbar>
-        <q-toolbar-title>
-          <p v-if="footer.message" class="message" v-html="footer.message"></p>
-          <p v-if="footer.copyright" class="copyright" v-html="footer.copyright"></p>
-        </q-toolbar-title>
+        {{ footer.message }}
+        <q-space/>
+        {{ footer.copyright }}
       </q-toolbar>
     </q-footer>
   </q-layout>
