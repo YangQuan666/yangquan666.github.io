@@ -1,23 +1,25 @@
 <template>
-  <div class="q-pa-lg">
-    <q-timeline :layout="layout" color="secondary">
-      <q-timeline-entry heading>时间轴</q-timeline-entry>
-      <q-timeline-entry
-          v-for="summary in summaries"
-          :title="summary.title"
-          :subtitle="summary.time"
-          side="left"
-      >
-        <div class="text-caption">{{ summary.excerpt }}</div>
-        <q-btn
-            flat
-            color="primary"
-            @click="router.go(summary.link)"
+  <div class="row">
+    <div class="col-10 offset-1 col-sm-8 offset-sm-2">
+      <q-timeline :layout="layout" color="secondary">
+        <q-timeline-entry heading>时间轴</q-timeline-entry>
+        <q-timeline-entry
+            v-for="summary in summaries"
+            :title="summary.title"
+            :subtitle="summary.time"
+            side="left"
         >
-          阅读全文
-        </q-btn>
-      </q-timeline-entry>
-    </q-timeline>
+          <div class="text-caption">{{ summary.excerpt }}</div>
+          <q-btn
+              flat
+              color="primary"
+              @click="router.go(summary.link)"
+          >
+            阅读全文
+          </q-btn>
+        </q-timeline-entry>
+      </q-timeline>
+    </div>
   </div>
 </template>
 
