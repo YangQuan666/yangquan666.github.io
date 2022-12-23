@@ -19,6 +19,14 @@
 }
 
 /**
+ * Github Markdown CSS
+ */
+
+.markdown-body {
+    background-color: transparent !important;
+}
+
+/**
  * Code
  * -------------------------------------------------------------------------- */
 
