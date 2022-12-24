@@ -31,13 +31,13 @@
             :icon="item.icon"
             :label="item.title"
             :hide-expand-icon="!item.children"
-            @click="router.go(item.link)"
+            @click="drawerClick(item.link)"
             :header-class="{'text-primary': route.path === '/' && item.link === '/'}"
         >
           <q-item
               v-for="child in item.children"
               :key="child"
-              @click="router.go(child.link)"
+              @click="drawerClick(child.link)"
               :active="route.path.includes(child.link)"
               clickable
               v-ripple
@@ -95,14 +95,22 @@ import {useData, useRoute, useRouter} from 'vitepress'
 import Post from './components/Post.vue'
 import Timeline from './components/Timeline.vue';
 import Toolbar from "./components/Toolbar.vue";
+import {useQuasar} from "quasar";
 
 const route = useRoute()
 const router = useRouter()
 const {site} = useData()
+const $q = useQuasar()
 
 const drawer = ref(false)
 const updateDrawer = () => {
   drawer.value = !drawer.value
+}
+const drawerClick = (href) => {
+  router.go(href)
+  if ($q.screen.sm) {
+    drawer.value = false
+  }
 }
 const {themeConfig} = site.value;
 const {nav, socialLinks, footer} = themeConfig
