@@ -23,50 +23,43 @@
             <div>{{ themeConfig.email }}</div>
           </div>
         </q-img>
-
-        <q-list padding>
-          <q-expansion-item
-              default-opened
-              v-for="item in nav"
-              :key="item"
-              :icon="item.icon"
-              :label="item.title"
-              :hide-expand-icon="!item.children"
-              @click="router.go(item.link)"
+        <q-expansion-item
+            padding
+            default-opened
+            v-for="item in nav"
+            :key="item"
+            :icon="item.icon"
+            :label="item.title"
+            :hide-expand-icon="!item.children"
+            @click="router.go(item.link)"
+            :header-class="{'text-primary': route.path === '/' && item.link === '/'}"
+        >
+          <q-item
+              v-for="child in item.children"
+              :key="child"
+              @click="router.go(child.link)"
+              :active="route.path.includes(child.link)"
+              clickable
+              v-ripple
           >
-            <div v-if="false">
-              <!--todo 这里如果是post文章，则展示目录-->
-              <!--          <q-separator inset/>-->
-              <!--          <p>这里会展示文章目录</p>-->
-            </div>
-            <q-item
-                v-else
-                v-for="child in item.children"
-                :key="child"
-                @click="router.go(child.link)"
-                :active="route.path === child.link"
-                clickable
-                v-ripple
-            >
-              <q-item-section avatar/>
-              <q-item-section>
-                {{ child.title }}
-              </q-item-section>
-              <q-item-section avatar>
-                <q-icon :name="item.icon"/>
-              </q-item-section>
-            </q-item>
-          </q-expansion-item>
-        </q-list>
+            <q-item-section avatar/>
+            <q-item-section>
+              {{ child.title }}
+            </q-item-section>
+            <q-item-section avatar>
+              <q-icon :name="item.icon"/>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
 
-
-      </q-scroll-area>
-      <!--      todo 这里要考虑当list长度过大的时候，需要跟随往下展示-->
-      <div class="row absolute-bottom">
-        <div v-for="item in socialLinks" class="col" style="text-align: center">
-          <q-btn flat round :color="item.color" :icon="item.icon" :href="item.link"/>
+        <!--      todo 这里要考虑当list长度过大的时候，需要跟随往下展示-->
+        <div class="row absolute-bottom">
+          <div v-for="item in socialLinks" class="col" style="text-align: center">
+            <q-btn flat round :color="item.color" :icon="item.icon" :href="item.link"/>
+          </div>
         </div>
-      </div>
+      </q-scroll-area>
+
     </q-drawer>
 
     <q-page-container>
@@ -85,14 +78,6 @@
       </q-page>
     </q-page-container>
 
-    <q-drawer
-        show-if-above
-        no-swipe-open
-        no-swipe-close
-        side="right"
-        bordered>
-      <!-- drawer content -->
-    </q-drawer>
     <q-footer bordered class="bg-dark text-white">
       <q-toolbar>
         {{ footer.message }}

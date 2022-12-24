@@ -15,6 +15,14 @@
     <!--todo 1.展示相关的标签，2.展示阅读需要的大概时间(根据字数估计)-->
     <Content class="markdown-body col-12 col-sm-10 offset-sm-1"/>
   </div>
+  <q-drawer
+      show-if-above
+      no-swipe-open
+      no-swipe-close
+      side="right"
+      bordered>
+    <!-- drawer content -->
+  </q-drawer>
 
 </template>
 <script lang="ts" setup>
