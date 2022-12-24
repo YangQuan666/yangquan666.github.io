@@ -85,6 +85,14 @@
       </q-page>
     </q-page-container>
 
+    <q-drawer
+        show-if-above
+        no-swipe-open
+        no-swipe-close
+        side="right"
+        bordered>
+      <!-- drawer content -->
+    </q-drawer>
     <q-footer bordered class="bg-dark text-white">
       <q-toolbar>
         {{ footer.message }}
