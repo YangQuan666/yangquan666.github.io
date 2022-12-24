@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "front-matter": "^4.0.2",
-    "vitepress": "^1.0.0-alpha.32"
+    "vitepress": "^1.0.0-alpha.33"
   },
   "dependencies": {
     "@quasar/extras": "^1.15.7",
