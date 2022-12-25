@@ -33,8 +33,8 @@ export default {
             },
         ],
         socialLinks: [
-            {icon: biGithub, color: 'null', link: 'https://github.com/YangQuan666'},
             {icon: biTwitter, color: 'blue-6', link: 'https://twitter.com/QuarkYeung'},
+            {icon: biGithub, color: 'null', link: 'https://github.com/YangQuan666'},
             {icon: biTelegram, color: 'light-blue-6', link: 'https://t.me/QuarkYeung'}
         ],
         footer: {
