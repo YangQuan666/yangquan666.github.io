@@ -14,13 +14,18 @@
         side="left"
     >
       <q-scroll-area class="fit">
-        <q-img src="/material.png">
+        <q-img src="/material.png" height="300px">
           <div class="absolute-bottom bg-transparent" style="text-align: center">
             <q-avatar size="150px" class="q-mb-sm">
               <img src="/avatar.png" alt="avatar">
             </q-avatar>
             <div class="text-weight-bold">{{ themeConfig.author }}</div>
             <div>{{ themeConfig.email }}</div>
+            <div class="row">
+              <div v-for="item in socialLinks" class="col" style="text-align: center">
+                <q-btn flat round :color="item.color" :icon="item.icon" :href="item.link"/>
+              </div>
+            </div>
           </div>
         </q-img>
         <q-expansion-item
@@ -51,13 +56,6 @@
             </q-item-section>
           </q-item>
         </q-expansion-item>
-
-        <!--      todo 这里要考虑当list长度过大的时候，需要跟随往下展示-->
-        <div class="row absolute-bottom">
-          <div v-for="item in socialLinks" class="col" style="text-align: center">
-            <q-btn flat round :color="item.color" :icon="item.icon" :href="item.link"/>
-          </div>
-        </div>
       </q-scroll-area>
 
     </q-drawer>
