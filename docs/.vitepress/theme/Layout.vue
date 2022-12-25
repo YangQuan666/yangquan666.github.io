@@ -98,7 +98,7 @@ const updateDrawer = () => {
 }
 const drawerClick = (href) => {
   router.go(href)
-  if ($q.screen.sm) {
+  if ($q.screen.lt.sm) {
     drawer.value = false
   }
 }
