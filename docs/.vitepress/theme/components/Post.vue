@@ -21,11 +21,16 @@
       no-swipe-close
       side="right"
       bordered>
-    <!-- drawer content -->
+    <Toc :data="page.headers"/>
   </q-drawer>
 
 </template>
 <script lang="ts" setup>
+import {useData} from "vitepress";
+import Toc from "./Toc.vue";
+
+const {page} = useData()
+
 //todo 搜索引擎优化
 // const metaData = {}
 // useMeta(metaData)

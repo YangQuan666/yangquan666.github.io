@@ -43,8 +43,6 @@ export default {
         }
     },
     markdown: {
-        toc: {level: [1, 2]},
-        config: (md) => {
-        }
+        toc: {level: [1, 2, 3, 4, 5]}
     }
 }
