@@ -1,7 +1,7 @@
 import {Dark, Meta, Quasar} from "quasar";
 // Import icon libraries
 import '@quasar/extras/material-icons/material-icons.css'
-import 'animate.css';
+// import 'animate.css';
 // Import Quasar css
 import 'quasar/dist/quasar.css'
 

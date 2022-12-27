@@ -6,7 +6,7 @@ import {Loading} from 'quasar'
 import 'github-markdown-css'
 import './style/custom.css'
 
-import {initQuasar} from './plugins/quasar'
+import {initQuasar} from './composables/quasar'
 
 export default {
     Layout,
