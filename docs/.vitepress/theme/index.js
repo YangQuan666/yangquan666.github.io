@@ -17,7 +17,7 @@ export default {
         initQuasar(app)
 
         router.onBeforeRouteChange = () => {
-            Loading.show({message: '(ง •̀_•́)ง (*•̀ㅂ•́)و 努力加载中...',}
+            Loading.show({message: '(ง •̀_•́)ง (*•̀ㅂ•́)و 努力加载中...'}
             )
         }
 
