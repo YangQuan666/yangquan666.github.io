@@ -4,7 +4,7 @@ import Error404 from './components/Error404.vue'
 import {Loading} from 'quasar'
 
 import 'github-markdown-css'
-import './plugins/custom.css'
+import './style/custom.css'
 
 import {initQuasar} from './plugins/quasar'
 
