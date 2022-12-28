@@ -1,16 +1,9 @@
 <template>
-  <q-parallax :height="300">
-    <template v-slot:media>
-      <img src="https://cdn.quasar.dev/img/mountains.jpg" alt="background">
-    </template>
-
-    <template v-slot:content="scope">
-      <div class="absolute column items-center">
-        <h2>“When in doubt, use brute force.”</h2>
-      </div>
-    </template>
-  </q-parallax>
-
+  <q-img src="mountain.jpg" height="300px" alt="background">
+    <h2 class="absolute-full flex flex-center">
+      When in doubt, use brute force.
+    </h2>
+  </q-img>
   <div class="row animate__animated animate__fadeIn">
     <div class="col-10 offset-1 col-sm-8 offset-sm-2">
       <q-timeline :layout="layout" color="secondary">
