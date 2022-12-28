@@ -5,7 +5,6 @@
       <q-item
           dense
           clickable
-          @click="link = 'inbox'"
           :href="head.link"
           style="border-radius: 32px 0 0 32px"
       >
@@ -20,9 +19,8 @@
 </template>
 
 <script lang="ts" setup>
-import {defineProps, ref} from "vue";
+import {ref} from "vue";
 
 defineProps({data: Array})
 
-const first = ref(false)
 </script>
