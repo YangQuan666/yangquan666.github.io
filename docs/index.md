@@ -1,2 +1,2 @@
 ---
-title: VitePress
+title: '主页'
