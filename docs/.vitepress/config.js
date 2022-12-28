@@ -4,8 +4,8 @@ import {biGithub, biTelegram, biTwitter} from '@quasar/extras/bootstrap-icons'
 buildSummary()
 
 export default {
-    title: 'YangQuan\'s blog',
-    description: 'YangQuan666\'s person blog site',
+    title: '萨科的魔术盒',
+    description: 'YangQuan666的个人博客网站',
     lang: 'zh-CN',
     head: [
         ['meta', {name: 'viewport', content: 'user-scalable=no, initial-scale=1, width=device-width'}],

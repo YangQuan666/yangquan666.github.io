@@ -9,7 +9,7 @@
       <q-avatar>
         <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" alt="logo">
       </q-avatar>
-      <span class="q-ml-sm">quan's blog</span>
+      <span class="q-ml-sm">{{site.themeConfig.title}}</span>
     </q-toolbar-title>
     <q-space/>
 
@@ -29,14 +29,16 @@
       </template>
     </q-input>
     <q-space class="gt-sm"/>
+    <q-btn v-if="必须是在post页面中" flat round icon="toc" class="lt-md" @click="$emit('')"/>
   </q-toolbar>
 </template>
 
 <script lang="ts" setup>
 import {ref} from "vue";
+import {useData} from "vitepress";
 
 defineProps({drawer: Boolean})
-
+const {site} = useData()
 const searchClose = ref(true)
 
 const keyword = ref('')
