@@ -20,7 +20,7 @@
               <img src="/avatar.png" alt="avatar">
             </q-avatar>
             <div class="text-weight-bold">{{ themeConfig.author }}</div>
-            <div>{{ themeConfig.email }}</div>
+            <div>{{ themeConfig.signature }}</div>
             <div class="row">
               <div v-for="item in socialLinks" class="col" style="text-align: center">
                 <q-btn flat round :color="item.color" :icon="item.icon" :href="item.link"/>

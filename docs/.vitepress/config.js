@@ -14,7 +14,7 @@ export default {
     ],
     themeConfig: {
         author: 'YangQuan',
-        email: 'quark.yeung@icloud.com',
+        signature: '一个爱折腾的程序员=￣ω￣=) ',
         nav: [
             {
                 title: 'Home', icon: 'home', link: '/'
