@@ -1,82 +1,76 @@
 ---
-title: 面向小白的一篇OpenWRT入门教程
+title: 面向小白的软路由入门指南
 date: 2022-04-30T13:30:00+08:00
-excerpt: "OpenWrt是一款开源的路由器操作系统，能够把你们的路由器变成一台强大的网络工具。它的灵活性和可扩展性让用户能够定制路由器的功能，让路由器发挥最大的潜力。"
+excerpt: "
+OpenWrt是一款开源的路由器操作系统，能够把你们的路由器变成一台强大的网络工具。它的灵活性和可扩展性让用户能够定制路由器的功能，让路由器发挥最大的潜力。"
 tags:
+
 - OpenWrt
 - 软路由
-- 翻墙
-- openClash
+- OpenClash
+- Docker
 - uu加速器
+- samba
+- aria
+
 ---
-# 华硕RT-AX56U V2路由器安装clash
 
-1. 参考项目：[iloahz/asus-router-stock-firmware-clash](https://github.com/iloahz/asus-router-stock-firmware-clash)
+# 面向小白的软路由入门指南
 
-2. clash地址（armv7）：[Dreamacro/clash: A rule-based tunnel in Go. (github.com)](https://github.com/Dreamacro/clash)
+演示的软路由型号为友善R4S
 
-3. web界面：[haishanh/yacd: Yet Another Clash Dashboard (github.com)](https://github.com/haishanh/yacd)
+[//]: # (todo)
 
-## 开启SSH
+## 为什么需要一台软路由
 
-1. 登录路由器后台 > 系统管理 > 系统设置
+[//]: # (todo)
 
-2. ssh命令登录路由器：`ssh {username}@192.168.50.1`
+## 软路由需要安装什么系统
 
-## 配置启动和关闭脚本
+## 软件安装
 
-1. start.sh
-   
+### Samba
+
+#### 安装Samba
+
+在 `System` -> `Software` 中安装 `samba4-server` , `luci-app-samba4`
+![openwrt_install_samba.png](/post/openwrt/openwrt_install_samba.png)
+
+#### 添加用户
+
    ```shell
-   #!/bin/sh
-   
-   create_iptables_rules() {
-       if ! /usr/sbin/iptables -L -n -t nat | grep -lq CLASH; then
-           /usr/sbin/iptables -t nat -A PREROUTING -p tcp --dport 22 -j ACCEPT
-           /usr/sbin/iptables -t nat -N CLASH
-           /usr/sbin/iptables -t nat -A CLASH -p tcp --dport 7890 -j RETURN
-           /usr/sbin/iptables -t nat -A CLASH -d 192.168.0.0/16 -j RETURN
-           /usr/sbin/iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports 7892
-           /usr/sbin/iptables -t nat -A PREROUTING -j CLASH
-           /usr/sbin/iptables -t nat -A PREROUTING -p udp -m udp --dport 53 -j DNAT --to-destination 192.168.50.1:1053
-       fi
-   }
-   
-   clashdir=/jffs/clash
-   start_clash() {
-       killall clash
-       nohup $clashdir/clash -d $clashdir -f $clashdir/config.yaml > nohup.out 2>&1 &
-   }
-   
-   create_iptables_rules
-   start_clash
+   opkg install shadow-useradd # 安装'useradd'，目的是为了创建用户
+   useradd samba # 新建一个用户,名字叫'samba'
+   smbpasswd -a samba #为用户samba创建密码，看到'Added user samba.'表示用户成功添加到samba中了
+   mkdir -p /opt/samba # 创建一个文件夹用于samba共享，可以自己随意设置
+   chown -R samba:samba /opt/samba #使用户samba获得文件夹权限
    ```
 
-2. stop.sh
-   
-   ```shell
-   #!/bin/sh
-   
-   clear_iptables_rules() {
-     if /usr/sbin/iptables -L -n -t nat | grep -lq CLASH; then
-       /usr/sbin/iptables -t nat -D PREROUTING -p tcp --dport 22 -j ACCEPT
-       /usr/sbin/iptables -t nat -D PREROUTING -j CLASH
-       /usr/sbin/iptables -t nat -F CLASH
-       /usr/sbin/iptables -t nat -X CLASH
-       /usr/sbin/iptables -t nat -D PREROUTING -p udp -m udp --dport 53 -j DNAT --to-destination 192.168.50.1:1053
-     fi
-   }
-   
-   stop_clash() {
-     killall clash
-   }
-   
-   clear_iptables_rules
-   stop_clash
-   ```
+#### 软件配置
 
-## 访问控制界面
+1. 进入Samba配置页面： `Services` -> `Network Shares`
+2. 共享目录，注意 `Path` 一定要选之前创建的，例如我的就是 `/opt/samba`，其他的可以参照我的截图来
+   ![shared_directories](/post/openwrt/shared_directories.png)
+3. 兼容苹果设备访问(建议打开)
+   ![macOS_compatible](/post/openwrt/macOS_compatible.png)
 
-1. 执行`sh start.sh`
+#### 其他平台访问方式
 
-2. 访问[192.168.50.1:9090 - yacd](http://192.168.50.1:9090/ui/#/proxies)
+1. Windows
+   1. 在启用或关闭windows功能中打开 `SMB 1.0/CIFS 文件共享支持` 和 `SMB直通`
+      ![windows_samba_enable](/post/openwrt/windows_samba_enable.png)
+   2. 打开文件夹，访问samba服务地址，例如 `smb://192.168.1.1`，然后回车
+   3. 按照提示输入用户名和密码即可成功连接
+      ![windows_samba.png](/post/openwrt/windows_samba.png)
+2. Mac
+   1. 打开finder
+   2. 按下快捷键 `⌘` + `k` 打开连接
+   3. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
+   4. 按照提示输入用户名和密码即可成功连接
+      ![mac_finder_samba](/post/openwrt/mac_finder_samba.png)
+3. iPhone/iPad
+   1. 打开文件 -> 浏览，然后点击右上角 更多 -> 连接服务器
+      ![iOS_samba_connect.PNG](/post/openwrt/iOS_samba_connect.PNG)
+   2. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
+   3. 按照提示输入用户名和密码即可成功连接
+      ![iOS_samba_display.PNG](/post/openwrt/iOS_samba_display.PNG)
