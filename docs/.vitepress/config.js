@@ -17,17 +17,17 @@ export default {
         signature: '一个爱折腾的程序员=￣ω￣=) ',
         nav: [
             {
-                title: 'Home', icon: 'home', link: '/'
+                title: '主页', icon: 'home', link: '/'
             },
             {
-                title: 'Game', icon: 'smart_toy', children: [
+                title: '小游戏', icon: 'smart_toy', children: [
                     {title: 'Chrome Dinosaur', link: '/game/dinosaur', icon: 'casino'},
                     {title: 'Flappy Bird', link: '/game/flappyBird', icon: 'casino'},
                     {title: '2048', link: '/game/2048', icon: 'casino'},
                 ]
             },
             {
-                title: 'Tool', icon: 'api', children: [
+                title: '小工具', icon: 'api', children: [
                     {title: 'Json Formatter', link: '/tool/jsonFormatter', icon: 'hive'},
                 ]
             },
