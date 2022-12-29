@@ -31,9 +31,13 @@ tags:
 
 ### Samba
 
+#### 介绍
+Samba 是一组不同功能程序组成的应用集合，它能让 Linux 服务器实现文件服务器、身份授权和认证、名称解析和打印服务等功能。
+Samba分为服务端和客户端，本次我们打算将软路由上作为文件共享中心，因此需要在软路由上安装Samba的服务端。客户端的话，因为现代的操作系统默认都支持SMB协议，所以只需要稍加配置即可启用
+
 #### 安装Samba
 
-在 `System` -> `Software` 中安装 `samba4-server` , `luci-app-samba4`
+在 `System` -> `Software` 中安装samba的服务端 `samba4-server` ,以及可视化配置页面 `luci-app-samba4`
 ![openwrt_install_samba.png](/post/openwrt/openwrt_install_samba.png)
 
 #### 添加用户
@@ -70,7 +74,7 @@ tags:
       ![mac_finder_samba](/post/openwrt/mac_finder_samba.png)
 3. iPhone/iPad
    1. 打开文件 -> 浏览，然后点击右上角 更多 -> 连接服务器
-      ![iOS_samba_connect.PNG](/post/openwrt/iOS_samba_connect.PNG)
+      ![iOS_samba_connect.png](/post/openwrt/iOS_samba_connect.png)
    2. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
    3. 按照提示输入用户名和密码即可成功连接
-      ![iOS_samba_display.PNG](/post/openwrt/iOS_samba_display.PNG)
+      ![iOS_samba_display.png](/post/openwrt/iOS_samba_display.png)
