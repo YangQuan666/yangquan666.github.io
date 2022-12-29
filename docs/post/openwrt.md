@@ -68,7 +68,7 @@ Samba分为服务端和客户端，本次我们打算将软路由上作为文件
       ![windows_samba.png](/post/openwrt/windows_samba.png)
 2. Mac
    1. 打开finder
-   2. 按下快捷键 `⌘` + `k` 打开连接
+   2. 按下快捷键 `⌘` + `K` 打开连接
    3. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
    4. 按照提示输入用户名和密码即可成功连接
       ![mac_finder_samba](/post/openwrt/mac_finder_samba.png)

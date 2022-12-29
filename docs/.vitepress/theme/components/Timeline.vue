@@ -1,8 +1,8 @@
 <template>
   <q-img src="mountain.jpg" height="300px" alt="background">
-    <h2 class="absolute-full flex flex-center">
+    <h3 class="absolute-full flex flex-center">
       When in doubt, use brute force.
-    </h2>
+    </h3>
   </q-img>
   <div class="row animate__animated animate__fadeIn">
     <div class="col-10 offset-1 col-sm-8 offset-sm-2">
