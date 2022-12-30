@@ -29,7 +29,6 @@
       </template>
     </q-input>
     <q-space class="gt-sm"/>
-    <q-btn v-if="必须是在post页面中" flat round icon="toc" class="lt-md" @click="$emit('')"/>
   </q-toolbar>
 </template>
 
@@ -37,7 +36,6 @@
 import {ref} from "vue";
 import {useData} from "vitepress";
 
-defineProps({drawer: Boolean})
 const {site} = useData()
 const searchClose = ref(true)
 

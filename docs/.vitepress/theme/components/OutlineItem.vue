@@ -6,9 +6,9 @@
           dense
           clickable
           :href="head.link"
-          :key="head.link"
-          :active="head.link === curItem"
-          @click="onItemClick(head.link)"
+          :key="path + head.link"
+          :active="path + head.link === uniqueItemKey"
+          @click="onItemClick(path, head.link)"
           style="border-radius: 8px 0 0 8px"
       >
         <q-item-section>{{ head.title }}</q-item-section>
@@ -16,7 +16,7 @@
     </li>
 
     <template v-if="head.children && head.children.length">
-      <OutlineItem :headers="head.children"></OutlineItem>
+      <OutlineItem :headers="head.children" :path="path+ head.link"></OutlineItem>
     </template>
 
   </ul>
@@ -24,14 +24,13 @@
 
 <script lang="ts" setup>
 import {useData} from "vitepress";
-import {ref} from "vue";
+import {uniqueItemKey} from '../composables/outline.js'
 
-defineProps({headers: Array})
+const props = defineProps({headers: Array, path: String});
 const {theme} = useData()
 
-const curItem = ref(null)
-
-const onItemClick = (link) => {
-  curItem.value = link
+const onItemClick = (path, link) => {
+  uniqueItemKey.value = path + link
 }
+
 </script>
