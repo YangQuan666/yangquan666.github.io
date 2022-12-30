@@ -72,7 +72,8 @@
       <q-toolbar>
         {{ footer.message }}
         <q-space/>
-        {{ footer.copyright }}
+        v{{ footer.version }}
+        <q-btn icon="description" round flat :href="footer.releaseNote"/>
       </q-toolbar>
     </q-footer>
   </q-layout>
