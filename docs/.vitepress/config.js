@@ -1,5 +1,6 @@
 import {buildSummary} from './theme/composables/metadata.js'
 import {biGithub, biTelegram, biTwitter} from '@quasar/extras/bootstrap-icons'
+import { version } from '../../package.json'
 
 buildSummary()
 
@@ -15,6 +16,7 @@ export default {
     themeConfig: {
         author: 'YangQuan',
         signature: '一个爱折腾的程序员=￣ω￣=) ',
+        outline: 'deep',
         nav: [
             {
                 title: '主页', icon: 'home', link: '/'
@@ -39,10 +41,12 @@ export default {
         ],
         footer: {
             message: 'Released under the GPL License.',
-            copyright: 'Copyright © 2021-present, YangQuan666'
+            releaseNote: 'https://github.com/YangQuan666/yangquan666.github.io/blob/main/CHANGELOG.md',
+            version: version
         }
     },
     markdown: {
-        toc: {level: [1, 2, 3, 4, 5]}
+        config: (md) => {
+        }
     }
 }
