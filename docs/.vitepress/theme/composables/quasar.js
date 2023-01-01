@@ -1,4 +1,4 @@
-import {Dark, Meta, Quasar} from "quasar";
+import {Cookies, Dark, Meta, Quasar} from "quasar";
 // Import icon libraries
 import '@quasar/extras/material-icons/material-icons.css'
 // import 'animate.css';
@@ -24,7 +24,8 @@ export function initQuasar(app) {
         },
         plugins: {
             Dark,
-            Meta
+            Meta,
+            Cookies
         }
     }, {
         req: {

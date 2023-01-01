@@ -17,6 +17,8 @@
     <!--todo 增加sponsor（请我喝杯咖啡）, 增加discussion，增加其他 -->
   </div>
   <q-drawer
+      no-swipe-open
+      no-swipe-close
       show-if-above
       bordered
       side="right"
@@ -30,6 +32,7 @@
 import {useData} from "vitepress";
 import {provide, ref} from "vue";
 import Outline from "./Outline.vue";
+import {Cookies} from 'quasar'
 
 const {page} = useData()
 const headers = ref([])
@@ -38,7 +41,9 @@ const draw = ref(false)
 const onContentUpdated = ref()
 provide('onContentUpdated', onContentUpdated)
 
+
 //todo 搜索引擎优化
 // const metaData = {}
 // useMeta(metaData)
+//todo cookie 记录浏览位置
 </script>

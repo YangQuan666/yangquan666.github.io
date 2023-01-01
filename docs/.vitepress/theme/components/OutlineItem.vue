@@ -5,9 +5,9 @@
       <q-item
           dense
           clickable
-          :href="head.link"
           :key="path + head.link"
-          :active="path + head.link === uniqueItemKey"
+          :active="isActivate(path, head.link)"
+          active-class="q-bar"
           @click="onItemClick(path, head.link)"
           style="border-radius: 8px 0 0 8px"
       >
@@ -16,7 +16,7 @@
     </li>
 
     <template v-if="head.children && head.children.length">
-      <OutlineItem :headers="head.children" :path="path+ head.link"></OutlineItem>
+      <OutlineItem :headers="head.children" :path="path + head.link"></OutlineItem>
     </template>
 
   </ul>
@@ -33,4 +33,16 @@ const onItemClick = (path, link) => {
   uniqueItemKey.value = path + link
 }
 
+// function handleClick({ target: el }: Event) {
+//   // console.log(((el as HTMLAnchorElement).parentElement as HTMLAnchorElement).href)
+//   const id = '#' + ((el as HTMLAnchorElement).parentElement as HTMLAnchorElement).href!.split('#')[1]
+//   const heading = document.querySelector<HTMLAnchorElement>(
+//       decodeURIComponent(id)
+//   )
+//   heading?.focus()
+//   console.log(heading)
+// }
+const isActivate = (path, link) => {
+  return path + link === uniqueItemKey.value
+}
 </script>
