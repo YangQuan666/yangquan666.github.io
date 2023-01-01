@@ -1,8 +1,8 @@
-import {onMounted, onUnmounted, onUpdated, ref} from 'vue';
-// import { useAside } from '../composables/aside.js';
-// import { throttleAndDebounce } from '../support/utils.js';
-// magic number to avoid repeated retrieval
+import {ref} from 'vue';
+import {throttle} from "quasar";
+
 export const uniqueItemKey = ref(null)
+export const currentPosition = ref(null)
 
 const PAGE_OFFSET = 71;
 
@@ -65,4 +65,9 @@ function addToParent(currIndex, headers, levelsRange) {
     return true;
 }
 
+export function onScroll(pos) {
+    currentPosition.value = pos
+    console.log(currentPosition.value)
+}
 
+export const throttleOnScroll = throttle(onScroll, 500)
