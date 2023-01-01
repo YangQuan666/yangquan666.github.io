@@ -2,6 +2,7 @@
 node_modules/
 # 编译文件
 docs/.vitepress/dist/
+/docs/.vitepress/cache/
 yarn.lock
 docs/post/metadata.json
 # webstorm 生成的信息
