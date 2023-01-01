@@ -16,28 +16,18 @@
     <!--todo 增加 end 分隔符，或者提示"我也是有底线的" -->
     <!--todo 增加sponsor（请我喝杯咖啡）, 增加discussion，增加其他 -->
   </div>
-  <q-drawer
-      no-swipe-open
-      no-swipe-close
-      show-if-above
-      bordered
-      side="right"
-      v-model="draw"
-  >
-    <Outline :headers="headers"/>
-  </q-drawer>
 
+  <Outline :headers="headers"/>
 </template>
 <script lang="ts" setup>
 import {useData} from "vitepress";
 import {provide, ref} from "vue";
 import Outline from "./Outline.vue";
-import {Cookies} from 'quasar'
 
 const {page} = useData()
 const headers = ref([])
 
-const draw = ref(false)
+
 const onContentUpdated = ref()
 provide('onContentUpdated', onContentUpdated)
 

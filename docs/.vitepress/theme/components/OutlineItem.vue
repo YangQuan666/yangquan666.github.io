@@ -5,6 +5,7 @@
       <q-item
           dense
           clickable
+          :href="head.link"
           :key="path + head.link"
           :active="isActivate(path, head.link)"
           active-class="q-bar"
