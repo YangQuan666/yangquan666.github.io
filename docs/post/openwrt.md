@@ -36,7 +36,7 @@ tags:
 opkg install docker docker docker-ce
 ```
 #### 管理页面
-**需要打开防火墙转发，Luci > 网络 > 防火墙 > 转发：接受 **
+**需要打开防火墙转发，Luci > 网络 > 防火墙 > 转发：接受**
 ```shell
 #创建一个卷，来供管理工具存储数据
 docker volume create portainer_data
