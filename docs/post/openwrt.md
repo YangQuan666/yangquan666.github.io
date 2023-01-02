@@ -29,6 +29,32 @@ tags:
 
 ## 软件安装
 
+### Docker
+
+#### 安装
+```shell
+opkg install docker docker docker-ce
+```
+#### 管理页面
+**需要打开防火墙转发，Luci > 网络 > 防火墙 > 转发：接受 **
+```shell
+#创建一个卷，来供管理工具存储数据
+docker volume create portainer_data
+
+#拉取Docker镜像
+docker pull portainer/portainer-ce:linux-arm64
+
+#运行Docker容器
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:linux-arm64
+```
+访问地址：`htpps://192.168.1.1:9443`
+
+创建用户名和密码
+#### 运行Debian容器
+```shell
+docker pull debian
+docker run -it --name debian debian /bin/bash
+```
 ### Samba
 
 #### 介绍
