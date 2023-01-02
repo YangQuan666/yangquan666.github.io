@@ -6,6 +6,7 @@
           dense
           clickable
           :href="head.link"
+          :id="'toc--' + path + head.link"
           :key="path + head.link"
           :active="isActivate(path, head.link)"
           active-class="q-bar"
@@ -26,7 +27,7 @@
 <script lang="ts" setup>
 import {isActivate, uniqueItemKey} from '../composables/outline'
 
-defineProps({headers: Array, path: String});
+defineProps({headers: Array, path: {type: String, default: ''}});
 
 const onItemClick = (path, link) => {
   uniqueItemKey.value = path + link

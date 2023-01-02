@@ -11,7 +11,7 @@
       <q-toolbar-title>目录</q-toolbar-title>
     </q-toolbar>
     <q-space/>
-    <OutlineItem :headers="headers" :path="'/'"/>
+    <OutlineItem :headers="headers"/>
   </q-drawer>
 </template>
 
