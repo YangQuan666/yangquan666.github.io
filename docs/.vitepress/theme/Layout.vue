@@ -73,8 +73,8 @@
       <q-toolbar>
         {{ footer.message }}
         <q-space/>
-        v{{ footer.version }}
-        <q-btn icon="description" round flat :href="footer.releaseNote"/>
+        <q-btn label="Release Note" flat :href="footer.releaseNote"/>
+        <q-badge color="primary">{{ footer.version }}</q-badge>
       </q-toolbar>
     </q-footer>
   </q-layout>
