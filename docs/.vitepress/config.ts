@@ -1,6 +1,6 @@
 import {buildSummary} from './theme/composables/metadata'
-import {biGithub, biTelegram, biTwitter} from '@quasar/extras/bootstrap-icons'
-import { version } from '../../package.json'
+import {biDiscord, biGithub, biMastodon} from '@quasar/extras/bootstrap-icons'
+import {version} from '../../package.json'
 
 buildSummary()
 
@@ -36,9 +36,9 @@ export default {
             },
         ],
         socialLinks: [
-            {icon: biTwitter, color: 'blue-6', link: 'https://twitter.com/QuarkYeung'},
-            {icon: biGithub, color: 'null', link: 'https://github.com/YangQuan666'},
-            {icon: biTelegram, color: 'light-blue-6', link: 'https://t.me/QuarkYeung'}
+            {icon: biMastodon, link: 'https://mastodon.social/@Kourtsis'},
+            {icon: biGithub, link: 'https://github.com/YangQuan666'},
+            {icon: biDiscord, link: 'https://discord.gg/J8BVvnsWeB'}
         ],
         footer: {
             message: 'Released under the GPL License.',
