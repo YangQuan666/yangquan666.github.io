@@ -12,7 +12,7 @@ export function getHeaders(pageOutline) {
     let updatedHeaders = [];
     document
         .querySelectorAll('h2, h3, h4, h5, h6')
-        .forEach((el) => {
+        .forEach((el: HTMLAnchorElement) => {
             if (el.textContent && el.id) {
                 updatedHeaders.push({
                     level: Number(el.tagName[1]),

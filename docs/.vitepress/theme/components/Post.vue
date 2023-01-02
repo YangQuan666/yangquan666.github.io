@@ -22,7 +22,7 @@
 <script lang="ts" setup>
 import {provide, ref} from "vue";
 import Outline from "./Outline.vue";
-import {throttleOnScroll} from "../composables/outline.js";
+import {throttleOnScroll} from "../composables/outline";
 
 const headers = ref([])
 

@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import {isActivate, uniqueItemKey} from '../composables/outline.js'
+import {isActivate, uniqueItemKey} from '../composables/outline'
 
 defineProps({headers: Array, path: String});
 

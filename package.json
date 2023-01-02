@@ -14,6 +14,7 @@
     "docs:deploy": "vitepress build docs && vitepress serve docs"
   },
   "devDependencies": {
+    "@types/node": "^18.11.18",
     "front-matter": "^4.0.2",
     "vitepress": "^1.0.0-alpha.33"
   },

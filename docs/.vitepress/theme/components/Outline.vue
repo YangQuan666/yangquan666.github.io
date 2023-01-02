@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import {useData} from "vitepress";
 import {inject, onUpdated, ref, Ref} from "vue";
-import {getHeaders, uniqueItemKey} from "../composables/outline.js";
+import {getHeaders, uniqueItemKey} from "../composables/outline";
 import OutlineItem from "./OutlineItem.vue";
 
 defineProps({headers: Array})
