@@ -9,7 +9,7 @@
       <q-avatar>
         <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" alt="logo">
       </q-avatar>
-      <span class="q-ml-sm" v-if="$q.screen.gt.sm || searchClose">{{site.title}}</span>
+      <span class="q-ml-sm" v-if="$q.screen.gt.xs || searchClose">{{site.title}}</span>
     </q-toolbar-title>
     <q-space/>
 
