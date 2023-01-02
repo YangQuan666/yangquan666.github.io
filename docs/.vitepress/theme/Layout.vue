@@ -3,6 +3,7 @@
 
     <q-header elevated>
       <Toolbar :drawer="drawer" @updateDrawer="updateDrawer"/>
+      <q-linear-progress indeterminate color="accent" v-if="progress"/>
     </q-header>
 
     <q-drawer
@@ -105,4 +106,13 @@ const drawerClick = (href) => {
 }
 const {themeConfig} = site.value;
 const {nav, socialLinks, footer} = themeConfig
+
+const progress = ref(false)
+
+router.onBeforeRouteChange = () => {
+  progress.value = true
+}
+router.onAfterRouteChanged = () => {
+  progress.value = false
+}
 </script>
