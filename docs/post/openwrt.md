@@ -33,7 +33,7 @@ tags:
 
 #### 安装
 ```shell
-opkg install docker docker docker-ce
+opkg install docker dockerd docker-compose
 ```
 #### 管理页面
 **需要打开防火墙转发，Luci > 网络 > 防火墙 > 转发：接受**
