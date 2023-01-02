@@ -1,4 +1,4 @@
-import {buildSummary} from './theme/composables/metadata.js'
+import {buildSummary} from './theme/composables/metadata'
 import {biGithub, biTelegram, biTwitter} from '@quasar/extras/bootstrap-icons'
 import { version } from '../../package.json'
 
