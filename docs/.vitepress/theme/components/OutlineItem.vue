@@ -24,26 +24,11 @@
 </template>
 
 <script lang="ts" setup>
-import {useData} from "vitepress";
-import {uniqueItemKey} from '../composables/outline.js'
+import {isActivate, uniqueItemKey} from '../composables/outline.js'
 
-const props = defineProps({headers: Array, path: String});
-const {theme} = useData()
+defineProps({headers: Array, path: String});
 
 const onItemClick = (path, link) => {
   uniqueItemKey.value = path + link
-}
-
-// function handleClick({ target: el }: Event) {
-//   // console.log(((el as HTMLAnchorElement).parentElement as HTMLAnchorElement).href)
-//   const id = '#' + ((el as HTMLAnchorElement).parentElement as HTMLAnchorElement).href!.split('#')[1]
-//   const heading = document.querySelector<HTMLAnchorElement>(
-//       decodeURIComponent(id)
-//   )
-//   heading?.focus()
-//   console.log(heading)
-// }
-const isActivate = (path, link) => {
-  return path + link === uniqueItemKey.value
 }
 </script>

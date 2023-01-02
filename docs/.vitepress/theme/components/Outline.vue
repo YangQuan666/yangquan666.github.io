@@ -17,8 +17,8 @@
 
 <script lang="ts" setup>
 import {useData} from "vitepress";
-import {inject, ref, Ref} from "vue";
-import {getHeaders} from "../composables/outline.js";
+import {inject, onUpdated, ref, Ref} from "vue";
+import {getHeaders, uniqueItemKey} from "../composables/outline.js";
 import OutlineItem from "./OutlineItem.vue";
 
 defineProps({headers: Array})
@@ -29,4 +29,7 @@ const onContentUpdated = inject('onContentUpdated') as Ref<() => void>
 onContentUpdated.value = () => {
   headers.value = getHeaders(theme.value.outline)
 }
+onUpdated(() => {
+  uniqueItemKey.value = null
+})
 </script>

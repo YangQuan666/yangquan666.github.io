@@ -65,6 +65,10 @@ function addToParent(currIndex, headers, levelsRange) {
     return true;
 }
 
+export function isActivate(path, link) {
+    return path + link === uniqueItemKey.value
+}
+
 export function onScroll(pos) {
     currentPosition.value = pos
     console.log(currentPosition.value)
