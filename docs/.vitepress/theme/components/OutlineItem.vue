@@ -32,4 +32,5 @@ defineProps({headers: Array, path: {type: String, default: ''}});
 const onItemClick = (path, link) => {
   uniqueItemKey.value = path + link
 }
+
 </script>

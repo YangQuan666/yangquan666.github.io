@@ -149,8 +149,3 @@
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
 }
-
-html {
-    -webkit-text-size-adjust: 100%;
-    scroll-behavior: smooth;
-}

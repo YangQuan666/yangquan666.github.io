@@ -17,7 +17,6 @@ export default {
     themeConfig: {
         author: 'YangQuan',
         signature: '一个爱折腾的程序员=￣ω￣=) ',
-        outline: 'deep',
         nav: [
             {
                 title: '主页', icon: 'home', link: '/'
