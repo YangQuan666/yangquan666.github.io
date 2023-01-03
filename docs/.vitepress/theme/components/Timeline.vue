@@ -1,5 +1,5 @@
 <template>
-  <q-img src="mountain.jpg" height="400px" alt="background">
+  <q-img src="map.svg" height="400px" alt="background">
     <h3 class="absolute-full flex flex-center">
       When in doubt, use brute force.
     </h3>

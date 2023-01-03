@@ -4,7 +4,7 @@
  */
 export function readingTime(el: HTMLElement) {
     const text = el.innerText;
-    const wpm = 225;
+    const wpm = 75;
     const words = text.trim().split(/\s+/).length;
     return Math.ceil(words / wpm)
 }

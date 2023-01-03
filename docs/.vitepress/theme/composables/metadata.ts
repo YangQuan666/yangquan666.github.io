@@ -10,7 +10,7 @@ const postDir = path.resolve('docs/post/')
  * @param file md文章
  * @returns {{link: string, time: string, title, excerpt: *}|null} 文章的摘要信息
  */
-function getPost(file) {
+function getPost(file: string) {
     const fullPath = path.join(postDir, file)
 
     const src = fs.readFileSync(fullPath, 'utf-8')
