@@ -1,7 +1,7 @@
 <template>
   <q-img src="/default.svg" height="400px" alt="background">
     <h3 class="absolute-full flex flex-center">
-      When in doubt, use brute force.
+      Talk is cheap. Show me the code.
     </h3>
   </q-img>
   <div class="row animate__animated animate__fadeIn">
