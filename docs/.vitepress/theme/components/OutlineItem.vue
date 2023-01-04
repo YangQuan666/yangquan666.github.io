@@ -26,11 +26,17 @@
 
 <script lang="ts" setup>
 import {isActivate, uniqueItemKey} from '../composables/outline'
+import {outlineDraw} from '../composables/store'
+import {useQuasar} from 'quasar'
 
 defineProps({headers: Array, path: {type: String, default: ''}});
 
-const onItemClick = (path, link) => {
+const $q = useQuasar()
+const onItemClick = (path: string, link: string) => {
   uniqueItemKey.value = path + link
+  if ($q.screen.lt.md) {
+    outlineDraw.value = false
+  }
 }
 
 </script>

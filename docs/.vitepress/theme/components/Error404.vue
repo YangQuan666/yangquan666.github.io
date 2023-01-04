@@ -22,7 +22,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {useData, useRouter} from "vitepress";
+import {useData, useRouter} from 'vitepress';
 
 const router = useRouter()
 const {site} = useData()

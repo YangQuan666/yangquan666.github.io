@@ -1,32 +1,36 @@
 <template>
   <q-drawer
-      no-swipe-open
-      no-swipe-close
-      show-if-above
-      bordered
+      v-model="outlineDraw"
+      :mini="miniState"
+      @mouseover="miniState = false"
+      @mouseout="miniState = true"
       side="right"
-      v-model="draw"
+      show-if-above
+      mini-to-overlay
+      bordered
   >
-    <q-toolbar>
-      <q-toolbar-title>目录</q-toolbar-title>
-    </q-toolbar>
-    <q-space/>
-    <OutlineItem :headers="headers"/>
+    <q-list padding>
+      <q-item>
+        <q-item-section avatar>
+          <q-icon name="toc"/>
+        </q-item-section>
+
+        <q-item-section class="text-h5">
+          目录
+        </q-item-section>
+      </q-item>
+      <OutlineItem :headers="headers"/>
+    </q-list>
   </q-drawer>
 </template>
 
 <script lang="ts" setup>
-import {useData} from "vitepress";
-import {onUpdated, ref} from "vue";
-import {uniqueItemKey} from "../composables/outline";
-import OutlineItem from "./OutlineItem.vue";
+import {ref} from 'vue';
+import OutlineItem from './OutlineItem.vue';
+import {outlineDraw} from '../composables/store'
 
 defineProps({headers: Array});
-const {theme} = useData()
-// const headers = ref([])
-const draw = ref(false)
 
-onUpdated(() => {
-  uniqueItemKey.value = null
-})
+const miniState = ref(true)
+
 </script>

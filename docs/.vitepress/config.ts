@@ -15,8 +15,8 @@ export default {
         ['link', {rel: 'me', href: 'https://mastodon.social/@Kourtsis'}]
     ],
     themeConfig: {
-        author: 'YangQuan',
-        signature: '一个爱折腾的程序员=￣ω￣=) ',
+        author: 'Yang Quan',
+        signature: '一个爱折腾的程序员 )=￣ω￣=)',
         nav: [
             {
                 title: '主页', icon: 'home', link: '/'
@@ -46,7 +46,7 @@ export default {
         }
     },
     markdown: {
-        config: (md) => {
+        config: (md: any) => {
         }
     }
 }

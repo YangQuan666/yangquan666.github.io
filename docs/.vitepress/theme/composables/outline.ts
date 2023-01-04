@@ -1,7 +1,7 @@
 import {ref} from 'vue';
 import {throttle} from "quasar";
 
-export const uniqueItemKey = ref(null)
+export const uniqueItemKey = ref<string>('')
 export const currentPosition = ref(0)
 
 export function isActivate(path: string, link: string) {

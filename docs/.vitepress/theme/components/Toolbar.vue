@@ -29,12 +29,14 @@
       </template>
     </q-input>
     <q-space class="gt-sm"/>
+    <q-btn v-if="isPost" @click="toggle" class="lt-md" icon="toc" flat round/>
   </q-toolbar>
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue";
-import {useData} from "vitepress";
+import {ref} from 'vue';
+import {useData} from 'vitepress';
+import {isPost, toggle} from '../composables/store'
 
 const {site} = useData()
 const searchClose = ref(true)

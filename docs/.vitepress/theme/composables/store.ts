@@ -1,17 +1,19 @@
-import {reactive, ref} from 'vue'
+import {ref} from 'vue'
 // 全局状态，创建在模块作用域下
-const globalCount = ref(1)
+export const isPost = ref<boolean>(false)
+export const outlineDraw = ref(false)
 
-export function useCount() {
-    // 局部状态，每个组件都会创建
-    const localCount = ref(1)
-
-    return {
-        globalCount,
-        localCount
-    }
+export function toggle() {
+    outlineDraw.value = !outlineDraw.value
 }
 
-export const store = reactive({
-    count: 0
-})
+/**
+ * 计算阅读大概时间
+ * @param el 文章所在的html元素
+ */
+export function readingTime(el: HTMLElement) {
+    const text = el.innerText;
+    const wpm = 75;
+    const words = text.trim().split(/\s+/).length;
+    return Math.ceil(words / wpm)
+}
