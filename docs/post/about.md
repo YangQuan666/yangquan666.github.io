@@ -10,3 +10,16 @@ tags:
 - markdown
 ---
 # 关于这个博客
+
+## 博客的亮点
+### 响应式
+### 为Dark模式优化
+### 支持全局搜索
+
+## 用到了哪些技术
+> 站在巨人的肩膀，可以看得更远 --沃兹基·硕得
+### GitHub Pages
+### VitePress
+### Quasar
+### Algolia
+### Markdown CSS
