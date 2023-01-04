@@ -1,5 +1,16 @@
 [//]: # (todo 补充重大的变更记录)
 
+## 0.1.0 (2023-01-04)
+
+### Features
+
+- 整体界面趋于完善，文章采用markdown css渲染，同时增加了目录 [af16245
+  ](https://github.com/YangQuan666/yangquan666.github.io/commit/af162456d679b8c65d11009e9f7783bbf12ac6bf)
+
+### To Improvements
+
+- 后续支持目录跟随页面滚动
+
 ## 0.0.2 (2021-10-17)
 
 ### Features
