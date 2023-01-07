@@ -16,12 +16,12 @@
   "devDependencies": {
     "@types/node": "^18.11.18",
     "front-matter": "^4.0.2",
-    "vitepress": "^1.0.0-alpha.33"
+    "vitepress": "^1.0.0-alpha.35"
   },
   "dependencies": {
-    "@quasar/extras": "^1.15.7",
+    "@quasar/extras": "^1.15.9",
     "github-markdown-css": "^5.1.0",
-    "quasar": "^2.11.3"
+    "quasar": "^2.11.4"
   },
   "packageManager": "yarn@3.0.2"
 }
