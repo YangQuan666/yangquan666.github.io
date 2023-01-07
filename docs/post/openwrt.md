@@ -47,7 +47,7 @@ docker pull portainer/portainer-ce:linux-arm64
 #运行Docker容器
 docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:linux-arm64
 ```
-访问地址：`htpps://192.168.1.1:9443`
+访问地址：`https://192.168.1.1:9443`
 
 创建用户名和密码
 #### 运行Debian容器

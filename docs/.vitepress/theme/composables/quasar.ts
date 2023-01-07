@@ -4,8 +4,9 @@ import '@quasar/extras/material-icons/material-icons.css'
 // import 'animate.css';
 // Import Quasar css
 import 'quasar/dist/quasar.css'
+import {App} from 'vue';
 
-export function initQuasar(app) {
+export function initQuasar(app: App) {
     app.use(Quasar, {
         config: {
             brand: {

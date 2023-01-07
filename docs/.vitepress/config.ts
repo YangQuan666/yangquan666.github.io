@@ -1,6 +1,9 @@
 import {buildSummary} from './theme/composables/metadata'
-import {biDiscord, biGithub, biMastodon, biAlipay} from '@quasar/extras/bootstrap-icons'
+import {biAlipay, biDiscord, biGithub, biMastodon} from '@quasar/extras/bootstrap-icons'
 import {version} from '../../package.json'
+import Renderer from 'markdown-it/lib/renderer';
+import Token from 'markdown-it/lib/token';
+import MarkdownIt from 'markdown-it';
 
 buildSummary()
 
@@ -54,7 +57,13 @@ export default {
         }
     },
     markdown: {
-        config: (md: any) => {
+        config: (md: MarkdownIt) => {
+            md.renderer.rules.image = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
+                const token = tokens[idx]
+                const url = token.attrGet('src')
+                const alt = token.attrGet('alt')
+                return `<q-img src="${url}" alt="${alt}" style="max-height: 400px" loading="lazy" fit="contain"/>`
+            }
         }
     }
 }

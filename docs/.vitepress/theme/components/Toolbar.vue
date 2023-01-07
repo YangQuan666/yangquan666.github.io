@@ -29,7 +29,7 @@
       </template>
     </q-input>
     <q-space class="gt-sm"/>
-    <q-btn v-if="isPost" @click="toggle" class="lt-md" icon="toc" flat round/>
+    <q-btn v-if="false" @click="toggle" class="lt-md" icon="toc" flat round/>
   </q-toolbar>
 </template>
 
