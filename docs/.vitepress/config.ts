@@ -9,7 +9,7 @@ buildSummary()
 
 export default {
     title: '萨科的魔术盒',
-    description: 'YangQuan666的个人博客网站',
+    description: 'YangQuan的个人博客网站',
     lang: 'zh-CN',
     head: [
         ['meta', {name: 'viewport', content: 'user-scalable=0, initial-scale=1, maximum-scale=1, width=device-width'}],
