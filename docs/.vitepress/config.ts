@@ -1,5 +1,5 @@
 import {buildSummary} from './theme/composables/metadata'
-import {biDiscord, biGithub, biMastodon} from '@quasar/extras/bootstrap-icons'
+import {biDiscord, biGithub, biMastodon, biAlipay} from '@quasar/extras/bootstrap-icons'
 import {version} from '../../package.json'
 
 buildSummary()
@@ -39,6 +39,14 @@ export default {
             {icon: biGithub, link: 'https://github.com/YangQuan666'},
             {icon: biDiscord, link: 'https://discord.gg/J8BVvnsWeB'}
         ],
+        sponsor: {
+            icon: biAlipay,
+            link: 'https://qr.alipay.com/fkx12630qiigpvf7yb0nd85'
+        },
+        comment: {
+            icon: 'question_answer',
+            link: 'https://github.com/YangQuan666/yangquan666.github.io/discussions'
+        },
         footer: {
             message: 'Released under the GPL License.',
             releaseNote: 'https://github.com/YangQuan666/yangquan666.github.io/blob/main/CHANGELOG.md',

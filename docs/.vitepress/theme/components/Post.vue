@@ -16,23 +16,33 @@
       </q-card-actions>
 
       <Content ref="content" v-scroll="throttleOnScroll" class="markdown-body"/>
-      <q-separator />
-      <!--todo 增加 end 分隔符，或者提示"我也是有底线的" -->
-      <!--todo 增加sponsor（请我喝杯咖啡）, 增加discussion，增加其他 -->
+      <q-separator/>
+
+      <q-card-actions>
+        <q-btn flat color="blue-6" :href="site.themeConfig.sponsor.link">
+          <div>请我喝杯咖啡</div>
+          <q-icon right size="2em" :name="site.themeConfig.sponsor.icon"/>
+        </q-btn>
+        <q-space/>
+        <q-btn flat color="teal" :href="site.themeConfig.comment.link">
+          <q-icon left size="2em" :name="site.themeConfig.comment.icon"/>
+          <div>给我留言</div>
+        </q-btn>
+      </q-card-actions>
     </div>
   </div>
   <Outline :headers="page.headers"/>
 </template>
 <script lang="ts" setup>
-import {onMounted, onUpdated, onUnmounted, ref} from 'vue';
+import {onMounted, onUnmounted, onUpdated, ref} from 'vue';
+import {useData} from 'vitepress';
 import {throttleOnScroll, uniqueItemKey} from '../composables/outline';
 import {isPost, readingTime} from '../composables/store';
-import {useData} from 'vitepress';
 import Outline from './Outline.vue';
 import {date} from 'quasar';
 
 const content = ref()
-const {frontmatter, page} = useData()
+const {frontmatter, page, site} = useData()
 const readTime = ref()
 
 onMounted(() => {
