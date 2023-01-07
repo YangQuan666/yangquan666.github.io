@@ -14,7 +14,6 @@ export default {
     head: [
         ['meta', {name: 'viewport', content: 'user-scalable=0, initial-scale=1, maximum-scale=1, width=device-width'}],
         ['link', {rel: 'icon', type: 'image/svg+xml', href: '/logo.svg'}],
-        ['link', {rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'}],
         ['link', {rel: 'me', href: 'https://mastodon.social/@Kourtsis'}]
     ],
     themeConfig: {

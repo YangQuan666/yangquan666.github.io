@@ -15,10 +15,10 @@
         side="left"
     >
       <q-scroll-area class="fit">
-        <q-img src="/material.png" height="300px">
+        <q-img src="/material.webp" height="300px">
           <div class="absolute-bottom bg-transparent" style="text-align: center">
             <q-avatar size="150px" class="q-mb-sm">
-              <img src="/avatar.png" alt="avatar">
+              <img src="/avatar.webp" alt="avatar">
             </q-avatar>
             <div class="text-weight-bold">{{ themeConfig.author }}</div>
             <div>{{ themeConfig.signature }}</div>
