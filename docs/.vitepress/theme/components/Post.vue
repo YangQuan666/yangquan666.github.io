@@ -57,8 +57,5 @@ onUnmounted(() => {
 onUpdated(() => {
   uniqueItemKey.value = ''
 })
-//todo 搜索引擎优化
-// const metaData = {}
-// useMeta(metaData)
 //todo cookie 记录浏览位置
 </script>

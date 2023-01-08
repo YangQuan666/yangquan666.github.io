@@ -17,6 +17,7 @@
     "@types/markdown-it": "^12.2.3",
     "@types/node": "^18.11.18",
     "front-matter": "^4.0.2",
+    "sitemap": "^7.1.1",
     "vitepress": "^1.0.0-alpha.35"
   },
   "dependencies": {
