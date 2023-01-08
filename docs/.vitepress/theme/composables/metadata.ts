@@ -21,7 +21,7 @@ function getPost(file: string) {
     }
     return {
         title: attributes.title,
-        link: `/post/${file.replace(/\.md$/, '.html')}`,
+        link: `/post/${file.replace(/\.md$/, '')}`,
         time: date.formatDate(attributes.date, 'YYYY-MM-DD'),
         excerpt: attributes.excerpt
     };

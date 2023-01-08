@@ -55,6 +55,7 @@ export default {
             version: version
         }
     },
+    cleanUrls: 'without-subfolders',
     markdown: {
         config: (md: MarkdownIt) => {
             md.renderer.rules.image = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
