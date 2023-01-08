@@ -1,4 +1,4 @@
-import {Cookies, Dark, Meta, Quasar} from "quasar";
+import {Cookies, Dark, Meta, Quasar} from 'quasar';
 // Import icon libraries
 import '@quasar/extras/material-icons/material-icons.css'
 // import 'animate.css';

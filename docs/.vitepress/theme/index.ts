@@ -5,7 +5,7 @@ import 'github-markdown-css'
 import './style/custom.css'
 
 import {initQuasar} from './composables/quasar'
-import {initRouter} from "./composables/store";
+import {initRouter} from './composables/store';
 import {EnhanceAppContext} from 'vitepress';
 
 export default {

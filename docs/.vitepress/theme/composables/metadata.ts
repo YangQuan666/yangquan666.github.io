@@ -14,7 +14,7 @@ function getPost(file: string) {
     const fullPath = path.join(postDir, file)
 
     const src = fs.readFileSync(fullPath, 'utf-8')
-    const {attributes} = matter(src)
+    const {attributes}: any = matter(src)
 
     if (attributes.display === false) {
         return null;
@@ -33,7 +33,7 @@ function getPosts() {
         .filter(file => file.match(/\.md$/))
         .map(file => getPost(file))
         .filter(json => json != null)
-        .sort((a, b) => Date.parse(b.time) - Date.parse(a.time))
+        .sort((a: any, b: any) => Date.parse(b.time) - Date.parse(a.time))
 }
 
 

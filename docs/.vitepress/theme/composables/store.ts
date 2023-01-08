@@ -1,5 +1,5 @@
 import {ref} from 'vue'
-import {Router} from "vitepress/dist/client";
+import {Router} from 'vitepress/dist/client';
 // 全局状态，创建在模块作用域下
 export const isPost = ref<boolean>(false)
 // 加载进度条
