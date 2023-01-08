@@ -5,6 +5,7 @@ import 'github-markdown-css'
 import './style/custom.css'
 
 import {initQuasar} from './composables/quasar'
+import {initRouter} from "./composables/store";
 import {EnhanceAppContext} from 'vitepress';
 
 export default {
@@ -14,5 +15,6 @@ export default {
         // app is the Vue 3 app instance from `createApp()`. router is VitePress'
         // custom router. `siteData`` is a `ref`` of current site-level metadata.
         initQuasar(app)
+        initRouter(router)
     }
 }

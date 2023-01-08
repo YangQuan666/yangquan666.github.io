@@ -86,8 +86,9 @@ import {useData, useRoute, useRouter} from 'vitepress'
 
 import Post from './components/Post.vue'
 import Timeline from './components/Timeline.vue';
-import Toolbar from "./components/Toolbar.vue";
-import {useQuasar} from "quasar";
+import Toolbar from './components/Toolbar.vue';
+import {useQuasar} from 'quasar';
+import {progress} from './composables/store'
 
 const route = useRoute()
 const router = useRouter()
@@ -106,13 +107,4 @@ const drawerClick = (href: string) => {
 }
 const {themeConfig} = site.value;
 const {nav, socialLinks, footer} = themeConfig
-
-const progress = ref(false)
-
-router.onBeforeRouteChange = () => {
-  progress.value = true
-}
-router.onAfterRouteChanged = () => {
-  progress.value = false
-}
 </script>
