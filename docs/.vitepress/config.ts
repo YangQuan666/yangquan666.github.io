@@ -89,6 +89,12 @@ export default {
                 const alt = token.attrGet('alt')
                 return `<q-img src="${url}" alt="${alt}" style="max-height: 400px" loading="lazy" fit="contain"/>`
             }
+            // md.renderer.rules.table_open = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
+            //     return '<q-markup-table separator="cell"><table>'
+            // }
+            // md.renderer.rules.table_close = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
+            //     return '</table></q-markup-table>'
+            // }
         }
     }
 }
