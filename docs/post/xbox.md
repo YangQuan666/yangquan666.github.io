@@ -3,7 +3,7 @@ title: Xbox游戏机，你想知道的都在这
 date: 2022-06-01
 excerpt: "Xbox游戏机，你想知道的都在这"
 tags:
-- 钢琴
-- 生活
+- Xbox
+- 游戏
 ---
 # Xbox游戏机，你想知道的都在这
