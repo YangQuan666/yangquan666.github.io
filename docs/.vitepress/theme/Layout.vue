@@ -100,6 +100,9 @@ const updateDrawer = () => {
   drawer.value = !drawer.value
 }
 const drawerClick = (href: string) => {
+  if (href == undefined) {
+    return
+  }
   router.go(href)
   if ($q.screen.lt.md) {
     drawer.value = false
