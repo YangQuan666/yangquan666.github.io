@@ -64,23 +64,21 @@ tags:
 **解释**：当 Producer 发出的消息到达后，服务端马上将这条消息投递给 Consumer
 
 **使用场景**
-1. Producer 速率大于 Consumer 速率
-2. 消息实时性要求较高
-3. 
+1. **Producer 速率大于 Consumer 速率**：如果采用推模式，则消费者的压力会逐渐扩大，而如果使用拉模式，消费是需要根据自己的消费速率去拉取即可
+2. **消息实时性要求较高**：采用推模式，消息一到broker就会立刻发送给 Consumer，而拉模式则需要消费者主动去轮训，需要自己控制时间间隔
 ### 推模式（push）
 
 **解释**：当服务端收到这条消息后什么也不做，只是等着 Consumer 主动到自己这里来读，即 Consumer 这里有一个"拉取"的动作
 
 **使用场景**
 
-- 消息量大，成本较低
-- 实时数据平台
-- 订阅端处理时间不可控
-    - 商户数据中心
-- 需要蓄洪，下游限流或泄洪消费
-    - 安全风控，大促时蓄洪，两小时后泄洪。
-- 支持大数据实时计算，按照设定时间来消费消息
-    - [BLINK](https://yuque.antfin-inc.com/kepler/taxxnc/vgn6f8)
+1. **消费速率可控**：采用拉模式，消费者可以根据自己的消费速率，动态的调整拉取的频率，一般很难出现消息的积压
+2. **部分或全部 Consumer 不在线**：如果采用推模式，因为无法预知 Consumer 的宕机或下线是短暂的还是持久的，如果一直为该 Consumer
+   保留自宕机开始的所有历史消息，那么即便其他所有的 Consumer 都已经消费完成，数据也无法清理掉，随着时间的积累，队列的长度会越来越大，此时无论消息是暂存于内存还是持久化到磁盘上（采用
+   Push 模型的系统，一般都是将消息队列维护于内存中，以保证推送的性能和实时性），都将对 CMQ 服务端造成巨大压力，甚至可能影响到其他
+   Consumer 的正常消费，尤其当消息的生产速率非常快时更是如此；但是如果不保留数据，那么等该 Consumer 再次起来时，则要面对丢失数据的问题。
+   折中的方案是：CMQ 给数据设定一个超时时间，当 Consumer 宕机时间超过这个阈值时，则清理数据；但这个时间阈值也并不太容易确定。
+   采用拉模式，情况会有所改善；服务端不再关心 Consumer 的状态，而是采取“你来了我才服务”的方式，Consumer 是否能够及时消费数据，服务端不会做任何保证（也有超时清理时间）。
 
 
 ## 消息队列选型速览
@@ -100,30 +98,28 @@ tags:
 
 ## 投递&消费语义
 
-**投递语义**
+### 投递语义
 
-| 投递语义   | 消息     | 生产者                 | 消息队列                                         | 特点        | 例子      |
-|--------|--------|---------------------|----------------------------------------------|-----------|---------|
-| 最多投递一次 | 无需唯一编码 | 发送->不等ACK           | 消息无需持久化->无需ACK                               | 可靠性低、吞吐最高 | 非核心日志采集 |
-| 至少投递一次 | 无需唯一编码 | 发送->等消息队列ACK->失败重发  | 消息持久化->ACK                                   | 可靠性高      | 事件全量    |
-| 恰好投递一次 | 唯一编码   | 发送->等消息队列ACK->失败则重发 | 【幂等】检查消息唯一性-> 1.非重复消息->持久化->ACK 2. 重复消息->ACK | 可靠性高      |         |
+**最多一次**：Producer不等待Broker确认，只管发出即可；最可能丢失消息。如果丢了消息，就是投递0次。如果没丢，就是投递1次。
 
-【最多投递一次】SOFAMQ单向发送：
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/250552/1666749244802-18d333e2-3927-4cfd-a8c6-8c1aeed1183b.png#clientId=uaf84ef44-79b9-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=387&id=uf6cdb5da&margin=%5Bobject%20Object%5D&name=image.png&originHeight=387&originWidth=538&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16903&status=done&style=none&taskId=ufdb8ed9d-3aa9-47d9-8c69-4d541b60500&title=&width=538)
-【至少投递一次】SOFAMQ同步发送、异步发送：
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/250552/1666749267290-2ac1f71a-2e23-433b-bd64-93c0bc21af9d.png#clientId=uaf84ef44-79b9-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=390&id=u1c0e4623&margin=%5Bobject%20Object%5D&name=image.png&originHeight=390&originWidth=542&originalType=binary&ratio=1&rotation=0&showTitle=false&size=20385&status=done&style=none&taskId=u082a8991-8167-4983-82eb-d6d27d9c8d4&title=&width=542)
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/250552/1666749279073-905205f4-048d-4afb-b5c9-2a8740d91b8d.png#clientId=uaf84ef44-79b9-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=387&id=u94fe797d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=387&originWidth=538&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21878&status=done&style=none&taskId=u866a76dd-029d-4c0e-a869-29119750d93&title=&width=538)
+**最少一次**：Producer发送给Broker并等待返回ACK确认消息，如果未收到ack，则会重新发送，这样就会出现大于1次的投递情况。
 
-**消费语义**
+**恰好一次**：Producer每条消息有唯一的编号，Broker也会检查Producer的编号，如果编号已存在则会丢弃，可以实现恰好投递1次。
+
+### 消费语义
+
+**最多一次**：
+
+**最少一次**：
+
+**恰好一次**：
+
 
 | 消费语义   | 消息     | 生产者              | 消息队列           | 消费者                                   | 特点        | 例子      |
 |--------|--------|------------------|----------------|---------------------------------------|-----------|---------|
 | 最多消费一次 | 无需唯一编码 | 最多投递一次           | 分发->不等ACK      | 消费->无需ACK                             | 可靠性低，吞吐最高 | 非核心日志采集 |
 | 至少消费一次 | 无需唯一编码 | 至少投递一次 or 恰好投递一次 | 分发->等ACK->失败重发 | 消费->ACK                               | 可靠性高      | 事件全量    |
 | 恰好消费一次 | 唯一编码   | 至少投递一次 or 恰好投递一次 | 分发->等ACK->失败重发 | 【幂等检查消息唯一性 1.非重复消息-持久化-ACK 2.重复消息-ACK | 可靠性高      |         |
-
-【至少消费一次】MsgBroker发送、订阅：
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/250552/1666748859300-a43c1fc9-ab05-443c-a7f8-e8635af0b368.png#clientId=uaf84ef44-79b9-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=360&id=ub5df8d12&margin=%5Bobject%20Object%5D&name=image.png&originHeight=360&originWidth=594&originalType=binary&ratio=1&rotation=0&showTitle=false&size=88863&status=done&style=none&taskId=u23cf4ad5-d686-45a9-b820-b75f2e13114&title=&width=594)
 
 ## 功能特性
 
@@ -248,7 +244,7 @@ RocketMQ社区版支持延迟消息，但是不支持任意时间精度的延迟
 **原理**
 RocketMQ发送延时消息时先把消息按照延迟时间段发送到指定的队列中，然后通过一个定时器进行轮训这些队列，查看消息是否到期，如果到期就把这个消息发送到指定topic的队列中，这样的好处是同一队列中的消息延时时间是一致的，还有一个好处是这个队列中的消息时按照消息到期时间进行递增排序的，说的简单直白就是队列中消息越靠前的到期时间越早。
 
-##### 顺序消息
+### 顺序消息
 
 ###### kafka
 
@@ -266,7 +262,7 @@ kafka可以通过key，将某类消息写入同一个partition，一个partition
 答：消费者端创建多个内存队列，具有相同 key 的数据都路由到同一个内存 队列；然后每个线程分别消费一个内存队列即可，这样就能保证顺序性。如下图：
 
 ![shunxu.png](/post/message-queue/shunxu.png)
-#### 消息轨迹
+### 消息轨迹
 
 一条消息的生命周期包含多个阶段：发送端发送，服务端收到消息、写入消息、投递消息等。而用户在使用MQ时，有时会想知道消息的发送、投递、消费情况，以及消费耗时、消费节点、是否重投等信息。这些信息都属于消息轨迹。
 在没有可视化的消息轨迹界面时，轨迹信息都是通过原始的翻日志的方式来查询。需要根据机器节点的日志信息找到链路，一步一步溯源查找。
@@ -285,7 +281,7 @@ RMQ_SYS_TRACE_TOPIC，队列个数为1，默认该值为false，表示该Broker�
 中只支持配置一个消息轨迹Topic，故自定义Topic，在目前这个阶段或许还不是一个最佳实践，建议使用系统默认的Topic即可。
 通常为了避免消息轨迹的数据与正常的业务数据混合在一起，官方建议，在Broker集群中，新增加一台机器，只在这台机器上开启消息轨迹跟踪，这样该集群内的消息轨迹数据只会发送到这一台Broker服务器上，并不会增加集群内原先业务Broker的负载压力。
 
-### 稳定性&性能
+## 稳定性&性能
 
 #### 高可用
 
