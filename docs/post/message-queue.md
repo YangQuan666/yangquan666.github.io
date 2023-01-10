@@ -57,35 +57,30 @@ tags:
 
 ## 消费模式
 
-### 拉模式
+![pull&push.png](/post/message-queue/pull&push.png)
 
-#### rocketmq
+### 拉模式（pull）
 
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20156646/1667209314893-418d9683-c128-469d-a750-5154c970578e.png#clientId=u898eb282-ece6-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=1304&id=u0cc14049&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1304&originWidth=1812&originalType=binary&ratio=1&rotation=0&showTitle=false&size=505711&status=done&style=none&taskId=u58778780-7fd4-4948-b3a0-8d572f58869&title=&width=1812)
+**解释**：当 Producer 发出的消息到达后，服务端马上将这条消息投递给 Consumer
 
-- 拉 pull：消费者主动从消息中间件拉取消息
-    - 消息要求高可靠
-        - 消息中心消息可靠性由 DB 来保证
-    - 消息实时性
-        - 消息中心是推模式，即使积压也能保证下游的实时性，但是牺牲了积压量
-        - SOFAMQ 本质是拉模式，当有积压时，因为是顺序消费，下游消费实时性无法保证
-        - 非积压场景下，两个产品下游实时性基本一致，一般都在10ms左右
-          采用push模式，可以尽可能快的把消息发给消费者，但是如果消费者处理一条消息能力较弱（处理时间长），消息中间件会不断的发消息给消费者，到时消费者的缓存区溢出；采用pull模式，可能会增加消息的延迟。
+**使用场景**
+1. Producer 速率大于 Consumer 速率
+2. 消息实时性要求较高
+3. 
+### 推模式（push）
 
-### 推模式
+**解释**：当服务端收到这条消息后什么也不做，只是等着 Consumer 主动到自己这里来读，即 Consumer 这里有一个"拉取"的动作
 
+**使用场景**
 
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20156646/1666926141014-60b9ddbe-9726-4c33-b77d-fca8eff9a9f7.png#clientId=u9e5d1166-b7b7-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=315&id=u521f5aa0&margin=%5Bobject%20Object%5D&name=image.png&originHeight=315&originWidth=634&originalType=binary&ratio=1&rotation=0&showTitle=false&size=92018&status=done&style=none&taskId=ufc8b0d18-b384-4cbe-a58c-199f3ffe87c&title=&width=634)
-
-- 推 push：由消息中间件主动发消息给消费者
-    - 消息量大，成本较低
-    - 实时数据平台
-    - 订阅端处理时间不可控
-        - 商户数据中心
-    - 需要蓄洪，下游限流或泄洪消费
-        - 安全风控，大促时蓄洪，两小时后泄洪。
-    - 支持大数据实时计算，按照设定时间来消费消息
-        - [BLINK](https://yuque.antfin-inc.com/kepler/taxxnc/vgn6f8)
+- 消息量大，成本较低
+- 实时数据平台
+- 订阅端处理时间不可控
+    - 商户数据中心
+- 需要蓄洪，下游限流或泄洪消费
+    - 安全风控，大促时蓄洪，两小时后泄洪。
+- 支持大数据实时计算，按照设定时间来消费消息
+    - [BLINK](https://yuque.antfin-inc.com/kepler/taxxnc/vgn6f8)
 
 
 ## 消息队列选型速览
@@ -145,7 +140,7 @@ tags:
 
 ###### 整体流程
 
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/39156604/1661772178394-b3813e4c-1875-4b3e-9d3b-a0a5a54c4f37.png#clientId=u19ae7e55-69aa-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=202&id=MoV0E&margin=%5Bobject%20Object%5D&name=image.png&originHeight=403&originWidth=1223&originalType=binary&ratio=1&rotation=0&showTitle=false&size=52125&status=error&style=none&taskId=u3ad62344-323f-4bcd-9eb4-b8428687195&title=&width=611.5)
+![shiwu.png](/post/message-queue/shiwu.png)
 
 ###### 异常情况
 
@@ -180,31 +175,31 @@ tags:
 
 #### 时间轮
 
-1. Kafka中一个时间轮TimingWheel默认是由20个时间格组成，每格的时间跨度是1ms，时间轮底层采用数组实现，数组中的每个元素可以存放一个定时任务列表（TimerTaskList）。TimerTaskList是一个环形的双向链表，链表中的每一项表示的都是定时任务项（TimerTaskEntry），其中封装了真正的定时任务TimerTask
-    
-    ![shijianlun1.png](/post/message-queue/shijianlun1.png)
+1.
+
+Kafka中一个时间轮TimingWheel默认是由20个时间格组成，每格的时间跨度是1ms，时间轮底层采用数组实现，数组中的每个元素可以存放一个定时任务列表（TimerTaskList）。TimerTaskList是一个环形的双向链表，链表中的每一项表示的都是定时任务项（TimerTaskEntry），其中封装了真正的定时任务TimerTask
+
+![shijianlun1.png](/post/message-queue/shijianlun1.png)
 
 2. 假设初始的时候一个格子一秒，时间轮的指针定格在0。此时添加一个超时时间为2ms的任务, 那么这个任务将会插入到第二个时间格中
-   ![640-2.gif](https://intranetproxy.alipay.com/skylark/lark/0/2022/gif/39156604/1666795138826-aba61b58-039c-47eb-bcbe-8d236c99e739.gif#clientId=u6de1b89a-222a-4&crop=0&crop=0&crop=1&crop=1&from=ui&height=294&id=JiPgP&margin=%5Bobject%20Object%5D&name=640-2.gif&originHeight=588&originWidth=639&originalType=binary&ratio=1&rotation=0&showTitle=false&size=72819&status=done&style=none&taskId=ua97a540f-0ed1-43c1-bc6f-c945937ace5&title=&width=320)
-3. 时间轮的指针到达第二个时间格时, 会处理该时间格上对应的任务
-   ![640-3.gif](https://intranetproxy.alipay.com/skylark/lark/0/2022/gif/39156604/1666795356385-6e9bb305-11f4-45aa-ac7d-e5b6c19aac98.gif#clientId=u6de1b89a-222a-4&crop=0&crop=0&crop=1&crop=1&from=ui&height=294&id=g9icC&margin=%5Bobject%20Object%5D&name=640-3.gif&originHeight=588&originWidth=639&originalType=binary&ratio=1&rotation=0&showTitle=false&size=133833&status=done&style=none&taskId=ub50d1813-7feb-4e04-aa6e-cc037915d9c&title=&width=320)
-4. 如果这个时候又插入一个延时时间为8ms的任务进来, 这个任务的过期时间就是在当前时间2ms的基础上加8ms, 也就是10ms, 那么这个任务将会插入到过期时间为10ms的时间格中。
-   ![640-4.gif](https://intranetproxy.alipay.com/skylark/lark/0/2022/gif/39156604/1666795417643-9b747ec2-43c3-402e-9dff-259ba3129e19.gif#clientId=u6de1b89a-222a-4&crop=0&crop=0&crop=1&crop=1&from=ui&height=294&id=wntcx&margin=%5Bobject%20Object%5D&name=640-4.gif&originHeight=588&originWidth=639&originalType=binary&ratio=1&rotation=0&showTitle=false&size=76816&status=done&style=none&taskId=uca50c1c5-8b36-4642-b4e3-b1c99e79496&title=&width=320)
-5. 如果在当前时间是2ms的时候, 插入一个延时时间为19ms的任务时, 这个任务的过期时间就是在当前时间2s的基础上加19ms,
+   ![shijianlun2.gif](/post/message-queue/shijianlun2.gif)
+4. 时间轮的指针到达第二个时间格时, 会处理该时间格上对应的任务
+   ![shijianlun3.gif](/post/message-queue/shijianlun3.gif)
+5. 如果这个时候又插入一个延时时间为8ms的任务进来, 这个任务的过期时间就是在当前时间2ms的基础上加8ms, 也就是10ms, 那么这个任务将会插入到过期时间为10ms的时间格中。
+   ![shijianlun4.gif](/post/message-queue/shijianlun4.gif)
+6. 如果在当前时间是2ms的时候, 插入一个延时时间为19ms的任务时, 这个任务的过期时间就是在当前时间2s的基础上加19ms,
    也就是21ms，那么这个任务就会插入到过期时间为21ms的时间格中
-
-![640-5.gif](https://intranetproxy.alipay.com/skylark/lark/0/2022/gif/39156604/1666795948319-9b1d090e-a266-4486-bb8f-cbe945349485.gif#clientId=u6de1b89a-222a-4&crop=0&crop=0&crop=1&crop=1&from=ui&height=294&id=YJfiO&margin=%5Bobject%20Object%5D&name=640-5.gif&originHeight=588&originWidth=639&originalType=binary&ratio=1&rotation=0&showTitle=false&size=271099&status=done&style=none&taskId=u361c955c-517c-42b3-b1d0-60960bcddcf&title=&width=320)
-
+   ![shijianlun5.gif](/post/message-queue/shijianlun5.gif)
 6. 如果在当前时间是2ms的时候, 插入一个延时时间为22ms的任务, 这个任务的过期时间就是在2ms的基础上加22ms，也就是24ms，但是显然没有24ms的格子
-   ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/39156604/1666795703659-bfe1acb2-e215-40f8-9a1f-1af04ada8d64.png#clientId=u6de1b89a-222a-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=294&id=YQtLH&margin=%5Bobject%20Object%5D&name=image.png&originHeight=718&originWidth=686&originalType=binary&ratio=1&rotation=0&showTitle=false&size=60811&status=done&style=none&taskId=u296ae728-6e7e-4c84-ac53-cfff32ecef7&title=&width=281)
-7. 第一层的时间轮装不下的时候，任务就会放入第二层的时间轮格子中
-   ![640-2.gif](https://intranetproxy.alipay.com/skylark/lark/0/2022/gif/39156604/1666884189916-3f626406-06ff-47f1-b023-0a14e6951e65.gif#clientId=ue18a4c05-0a4a-4&crop=0&crop=0&crop=1&crop=1&from=ui&height=319&id=MIzh1&margin=%5Bobject%20Object%5D&name=640-2.gif&originHeight=637&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=81697&status=done&style=none&taskId=u7636cdc4-1715-4d4c-b05a-6401369f20c&title=&width=320)
-8. 当第二层时间轮上的任务到期后，就会执行时间轮的降级，原本超时时间为24ms的任务会被从第二层取出来，放入第一层到期时间为24ms的格子中
-   ![640-3.gif](https://intranetproxy.alipay.com/skylark/lark/0/2022/gif/39156604/1666884621506-c2228e08-252e-414d-ba5c-dc3c6febd6d5.gif#clientId=ue18a4c05-0a4a-4&crop=0&crop=0&crop=1&crop=1&from=ui&height=319&id=EHub5&margin=%5Bobject%20Object%5D&name=640-3.gif&originHeight=637&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=492485&status=done&style=none&taskId=u1d5565ee-4bb1-40a2-8cb0-cd9dfddc80f&title=&width=320)
-9. 从这里可以看出时间轮的巧妙之处，两层时间轮只用了40个数组元素，却可以承载[0-399s]的定时任务。而三层时间轮用60个数组元素，就可以承载[0-7999s]
-   的定时任务
-   ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/39156604/1666884813972-bc21201c-42c3-42e4-adc9-3e74ce1899e4.png#clientId=ue18a4c05-0a4a-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=304&id=wccxQ&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1026&originWidth=1080&originalType=binary&ratio=1&rotation=0&showTitle=false&size=258318&status=done&style=none&taskId=u4bd05c7a-58c3-49d0-b842-a9eb8874535&title=&width=320)
-10. 插入一个延时时间400ms的任务, 指针就要执行399次"空推进"吗？
+   ![shijianlun6.png](/post/message-queue/shijianlun6.png)
+8. 第一层的时间轮装不下的时候，任务就会放入第二层的时间轮格子中
+   ![shijianlun7.gif](/post/message-queue/shijianlun7.gif)
+9. 当第二层时间轮上的任务到期后，就会执行时间轮的降级，原本超时时间为24ms的任务会被从第二层取出来，放入第一层到期时间为24ms的格子中
+   ![shijianlun8.gif](/post/message-queue/shijianlun8.gif)
+10. 从这里可以看出时间轮的巧妙之处，两层时间轮只用了40个数组元素，却可以承载[0-399s]的定时任务。而三层时间轮用60个数组元素，就可以承载[0-7999s]
+    的定时任务
+    ![shijianlun9.png](/post/message-queue/shijianlun9.png)
+11. 插入一个延时时间400ms的任务, 指针就要执行399次"空推进"吗？
     Kafka通过一个`DelayQueue`保存了所有的`TimerTaskList`对象，然后通过一个叫做`ExpiredOperationReaper`的线程从 `DelayQueue`
     中获取超时的任务列表 `TimerTaskList`，然后根据`TimerTaskList` 的过期时间来精确推进时间轮的时间，这样就不会存在空推进的问题，
 
@@ -221,13 +216,13 @@ rocketmq在kafka的时间轮基础上提供了延迟消息可靠的存储方式
 1. 时间轮的每一格设计如下
 
    | delay_time(8B) 延迟时间 | first_pos 首条位置 | last_pos(8B) 最后位置 | num(4B) 消息条数 |
-                      |---------------------|----------------|-------------------|--------------|
+   |---------------------|----------------|-------------------|--------------|
 
 2. TimerLog，定时消息的记录文件，Append Only。每条记录包含一个prev_pos，指向前一条定时到同样时刻的记录
 3. TimerLog与TimerWheel的协作如下图所示
-   ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/39156604/1667225942409-b7c21a9e-696e-469f-bce2-1264f34e8984.png#clientId=u8922e004-42d1-4&crop=0&crop=0&crop=1&crop=1&from=paste&id=u68d1f375&margin=%5Bobject%20Object%5D&name=image.png&originHeight=347&originWidth=594&originalType=binary&ratio=1&rotation=0&showTitle=false&size=28052&status=done&style=none&taskId=u3d39f27b-4f0c-448a-ac44-e4b51b57193&title=)
+   ![r_shijianlun1.png](/post/message-queue/r_shijianlun1.png)
 4. 消息的存储工作流程如下：
-   ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/39156604/1667226406110-d5a6b5b8-c30f-4240-8bd6-0243c6d00d6b.png#clientId=u33cec491-c86d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=331&id=u336950de&margin=%5Bobject%20Object%5D&name=image.png&originHeight=661&originWidth=1080&originalType=binary&ratio=1&rotation=0&showTitle=false&size=52960&status=done&style=none&taskId=u3ca0708f-2e3c-4f4b-baff-561faa998a9&title=&width=540)
+   ![r_shijianlun1.png](/post/message-queue/r_shijianlun1.png)
     1. 针对放置定时消息的service，每50ms从commitLog读取指定topic的定时消息
         1. TimerEnqueueGetService从commitLog读取得到定时主题的消息，并先将其放入enqueuePutQueue
         2. 另一个线程TimerEnqueuePutService将其放入timerLog,更新时间轮的存储内容。将该任务放进时间轮的指定位置
@@ -270,8 +265,7 @@ kafka可以通过key，将某类消息写入同一个partition，一个partition
 问：只有一个partation会导致消费者的吞吐量变低，如果消费者启用多线程消费，则消息重新变得无序，如何解决？
 答：消费者端创建多个内存队列，具有相同 key 的数据都路由到同一个内存 队列；然后每个线程分别消费一个内存队列即可，这样就能保证顺序性。如下图：
 
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/39156604/1666888928358-033cca85-b9ac-4d94-94fd-160d83bac3ba.png#clientId=u06401f96-c50e-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=372&id=u40309fb4&margin=%5Bobject%20Object%5D&name=image.png&originHeight=744&originWidth=581&originalType=binary&ratio=1&rotation=0&showTitle=false&size=37909&status=done&style=none&taskId=ua3283353-c147-4554-81c0-17f8d56ee83&title=&width=290.5)
-
+![shunxu.png](/post/message-queue/shunxu.png)
 #### 消息轨迹
 
 一条消息的生命周期包含多个阶段：发送端发送，服务端收到消息、写入消息、投递消息等。而用户在使用MQ时，有时会想知道消息的发送、投递、消费情况，以及消费耗时、消费节点、是否重投等信息。这些信息都属于消息轨迹。
