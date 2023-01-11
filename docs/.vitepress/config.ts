@@ -19,6 +19,7 @@ export default {
     lang: 'zh-CN',
     head: [
         ['meta', {name: 'viewport', content: 'user-scalable=0, initial-scale=1, maximum-scale=1, width=device-width'}],
+        ['meta', {name: 'google-site-verification', content: 'RAVRlhHFJKHyrrg75VIxZPLEm6Vy7g846tY7WCmvQmA'}],
         ['link', {rel: 'icon', type: 'image/svg+xml', href: '/logo.svg'}],
         ['link', {rel: 'me', href: 'https://mastodon.social/@Kourtsis'}]
     ],
