@@ -5,9 +5,14 @@ import Renderer from 'markdown-it/lib/renderer';
 import Token from 'markdown-it/lib/token';
 // @ts-ignore
 import MarkdownIt from 'markdown-it';
+import {createWriteStream} from "fs";
+import {resolve} from 'node:path'
+import {SitemapStream} from 'sitemap'
+import {SiteConfig} from 'vitepress/dist/node';
 
 buildSummary()
 
+const links: any[] = []
 export default {
     title: '萨科的魔术盒',
     description: 'YangQuan的个人博客网站',
@@ -59,6 +64,24 @@ export default {
         }
     },
     cleanUrls: 'without-subfolders',
+    transformHtml: (_: any, htmlFileName: string, {pageData} : any) => {
+        if (!/[\\/]404\.html$/.test(htmlFileName) && pageData.frontmatter.display !== false)
+            links.push({
+                // you might need to change this if not using clean urls mode
+                url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, '$2'),
+                lastmod: pageData.lastUpdated
+            })
+    },
+    async buildEnd(siteConfig: SiteConfig) {
+        const sitemap = new SitemapStream({
+            hostname: 'https://yangquan.netlify.app/'
+        })
+        const writeStream = createWriteStream(resolve(siteConfig.outDir, 'sitemap.xml'))
+        sitemap.pipe(writeStream)
+        links.forEach((link) => sitemap.write(link))
+        sitemap.end()
+        await new Promise((r) => writeStream.on('finish', r))
+    },
     markdown: {
         config: (md: MarkdownIt) => {
             md.renderer.rules.image = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {

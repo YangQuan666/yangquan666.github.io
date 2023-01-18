@@ -83,7 +83,7 @@ tags:
    采用拉模式，情况会有所改善；服务端不再关心 Consumer 的状态，而是采取“你来了我才服务”的方式，Consumer 是否能够及时消费数据，服务端不会做任何保证（也有超时清理时间）。
 
 
-## 常见消息队列功能
+## 常见MQ比对
 
 | **功能特性** | **RocketMQ** | **MsgBroker（蚂蚁内部）** | **Kafka** | **RabbitMQ** |
 | ------------ | ------------ | ------------------------- | --------- | ------------ |
@@ -120,6 +120,8 @@ tags:
 ## 功能特性
 
 ### 事务消息
+
+> 以RocketMQ为例
 
 #### 使用场景
 
@@ -251,7 +253,7 @@ rocketmq在kafka的时间轮基础上提供了延迟消息可靠的存储方式
 #### rocketmq社区版
 
 RocketMQ社区版支持延迟消息，但是不支持任意时间精度的延迟消息，只支持特定级别的延迟消息
-消息延迟级别分别为`1s`, `5s`, `10s`, `30s`, `1min`, `2min`, `3min`, `4min`, `5min`, `6min`, `7min`, `8min`, `9min`, `10min`, `20min`, `30min`, `1h`, `2h`,，共18个级别。在发送消息时，设置消息延迟级别即可，设置消息延迟级别时有以下3种情况：
+消息延迟级别分别为`1s`, `5s`, `10s`, `30s`, `1min`, `2min`, `3min`, `4min`, `5min`, `6min`, `7min`, `8min`, `9min`, `10min`, `20min`, `30min`, `1h`, `2h` 共18个级别。在发送消息时，设置消息延迟级别即可，设置消息延迟级别时有以下3种情况：
 
 1. 设置消息延迟级别等于0时，则该消息为非延迟消息。
 2. 设置消息延迟级别大于等于1并且小于等于18时，消息延迟特定时间，如：设置消息延迟级别等于1，则延迟1s；设置消息延迟级别等于2，则延迟5s，以此类推。
@@ -261,6 +263,8 @@ RocketMQ社区版支持延迟消息，但是不支持任意时间精度的延迟
 RocketMQ发送延时消息时先把消息按照延迟时间段发送到指定的队列中，然后通过一个定时器进行轮训这些队列，查看消息是否到期，如果到期就把这个消息发送到指定topic的队列中，这样的好处是同一队列中的消息延时时间是一致的，还有一个好处是这个队列中的消息时按照消息到期时间进行递增排序的，说的简单直白就是队列中消息越靠前的到期时间越早。
 
 ### 顺序消息
+
+> 以Kafka为例
 
 `Kafka`通过`key`，将某类消息写入同一个`partition`，一个`partition`只能对应一个`Consumer`，以保证数据有序。
 
@@ -283,30 +287,37 @@ RocketMQ发送延时消息时先把消息按照延迟时间段发送到指定的
 
 ### 消息轨迹
 
+> 以蚂蚁的MagBroker为例
+
 一条消息的生命周期包含多个阶段：发送端发送，服务端收到消息、写入消息、投递消息等。而用户在使用MQ时，有时会想知道消息的发送、投递、消费情况，以及消费耗时、消费节点、是否重投等信息。这些信息都属于消息轨迹。
 在没有可视化的消息轨迹界面时，轨迹信息都是通过原始的翻日志的方式来查询。需要根据机器节点的日志信息找到链路，一步一步溯源查找。
 
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20156646/1667220447378-24e397ad-a285-40dd-9047-88803459af4a.png#clientId=ud471318f-e47b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=1455&id=u7ee5a91b&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1455&originWidth=2971&originalType=binary&ratio=1&rotation=0&showTitle=false&size=149879&status=done&style=none&taskId=u3841ca9f-2858-4740-8fd8-585f899378c&title=&width=2971)
-既然把消息轨迹当成消息存储在Broker服务器，那存储消息轨迹的Topic如何确定呢？RocketMQ提供了两种方法来定义消息轨迹的Topic。
+![guiji.png](/post/message-queue/guiji.png)
 
-- 系统默认Topic
+轨迹数据和消息数据不同。消息不能丢失，要保证高可靠性，而轨迹信息一般则用于问题的排查，并且往往是写远大于读，因此在轨迹功能的设计上不仅要考虑成本，还要考虑对消息链路是否有影响。因此采用了独立集群存储轨迹信息（PS：图中的`AntKV`可以理解为`HBase`）
 
-如果Broker的traceTopicEnable配置设置为true，表示在该Broker上创建topic名为：
-RMQ_SYS_TRACE_TOPIC，队列个数为1，默认该值为false，表示该Broker不承载系统自定义用于存储消息轨迹的topic。
+#### 轨迹写入
 
-- 自定义Topic
+MsgBroker消息服务端在处理消息时会进行埋点，轨迹数据就在埋点时产生，处理消息主要包括以下几个阶段：
+1. 消息存储DB时
+2. 消息的消费结果回调
+3. 事务消息的提交/回滚
+4. 定时消息的触发/修改/删除
 
-在创建消息生产者或消息消费者时，可以通过参数自定义用于记录消息轨迹的Topic名称，不过要注意的是，rokcetmq控制台(rocketmq-console)
-中只支持配置一个消息轨迹Topic，故自定义Topic，在目前这个阶段或许还不是一个最佳实践，建议使用系统默认的Topic即可。
-通常为了避免消息轨迹的数据与正常的业务数据混合在一起，官方建议，在Broker集群中，新增加一台机器，只在这台机器上开启消息轨迹跟踪，这样该集群内的消息轨迹数据只会发送到这一台Broker服务器上，并不会增加集群内原先业务Broker的负载压力。
+轨迹数据生产好以后会被推入至队列当中。线程定时捞取收集轨迹数据，处理组装后发送给轨迹集群服务。轨迹数据会以消息的形式从MsgBroker发送至轨迹集群服务，轨迹集群服务收到发送的轨迹数据时会进行存储。
+
+![guiji1.png](/post/message-queue/guiji1.png)
+
+#### 读取轨迹
+
+当用户登录消息控制台创建查询任务，消息控制台会向轨迹集群内的各个服务发送请求，轨迹数据存储在轨迹集群下各服务的本地`AntKV`中。因为消息服务发送轨迹信息消息至轨迹服务时的节点选取是随机的，所以数据会散落在集群内各服务上。因此控制台服务在查询轨迹时需要遍历轨迹集群下的所有轨迹服务，才能获得完整的轨迹信息。
+
+![guiji2.png](/post/message-queue/guiji2.png)
 
 ## 稳定性&性能
 
 #### 高可用
 
-##### ACK机制
-
-![](https://intranetproxy.alipay.com/skylark/lark/__puml/e43f0a1abf02d76ab7097deea0187b2d.svg#lake_card_v2=eyJ0eXBlIjoicHVtbCIsImNvZGUiOiJzZW5kZXIgLT4gYnJva2VyXG5icm9rZXIgLT4gZGIgOiBzYXZlIG1zZ1xuYnJva2VyIC0tPiBzZW5kZXIgOiBhY2svbmFja1xuYnJva2VyIC0-IHJlY2VpdmVyXG5yZWNlaXZlciAtLT4gYnJva2VyIDogYWNrL25hY2tcbmJyb2tlciAtPiBkYiA6IGRlbGV0ZSBtc2ciLCJ1cmwiOiJodHRwczovL2ludHJhbmV0cHJveHkuYWxpcGF5LmNvbS9za3lsYXJrL2xhcmsvX19wdW1sL2U0M2YwYTFhYmYwMmQ3NmFiNzA5N2RlZWEwMTg3YjJkLnN2ZyIsImlkIjoiYm1QU0IiLCJtYXJnaW4iOnsidG9wIjp0cnVlLCJib3R0b20iOnRydWV9LCJjYXJkIjoiZGlhZ3JhbSJ9)#####
 数据备份和故障转移
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20441/1666871933931-97904c34-ab95-4778-9266-8a724d652213.png#clientId=uecce1891-4c1f-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=242&id=ue475ed04&margin=%5Bobject%20Object%5D&name=image.png&originHeight=483&originWidth=1037&originalType=binary&ratio=1&rotation=0&showTitle=false&size=59699&status=done&style=none&taskId=u85dd854e-7f54-4fe9-8d6c-addca350b18&title=&width=518.5)
 
@@ -320,23 +331,8 @@ HighWatermark：取最小LEO，consumer能够看到的此partition的位置。
 
 ##### 零拷贝
 
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20441/1666874105184-a225b43d-bbc7-4cea-8f4f-cb05291be5c7.png#clientId=uecce1891-4c1f-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=432&id=ucafb9bc6&margin=%5Bobject%20Object%5D&name=image.png&originHeight=863&originWidth=1500&originalType=binary&ratio=1&rotation=0&showTitle=false&size=189782&status=done&style=none&taskId=uac12c40c-6569-448a-8259-d74addcb9f2&title=&width=750)
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20441/1666874115020-9996005b-36a2-4f0a-8051-824c5dd11908.png#clientId=uecce1891-4c1f-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=427&id=u415102c8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=853&originWidth=1500&originalType=binary&ratio=1&rotation=0&showTitle=false&size=183715&status=done&style=none&taskId=u05425056-2410-46d7-81fa-5cea881538c&title=&width=750)
-
 ##### 磁盘顺序读写
 
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20441/1666874264460-8cbf0497-6148-4bea-bf87-49a800ef3d51.png#clientId=uecce1891-4c1f-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=264&id=u655e9fe8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=528&originWidth=646&originalType=binary&ratio=1&rotation=0&showTitle=false&size=113276&status=done&style=none&taskId=u89e9f7da-7792-4ca4-b578-3412e933ab6&title=&width=323)
-
-#### msgbroker
-
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20156646/1666927224363-d5f358d6-4c94-4714-999a-d247de701a1b.png#clientId=ue9277cdc-a3a4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=357&id=u919d22b6&margin=%5Bobject%20Object%5D&name=image.png&originHeight=357&originWidth=750&originalType=binary&ratio=1&rotation=0&showTitle=false&size=74259&status=done&style=none&taskId=u7baec6c9-8d01-4648-8a19-0f428f8915e&title=&width=750)
-在2.0的模型中将normal message table拆分为了多个表，并且在逻辑上组成了一个环，按照时间进行写入表的切换，并且定期批量的进行过期表中的数据删除。消息投递之后只会记录
-checkpoint，标记哪些消息已经可以删除了，而不会真正执行 normal message table 中的数据删除，从而避免了频繁的插入和删除操作。可以简单的理解为2.0的模型写入就是不断的
-Append 消息（checkpoint 可以理解为 offset），投递就是不断的推进checkpoint，删除是批量的对过期的表（不再进行读写）进行删除。
-
-![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20156646/1666755832767-cae32c00-2718-4c29-b71e-1ef860b3eb73.png#clientId=u33216851-4002-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=606&id=u16911af2&margin=%5Bobject%20Object%5D&name=image.png&originHeight=757&originWidth=1500&originalType=binary&ratio=1&rotation=0&showTitle=false&size=314793&status=done&style=none&taskId=u5872799b-7230-4dd4-b8c1-db8cc3cd08e&title=&width=1200)
-MsgBroker 2.0的计算模型设计中采用了全异步的模型，对各个开销较高的操作都做了异步化，比如msg-write-threads（消息写入线程池）仅负责消息写入时的业务逻辑，并不处理持久化操作。持久化操作是耗时的，由msg-flush-threads批量进行持久化，这样能使
-msg-write-threads 更快的去处理更多的写入请求。基于这样的设计，能对各个阶段不同的线程池做精细化的配置，提升资源利用率和整体的性能。
 
 #### rocketmq
 
