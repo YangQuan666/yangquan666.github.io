@@ -21,7 +21,7 @@ tags:
 - **优点**：算法实现简单 
 - **缺点**：性能低
 ### 演示
-![朴素算法.gif](/post/keyword-check/朴素算法.gif)
+![朴素算法.gif](/post/keyword-check/bf.gif)
 ### 代码解读
 枚举原文`content`中的每个字符作为“发起点”，每次从`content`的“发起点”和`keyword`的“首位”开始尝试匹配：  
 
@@ -106,7 +106,7 @@ public int indexOf(char[] content, char[] keyword) {
 优点：词库匹配的情况下时间复杂度较低
 缺点：每次删除、修改关键词都需要全量build字典树
 ### 演示
-![字典树.gif](/post/keyword-check/字典树.gif)
+![字典树.gif](/post/keyword-check/trie.gif)
 ### 代码解读
 ```java
 class TrieNode {
@@ -176,7 +176,7 @@ kmp算法是由大神高德纳参与发明的算法，其核心思想是利用�
 优点：next数组不依赖原文content，所以在**管理时**就可以计算生成，从而大大提升**运行时**的识别速度
 缺点：next数组的代码逻辑理解比较困难
 ### 演示
-![kmp算法.gif](/post/keyword-check/kmp算法.gif)
+![kmp算法.gif](/post/keyword-check/kmp.gif)
 ### 代码解读
 ```java
 public int kmp(char[] content, char[] keyword) {
@@ -252,7 +252,7 @@ Boyer-Moore算法由Bob Boyer和J Strother Moore设计于1977年。一般情况�
 优点：应用广泛，匹配时间快
 缺点：代码复杂，不容易理解
 ### 演示
-![bm算法.gif](/post/keyword-check/bm算法.gif)
+![bm算法.gif](/post/keyword-check/bm.gif)
 ### 代码解读
 #### 坏字符规则
 BM 算法是从后往前进行比较，我们来看一下具体过程，假设有原文为`"HERE IS A SIMPLE EXAMPLE"`，关键词为`"EXAMPLE`"：
@@ -400,7 +400,7 @@ Sunday算法借鉴了BM算法的坏字符规则，不过和BM算法不同的是�
 优点：代码简单容易理解，时间复杂度低
 缺点：算法不稳定，最坏情况下时间复杂度和朴素算法一致
 ###  演示
-![sunday算法.gif](/post/keyword-check/sunday算法.gif)
+![sunday算法.gif](/post/keyword-check/sunday.gif)
 ### 代码解读
 Sunday算法**在匹配失败时重点关注的是关键词中参加匹配的最末位字符的下一位**：
 
