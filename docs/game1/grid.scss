@@ -1,0 +1,154 @@
+@mixin smaller($value) {
+  @media screen and (max-width: $value) {
+    @content;
+  }
+}
+
+@function exponent($base, $exponent) {
+  // reset value
+  $value: $base;
+  // positive intergers get multiplied
+  @if $exponent > 1 {
+    @for $i from 2 through $exponent {
+      $value: $value * $base;
+    }
+  }
+  // negitive intergers get divided. A number divided by itself is 1
+  @if $exponent < 1 {
+    @for $i from 0 through -$exponent {
+      $value: $value / $base;
+    }
+  }
+  // return the last value written
+  @return $value;
+}
+
+@function pow($base, $exponent) {
+  @return exponent($base, $exponent);
+}
+
+$cell-color: #eee4da;
+$cell-gold-color: #edc22e;
+$cell-gold-glow-color: lighten($cell-gold-color, 15%);
+$bright-text-color: #f9f6f2;
+$base: 2;
+$exponent: 1;
+$limit: 15;
+
+$special-colors: false false,
+  // 2
+  false false,
+  // 4
+  #f78e48 true,
+  // 8
+  #fc5e2e true,
+  // 16
+  #ff3333 true,
+  // 32
+  #ff0000 true,
+  // 64
+  false true,
+  // 128
+  false true,
+  // 256
+  false true,
+  // 512
+  false true,
+  // 1024
+  false true,
+  // 2048
+  false true,
+  // 4096
+  false true,
+  // 8192
+  false true,
+  // 16384
+  false true;
+
+@mixin buildCellStyle {
+  & {
+    will-change: left;
+    will-change: top;
+    transition: left 100ms ease-in-out 0s;
+    transition: top 100ms ease-in-out 0s;
+    animation-fill-mode: backwards;
+  }
+
+  @while $exponent <= $limit {
+    $power: pow($base, $exponent);
+
+    &.cell-#{$power} {
+      // Calculate base background color
+      $gold-percent: calc(($exponent - 1) / ($limit - 1)) * 100;
+      $mixed-background: mix($cell-gold-color, $cell-color, $gold-percent);
+
+      $nth-color: nth($special-colors, $exponent);
+
+      $special-background: nth($nth-color, 1);
+      $bright-color: nth($nth-color, 2);
+
+      @if $special-background {
+        $mixed-background: mix($special-background, $mixed-background, 55%);
+      }
+
+      @if $bright-color {
+        color: $bright-text-color;
+      }
+
+      // Set background
+      background: $mixed-background;
+
+      // Add glow
+      $glow-opacity: calc(max($exponent - 4, 0) / ($limit - 4));
+
+      @if not $special-background {
+        box-shadow: 0
+            0
+            30px
+            10px
+            rgba($cell-gold-glow-color, calc($glow-opacity / 1.8)),
+          inset 0 0 0 1px rgba(white, calc($glow-opacity / 3));
+      }
+    }
+
+    $exponent: $exponent + 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes appear {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    &.cell-new {
+      animation: appear 300ms ease-in 100ms;
+      animation-fill-mode: backwards;
+    }
+
+    &.cell-merge {
+      animation: pop 200ms ease-in 100ms;
+      animation-fill-mode: backwards;
+    }
+  }
+}
