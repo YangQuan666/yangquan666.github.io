@@ -11,7 +11,7 @@ const props = defineProps<{
     <h1 class="title">2048</h1>
     <div class="scores">
       <div class="score score-now">
-        <p class="label">{{ 'message.score'}}</p>
+        <p class="label">{{ 'SCORE'}}</p>
         <p class="value">{{ props.score }}</p>
 
         <!-- score increment -->
@@ -20,7 +20,7 @@ const props = defineProps<{
         </span>
       </div>
       <div class="score">
-        <p class="label">{{ 'message.best_score' }}</p>
+        <p class="label">BEST</p>
         <p class="value">{{ props.bestScore }}</p>
       </div>
     </div>

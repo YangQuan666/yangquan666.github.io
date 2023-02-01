@@ -138,50 +138,59 @@ start();
 </script>
 
 <template>
-  <div class="grid">
-    <header class="grid-header">
-      <Heading :score="score" :score-increment="scoreDiff" :best-score="bestScore"/>
+  <div class="game">
+    <div class="grid">
+      <header class="grid-header">
+        <Heading :score="score" :score-increment="scoreDiff" :best-score="bestScore"/>
 
-      <div class="controls">
-        <div class="select-wrapper">
-          <label class="label" for="select">{{ 'message.size'}}</label>
-          <select class="select" id="select" v-model.number="size" @change="handleSizeChange">
-            <template v-for="i in 9" :key="i">
-              <option class="option" v-if="i > 1" :value="i">{{ i }}</option>
-            </template>
-          </select>
+        <div class="controls">
+          <div class="select-wrapper">
+            <label class="label" for="select">SIZE</label>
+            <select class="select" id="select" v-model.number="size" @change="handleSizeChange">
+              <template v-for="i in [3,4,5,6]" :key="i">
+                <option class="option" v-if="i > 1" :value="i">{{ i }}</option>
+              </template>
+            </select>
+          </div>
+          <div class="btns">
+            <button class="btn" @click="handleNewGame">NEW</button>
+            <button class="btn" @click="undo">UNDO</button>
+          </div>
         </div>
-        <div class="btns">
-          <button class="btn" @click="handleNewGame">{{ 'message.new_game'}}</button>
-          <button class="btn" @click="undo">{{ 'message.undo' }}</button>
-        </div>
-      </div>
-    </header>
+      </header>
 
-    <main class="grid-main" ref="gridRef" :style="gridStyle">
-      <!-- cell placeholder -->
-      <div class="cell-placeholder" v-for="i in size * size" :key="i"/>
+      <main class="grid-main" ref="gridRef" :style="gridStyle">
+        <!-- cell placeholder -->
+        <div class="cell-placeholder" v-for="i in size * size" :key="i"/>
 
-      <!-- cells -->
-      <div class="cell" v-for="cell in cells" :key="cell.id" :class="{
+        <!-- cells -->
+        <div class="cell" v-for="cell in cells" :key="cell.id" :class="{
         [`cell-${cell.value}`]: true,
         'cell-merge': cell.state === CellState.MERGE,
         'cell-new': cell.state === CellState.NEW
       }" :style="getCellStyle(cell)">{{ cell.value }}
-      </div>
-
-      <!-- dialog wrapper -->
-      <transition name="fade">
-        <div v-show="isEnd" class="dialog">
-          <p class="text">{{ 'message.game_over' }}</p>
         </div>
-      </transition>
-    </main>
+
+        <!-- dialog wrapper -->
+        <transition name="fade">
+          <div v-show="isEnd" class="dialog">
+            <p class="text">{{ 'message.game_over' }}</p>
+          </div>
+        </transition>
+      </main>
+    </div>
   </div>
+
 </template>
 
 <style lang="scss">
 @import './grid.scss';
+.game {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+}
 .grid-header {
   .controls {
     display: flex;
