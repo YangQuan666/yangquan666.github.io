@@ -2,7 +2,6 @@
 import {computed, onMounted, onUnmounted, ref, watch} from 'vue';
 import {CellState, CellWithPosition, Direction, useGrid} from './game';
 import {useLocalStorage, uuid} from './utils';
-import Heading from './Heading.vue';
 // init
 const size = ref(4);
 const {cells, score, isEnd, move, undo, init, start} = useGrid(size.value);
@@ -138,29 +137,28 @@ start();
 </script>
 
 <template>
-  <div class="heading">
-    <h1 class="title">2048</h1>
-    <div class="scores">
-      <div class="score score-now">
-        <p class="label">{{ 'SCORE'}}</p>
-        <p class="value">{{ score }}</p>
 
-        <!-- score increment -->
-        <span class="score-increment" v-show="scoreDiff.value > 0" :key="scoreDiff.id">
-          +{{ scoreDiff.value }}
-        </span>
-      </div>
-      <div class="score">
-        <p class="label">BEST</p>
-        <p class="value">{{ bestScore }}</p>
-      </div>
-    </div>
-  </div>
   <div class="game">
     <div class="grid">
       <header class="grid-header">
-        <Heading :score="score" :score-increment="scoreDiff" :best-score="bestScore"/>
+        <div class="controls">
+          <h3 class="title">2048</h3>
+<!--          <div class="scores">-->
+            <div class="score score-now">
+              <p class="label">{{ 'SCORE' }}</p>
+              <p class="value">{{ score }}</p>
 
+              <!-- score increment -->
+              <span class="score-increment" v-show="scoreDiff.value > 0" :key="scoreDiff.id">
+                +{{ scoreDiff.value }}
+              </span>
+            </div>
+            <div class="score">
+              <p class="label">BEST</p>
+              <p class="value">{{ bestScore }}</p>
+            </div>
+          </div>
+<!--        </div>-->
         <div class="controls">
           <q-select
               v-model="size"
