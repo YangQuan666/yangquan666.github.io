@@ -1,1 +1,0 @@
-import{_ as e,o as t,a}from"./app.b1d86492.js";const l=JSON.parse('{"title":"主页","description":"","frontmatter":{"title":"主页"},"headers":[],"relativePath":"index.md","lastUpdated":1675261485000}'),n={name:"index.md"};function r(o,s,c,d,i,p){return t(),a("div")}const m=e(n,[["render",r]]);export{l as __pageData,m as default};
