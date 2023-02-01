@@ -38,10 +38,10 @@ const props = defineProps<{
   .title {
     margin: 0;
     font-size: 4em;
-
-    @include smaller(500px) {
-      font-size: 3em;
-    }
+    //
+    //@include smaller(500px) {
+    //  font-size: 3em;
+    //}
   }
 
   .scores {
@@ -56,9 +56,9 @@ const props = defineProps<{
       border-radius: 4px;
       background: var(--score-bg-color);
 
-      @include smaller(720px) {
-        padding: 2px 4px;
-      }
+      //@include smaller(720px) {
+      //  padding: 2px 4px;
+      //}
 
       &:last-child {
         margin-inline-start: 8px;

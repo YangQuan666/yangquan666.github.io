@@ -152,10 +152,10 @@ start();
               </template>
             </select>
           </div>
-          <div class="btns">
-            <button class="btn" @click="handleNewGame">NEW</button>
-            <button class="btn" @click="undo">UNDO</button>
-          </div>
+          <q-btn-group>
+            <q-btn color="primary" icon="refresh" @click="handleNewGame"/>
+            <q-btn color="accent" icon="undo" @click="undo"/>
+          </q-btn-group>
         </div>
       </header>
 
@@ -174,7 +174,7 @@ start();
         <!-- dialog wrapper -->
         <transition name="fade">
           <div v-show="isEnd" class="dialog">
-            <p class="text">{{ 'message.game_over' }}</p>
+            <p class="text">GAME OVER</p>
           </div>
         </transition>
       </main>
@@ -214,28 +214,6 @@ start();
         background-color: var(--select-bg-color);
       }
     }
-    .btns {
-      .btn {
-        padding: 8px 16px;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 4px;
-        color: var(--btn-color);
-        background: var(--btn-bg-color);
-        border: none;
-        outline: none;
-        cursor: pointer;
-        @include smaller(480px) {
-          padding: 4px 12px;
-          font-size: 14px;
-        }
-        &:last-child {
-          margin-inline-start: 10px;
-        }
-      }
-    }
   }
 }
 .grid-main {
@@ -248,15 +226,15 @@ start();
   user-select: none;
   position: relative;
   // media query
-  @include smaller(960px) {
+  @media screen and (max-width: 960px) {
     width: 400px;
     height: 400px;
   }
-  @include smaller(720px) {
+  @media screen and (max-width: 720px) {
     width: 350px;
     height: 350px;
   }
-  @include smaller(480px) {
+  @media screen and (max-width: 480px) {
     width: 300px;
     height: 300px;
   }

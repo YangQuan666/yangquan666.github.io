@@ -108,7 +108,6 @@ export const useGrid = (size: number) => {
         }
       }
     }
-
     return res;
   })
 
@@ -121,6 +120,7 @@ export const useGrid = (size: number) => {
   };
 
   const move = (dir: Direction) => {
+    let moved = false
     history.push({
       score: score.value,
       data: gridData.value,
@@ -143,11 +143,13 @@ export const useGrid = (size: number) => {
               grid[row][col].value = 0;
               value = -1;
               valueIndex = -1;
+              moved = true
             } else if (grid[row][col].value !== 0) {
               valueIndex = ++notNullIndex;
               value = grid[row][col].value;
               if (valueIndex !== row) {
                 swapGridCell(grid, row, col, valueIndex, col);
+                moved = true
               }
             }
           }
@@ -167,11 +169,13 @@ export const useGrid = (size: number) => {
               grid[row][col].value = 0;
               value = -1;
               valueIndex = -1;
+              moved = true
             } else if (grid[row][col].value !== 0) {
               valueIndex = --notNullIndex;
               value = grid[row][col].value;
               if (valueIndex !== row) {
                 swapGridCell(grid, row, col, valueIndex, col);
+                moved = true
               }
             }
           }
@@ -191,11 +195,13 @@ export const useGrid = (size: number) => {
               grid[row][col].value = 0;
               value = -1;
               valueIndex = -1;
+              moved = true
             } else if (grid[row][col].value !== 0) {
               valueIndex = ++notNullIndex;
               value = grid[row][col].value;
               if (valueIndex !== col) {
                 swapGridCell(grid, row, col, row, valueIndex);
+                moved = true
               }
             }
           }
@@ -215,11 +221,13 @@ export const useGrid = (size: number) => {
               grid[row][col].value = 0;
               value = -1;
               valueIndex = -1;
+              moved = true
             } else if (grid[row][col].value !== 0) {
               valueIndex = --notNullIndex;
               value = grid[row][col].value;
               if (valueIndex !== col) {
                 swapGridCell(grid, row, col, row, valueIndex);
+                moved = true
               }
             }
           }
@@ -230,7 +238,7 @@ export const useGrid = (size: number) => {
     gridData.value = grid;
     score.value += scoreIncrement;
 
-    if (hasEmpty.value) {
+    if (hasEmpty.value && moved) {
       addRandomCell();
     }
   };
