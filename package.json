@@ -24,7 +24,9 @@
     "@quasar/extras": "^1.15.9",
     "github-markdown-css": "^5.1.0",
     "gsap": "^3.11.4",
-    "quasar": "^2.11.5"
+    "quasar": "^2.11.5",
+    "sass": "^1.57.1",
+    "scss": "^0.2.4"
   },
   "packageManager": "yarn@3.0.2"
 }

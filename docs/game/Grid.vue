@@ -48,11 +48,11 @@ const getCellStyle = (cell: CellWithPosition) => {
   `;
 };
 // watch size change
-const handleSizeChange = (event: Event) => {
+const handleSizeChange = () => {
+  console.log('d')
   bestScore.value = getItem(storageKey.value) ?? 0;
   init(size.value);
   start();
-  (event.target as HTMLSelectElement).blur();
 }
 // event
 const gridRef = ref<HTMLElement>();
@@ -138,23 +138,43 @@ start();
 </script>
 
 <template>
+  <div class="heading">
+    <h1 class="title">2048</h1>
+    <div class="scores">
+      <div class="score score-now">
+        <p class="label">{{ 'SCORE'}}</p>
+        <p class="value">{{ score }}</p>
+
+        <!-- score increment -->
+        <span class="score-increment" v-show="scoreDiff.value > 0" :key="scoreDiff.id">
+          +{{ scoreDiff.value }}
+        </span>
+      </div>
+      <div class="score">
+        <p class="label">BEST</p>
+        <p class="value">{{ bestScore }}</p>
+      </div>
+    </div>
+  </div>
   <div class="game">
     <div class="grid">
       <header class="grid-header">
         <Heading :score="score" :score-increment="scoreDiff" :best-score="bestScore"/>
 
         <div class="controls">
-          <div class="select-wrapper">
-            <label class="label" for="select">SIZE</label>
-            <select class="select" id="select" v-model.number="size" @change="handleSizeChange">
-              <template v-for="i in [3,4,5,6]" :key="i">
-                <option class="option" v-if="i > 1" :value="i">{{ i }}</option>
-              </template>
-            </select>
-          </div>
+          <q-select
+              v-model="size"
+              :options="[3,4,5,6]"
+              behavior="menu"
+              @update:model-value="handleSizeChange"
+          >
+            <template v-slot:prepend>
+              <q-icon name="lens_blur"/>
+            </template>
+          </q-select>
           <q-btn-group>
-            <q-btn color="primary" icon="refresh" @click="handleNewGame"/>
-            <q-btn color="accent" icon="undo" @click="undo"/>
+            <q-btn icon="refresh" @click="handleNewGame"/>
+            <q-btn icon="undo" @click="undo"/>
           </q-btn-group>
         </div>
       </header>
