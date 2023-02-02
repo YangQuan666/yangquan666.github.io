@@ -142,24 +142,21 @@ start();
     <div class="grid">
       <header class="grid-header">
         <div class="controls">
-          <h3 class="title">2048</h3>
-<!--          <div class="scores">-->
-            <div class="score score-now">
+          <h3>2048</h3>
+            <div>
               <p class="label">{{ 'SCORE' }}</p>
               <p class="value">{{ score }}</p>
-
               <!-- score increment -->
-              <span class="score-increment" v-show="scoreDiff.value > 0" :key="scoreDiff.id">
-                +{{ scoreDiff.value }}
-              </span>
+<!--              <span class="score-increment" v-show="scoreDiff.value > 0" :key="scoreDiff.id">-->
+<!--                +{{ scoreDiff.value }}-->
+<!--              </span>-->
             </div>
-            <div class="score">
+            <div>
               <p class="label">BEST</p>
               <p class="value">{{ bestScore }}</p>
             </div>
           </div>
-<!--        </div>-->
-        <div class="controls">
+        <div class="row">
           <q-select
               v-model="size"
               :options="[3,4,5,6]"
@@ -170,6 +167,7 @@ start();
               <q-icon name="lens_blur"/>
             </template>
           </q-select>
+          <q-space/>
           <q-btn-group>
             <q-btn icon="refresh" @click="handleNewGame"/>
             <q-btn icon="undo" @click="undo"/>
