@@ -18,13 +18,12 @@
     "@types/node": "^18.11.18",
     "front-matter": "^4.0.2",
     "sitemap": "^7.1.1",
-    "vitepress": "^1.0.0-alpha.43"
+    "vitepress": "^1.0.0-alpha.45"
   },
   "dependencies": {
     "@quasar/extras": "^1.15.9",
     "algoliasearch": "^4.14.3",
     "github-markdown-css": "^5.1.0",
-    "gsap": "^3.11.4",
     "quasar": "^2.11.5",
     "sass": "^1.57.1",
     "scss": "^0.2.4"
