@@ -3,16 +3,17 @@ import {biAlipay, biDiscord, biGithub, biMastodon} from '@quasar/extras/bootstra
 import {version} from '../../package.json'
 import Renderer from 'markdown-it/lib/renderer';
 import Token from 'markdown-it/lib/token';
-// @ts-ignore
 import MarkdownIt from 'markdown-it';
 import {createWriteStream} from "fs";
 import {resolve} from 'node:path'
 import {SitemapStream} from 'sitemap'
-import {SiteConfig} from 'vitepress/dist/node';
+import {SiteConfig, TransformContext} from 'vitepress/dist/node';
+import {buildIndex} from "./theme/composables/algolia";
 
 buildSummary()
 
 const links: any[] = []
+const indexs: any[] = []
 export default {
     title: '萨科的魔术盒',
     description: 'YangQuan的个人博客网站',
@@ -64,13 +65,25 @@ export default {
         }
     },
     cleanUrls: 'without-subfolders',
-    transformHtml: (_: any, htmlFileName: string, {pageData} : any) => {
-        if (!/[\\/]404\.html$/.test(htmlFileName) && pageData.frontmatter.display !== false)
-            links.push({
-                // you might need to change this if not using clean urls mode
-                url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, '$2'),
-                lastmod: pageData.lastUpdated
-            })
+    transformHtml: (_: any, htmlFileName: string, {pageData}: TransformContext) => {
+        if (/[\\/]404\.html$/.test(htmlFileName)
+            || pageData.frontmatter.display === false
+            || !pageData.relativePath.startsWith("post")) {
+            return
+        }
+        links.push({
+            // you might need to change this if not using clean urls mode
+            url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, '$2'),
+            lastmod: pageData.lastUpdated
+        })
+
+        indexs.push({
+            link: pageData.relativePath,
+            lastUpdated: pageData.lastUpdated,
+            title: pageData.title,
+            excerpt: pageData.frontmatter.excerpt,
+            tags: pageData.frontmatter.tags
+        })
     },
     async buildEnd(siteConfig: SiteConfig) {
         const sitemap = new SitemapStream({
@@ -81,6 +94,8 @@ export default {
         links.forEach((link) => sitemap.write(link))
         sitemap.end()
         await new Promise((r) => writeStream.on('finish', r))
+
+        buildIndex(indexs)
     },
     markdown: {
         config: (md: MarkdownIt) => {
