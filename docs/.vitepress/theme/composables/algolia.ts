@@ -1,6 +1,6 @@
 import algoliasearch from 'algoliasearch'
 import {name} from '../../../../package.json'
-import instantsearch from 'instantsearch.js';
+// import instantsearch from 'instantsearch.js';
 import { searchBox, hits } from 'instantsearch.js/es/widgets';
 
 // const client = algoliasearch('62QCDY1RP0', '5dd74cb6aebd52dc20601d741451039d')
@@ -30,19 +30,19 @@ export function buildIndex(json: any) {
     })
 }
 
-const search = instantsearch({
-    indexName: index.indexName,
-    searchClient,
-});
+// const search = instantsearch({
+//     indexName: index.indexName,
+//     searchClient,
+// });
 
-search.addWidgets([
-    searchBox({
-        container: "#searchbox"
-    }),
+// search.addWidgets([
+//     searchBox({
+//         container: "#searchbox"
+//     }),
+//
+//     hits({
+//         container: "#hits"
+//     })
+// ]);
 
-    hits({
-        container: "#hits"
-    })
-]);
-
-search.start();
+// search.start();
