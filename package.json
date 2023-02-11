@@ -24,6 +24,7 @@
     "@quasar/extras": "^1.15.9",
     "algoliasearch": "^4.14.3",
     "github-markdown-css": "^5.1.0",
+    "instantsearch.js": "^4.50.2",
     "quasar": "^2.11.5",
     "sass": "^1.57.1",
     "scss": "^0.2.4"
