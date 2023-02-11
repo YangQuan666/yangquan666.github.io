@@ -1,9 +1,13 @@
 import algoliasearch from 'algoliasearch'
 import {name} from '../../../../package.json'
+import instantsearch from 'instantsearch.js';
+import { searchBox, hits } from 'instantsearch.js/es/widgets';
 
-const client = algoliasearch('62QCDY1RP0', '5dd74cb6aebd52dc20601d741451039d')
+// const client = algoliasearch('62QCDY1RP0', '5dd74cb6aebd52dc20601d741451039d')
+const searchClient = algoliasearch('62QCDY1RP0', '5dd74cb6aebd52dc20601d741451039d');
 
-const index = client.initIndex(name)
+
+const index = searchClient.initIndex(name)
 
 index.setSettings({
     // Select the attributes you want to search in
@@ -26,12 +30,19 @@ export function buildIndex(json: any) {
     })
 }
 
-fetch('https://alg.li/doc-ecommerce.json')
-    .then(function (response) {
-        return response.json()
+const search = instantsearch({
+    indexName: index.indexName,
+    searchClient,
+});
+
+search.addWidgets([
+    searchBox({
+        container: "#searchbox"
+    }),
+
+    hits({
+        container: "#hits"
     })
-    .then(function (products) {
-        return index.saveObjects(products, {
-            autoGenerateObjectIDIfNotExist: true
-        })
-    })
+]);
+
+search.start();
