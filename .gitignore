@@ -9,3 +9,5 @@ docs/post/metadata.json
 .idea/
 /.yarn/
 /docs/post/summary.json
+/.pnp.cjs
+/.pnp.loader.mjs

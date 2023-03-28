@@ -18,7 +18,8 @@
     "@types/node": "^18.11.18",
     "front-matter": "^4.0.2",
     "sitemap": "^7.1.1",
-    "vitepress": "^1.0.0-alpha.45"
+    "vitepress": "^1.0.0-alpha.45",
+    "vue": "^3.2.47"
   },
   "dependencies": {
     "@quasar/extras": "^1.15.9",
@@ -29,5 +30,5 @@
     "sass": "^1.57.1",
     "scss": "^0.2.4"
   },
-  "packageManager": "yarn@3.0.2"
+  "packageManager": "yarn@3.5.0"
 }
