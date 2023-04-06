@@ -36,7 +36,6 @@ const headers = ref([])
 const {theme} = useData()
 onContentUpdated(() => {
     headers.value = getHeaders(theme.value.outline)
-    console.log(headers.value)
 })
 
 const miniState = ref(true)

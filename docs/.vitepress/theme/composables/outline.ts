@@ -10,7 +10,8 @@ export type MenuItem = Omit<Header, 'slug' | 'children'> & {
 }
 
 export function getHeaders(range: DefaultTheme.Config['outline']) {
-    const headers = [...document.querySelectorAll('.VPDoc h2,h3,h4,h5,h6')]
+    let headers: { level: number; link: string; title: string }[];
+    headers = [...document.querySelectorAll('.markdown-body h2,h3,h4,h5,h6')]
         .filter((el) => el.id && el.hasChildNodes())
         .map((el) => {
             const level = Number(el.tagName[1])
@@ -19,7 +20,7 @@ export function getHeaders(range: DefaultTheme.Config['outline']) {
                 link: '#' + el.id,
                 level
             }
-        })
+        });
 
     return resolveHeaders(headers, range)
 }
