@@ -28,6 +28,7 @@ export default {
     themeConfig: {
         author: 'Yang Quan',
         signature: '一个爱折腾的程序员 )=￣ω￣=)',
+        outline: [2, 6],
         nav: [
             {
                 title: '主页', icon: 'home', link: '/'

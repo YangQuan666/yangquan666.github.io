@@ -18,7 +18,7 @@
     "@types/node": "^18.11.18",
     "front-matter": "^4.0.2",
     "sitemap": "^7.1.1",
-    "vitepress": "^1.0.0-alpha.45",
+    "vitepress": "^1.0.0-alpha.64",
     "vue": "^3.2.47"
   },
   "dependencies": {
@@ -26,7 +26,7 @@
     "algoliasearch": "^4.14.3",
     "github-markdown-css": "^5.1.0",
     "instantsearch.js": "^4.50.2",
-    "quasar": "^2.11.5",
+    "quasar": "^2.11.10",
     "sass": "^1.57.1",
     "scss": "^0.2.4"
   },
