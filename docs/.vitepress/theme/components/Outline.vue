@@ -4,8 +4,6 @@
                 v-model="drawer"
                 :mini="!drawer || miniState"
                 @click.capture="normalMode"
-                @mouseenter="normalMode"
-                @mouseleave="miniMode"
                 show-if-above
                 mini-to-overlay
                 bordered
@@ -23,7 +21,7 @@
                 <q-list padding>
                     <q-item>
                         <q-item-section avatar>
-                            <q-icon name="toc"/>
+                            <q-btn icon="toc" flat round @click="miniMode"/>
                         </q-item-section>
 
                         <q-item-section class="text-h5">
