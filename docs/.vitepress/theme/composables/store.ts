@@ -1,15 +1,9 @@
 import {ref} from 'vue'
-import {Router} from 'vitepress/dist/client';
+import {Router} from 'vitepress/dist/client'
 // 全局状态，创建在模块作用域下
 export const isPost = ref<boolean>(false)
 // 加载进度条
 export const progress = ref(false)
-// 目录抽屉
-export const outlineDraw = ref(false)
-
-export function toggle() {
-    outlineDraw.value = !outlineDraw.value
-}
 
 export function initRouter(router: Router) {
     router.onBeforeRouteChange = () => {
@@ -17,6 +11,37 @@ export function initRouter(router: Router) {
     }
     router.onAfterRouteChanged = () => {
         progress.value = false
+    }
+}
+
+// 是否展示大纲
+export const outlineDrawer = ref(null)
+
+// 是否展示为mini状态
+export const miniState = ref(true)
+
+function normalMode(e: Event) {
+    // if in "mini" state and user
+    // click on drawer, we switch it to "normal" mode
+    if (miniState.value) {
+        miniState.value = false
+
+        // notice we have registered an event with capture flag;
+        // we need to stop further propagation as this click is
+        // intended for switching drawer to "normal" mode only
+        e.stopPropagation()
+    }
+}
+
+function miniMode() {
+    miniState.value = true
+}
+
+export function toggleMiniDrawer(e: Event) {
+    if (outlineDrawer.value) {
+        miniState.value ? normalMode(e) : miniMode()
+    } else {
+        outlineDrawer.value = !outlineDrawer.value
     }
 }
 

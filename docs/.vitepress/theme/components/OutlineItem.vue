@@ -9,7 +9,6 @@
           :id="'toc--' + path + head.link"
           :key="path + head.link"
           :active="isActivate(path, head.link)"
-          active-class="q-bar"
           @click="onItemClick(path, head.link)"
           style="border-radius: 8px 0 0 8px"
       >
@@ -26,7 +25,7 @@
 
 <script lang="ts" setup>
 import {isActivate, uniqueItemKey} from '../composables/outline'
-import {outlineDraw} from '../composables/store'
+import {outlineDrawer} from '../composables/store'
 import {useQuasar} from 'quasar'
 
 defineProps({headers: Array, path: {type: String, default: ''}});
@@ -35,7 +34,7 @@ const $q = useQuasar()
 const onItemClick = (path: string, link: string) => {
   uniqueItemKey.value = path + link
   if ($q.screen.lt.md) {
-    outlineDraw.value = false
+      outlineDrawer.value = false
   }
 }
 
