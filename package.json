@@ -22,13 +22,13 @@
     "vue": "^3.2.47"
   },
   "dependencies": {
-    "@quasar/extras": "^1.15.9",
-    "algoliasearch": "^4.14.3",
-    "github-markdown-css": "^5.1.0",
-    "instantsearch.js": "^4.50.2",
+    "@quasar/extras": "^1.16.2",
+    "algoliasearch": "^4.17.0",
+    "github-markdown-css": "^5.2.0",
     "quasar": "^2.11.10",
     "sass": "^1.57.1",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "vue-instantsearch": "^4.8.9"
   },
   "packageManager": "yarn@3.5.0"
 }

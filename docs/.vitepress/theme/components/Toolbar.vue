@@ -12,22 +12,7 @@
             <span class="q-ml-sm" v-if="$q.screen.gt.xs || searchClose">{{ site.title }}</span>
         </q-toolbar-title>
         <q-space/>
-
-        <q-input
-                dark
-                standout bottom-slots
-                v-model="keyword"
-                placeholder="Search"
-                dense hide-bottom-space
-                class="search-field"
-                v-bind:class='{ "search-closed": searchClose}'
-                @blur="searchClose = true"
-                @focus="searchClose = false"
-        >
-            <template #prepend>
-                <q-icon name="search" class="cursor-pointer"></q-icon>
-            </template>
-        </q-input>
+        <Search/>
         <q-space class="gt-sm"/>
         <q-btn v-if="isPost" @click="toggleMiniDrawer" icon="toc" flat round/>
     </q-toolbar>
@@ -38,6 +23,7 @@ import {ref} from 'vue'
 import {useQuasar} from 'quasar'
 import {useData} from 'vitepress'
 import {isPost, toggleMiniDrawer} from '../composables/store'
+import Search from './Search.vue'
 
 const $q = useQuasar()
 const {site} = useData()
