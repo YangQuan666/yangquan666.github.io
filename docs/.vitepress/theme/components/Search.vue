@@ -40,7 +40,7 @@
 <script setup>
 import {ref} from 'vue';
 import {indexName, searchClient} from '../composables/algolia'
-import {AisAutocomplete, AisInstantSearch} from 'vue-instantsearch/vue3/es'
+import {AisAutocomplete, AisInstantSearch} from 'vue-instantsearch/vue3/es/index.js'
 
 const searchClose = ref(true)
 

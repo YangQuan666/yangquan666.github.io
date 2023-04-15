@@ -4,7 +4,7 @@ import Error404 from './components/Error404.vue'
 import 'github-markdown-css'
 import './style/custom.css'
 
-import InstantSearch from 'vue-instantsearch/vue3/es'
+import InstantSearch from 'vue-instantsearch/vue3/es/index.js'
 import {initQuasar} from './composables/quasar'
 import {initRouter} from './composables/store'
 import {EnhanceAppContext} from 'vitepress'
