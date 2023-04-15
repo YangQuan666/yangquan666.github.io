@@ -154,10 +154,10 @@ docker run -it --name debian debian /bin/bash
 1. 在 Basic Options 中开启Aria服务，并设置下载目录，这里我是下载到samba路径下方便分享
    ![aria_enable.png](/post/openwrt/aria_enable.png)
 2. 在 RPC Options 生成RPC令牌
-   ![aria_rpc.png](/post/openwrt/aria_rpc.png)
+   ![aria2_rpc.png](/post/openwrt/aria2_rpc.png)
 3. 返回 Basic Options ，点击上方的“WEBUI-ARIA2”按钮
    1. 设置 > 连接设置中填写aria2服务的ip、端口、rpc密钥
-      ![aria_webui.png](/post/openwrt/aria_webui.png)
+      ![aria2_webui.png](/post/openwrt/aria2_webui.png)
    2. 保存连接配置
    3. 现在可以试试下载一个url文件或者BT种子
 
