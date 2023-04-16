@@ -1,8 +1,7 @@
 ---
 title: 面向小白的软路由入门指南
 date: 2022-04-30
-excerpt: "
-OpenWrt是一款开源的路由器操作系统，能够把你们的路由器变成一台强大的网络工具。它的灵活性和可扩展性让用户能够定制路由器的功能，让路由器发挥最大的潜力。"
+excerpt: "OpenWrt是一款开源的路由器操作系统，能够把你们的路由器变成一台强大的网络工具。它的灵活性和可扩展性让用户能够定制路由器的功能，让路由器发挥最大的潜力。"
 tags:
 
   - OpenWrt
@@ -12,7 +11,6 @@ tags:
   - 游戏加速器
   - samba
   - aria2
-
 ---
 
 # 面向小白的软路由入门指南
@@ -44,7 +42,63 @@ tags:
 | [友善官方镜像](https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R4S#Download_Image_Files) | 优点：较为稳定，自带docker<br/>缺点：系统太过臃肿，自定义性差       |
 | 第三方固件，如 [supes.top](https://supes.top/)                                                | 优点：由kiddin9大佬贴心定制，适合大多数用户<br/>缺点：比起官方的稳定性差 |
 
+#### 扩容分区大小
+
+> OpenWrt默认的系统分区只有100M左右，如果你的SD卡空间较大，建议进行扩容
+> ⚠️以下命令只能在Linux环境下运行
+
+1. 执行下面的命令，对镜像包进行分区扩容
+    ```shell
+    # 解压下载好的镜像包
+    gzip -kdq openwrt-22.03.4-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img.gz
+    
+    # 重命名文件
+    mv openwrt-22.03.4-rockchip-armv8-friendlyarm_nanopi-r4s-squashfs-sysupgrade.img op.img
+    
+    #扩容8000M，这里因为我的SD卡总容量为32G，分出8G绰绰有余
+    dd if=/dev/zero bs=1M count=500 >>op.img
+    
+    #进入分区工具
+    parted op.img
+    #查看分区情况
+    print
+    #扩容分区2
+    resizepart 2 100%
+    #再次查看
+    print
+    
+    #退出分区工具
+    quit
+    
+    ```
+2. 分区之后的数据类似下图
+   ![img_partition.png](/post/openwrt/img_partition.png)
+3. 使用u盘工具刷入镜像包，如: [Rufus](https://rufus.ie/zh/), [Etcher](https://www.balena.io/etcher)
+
+#### 磁盘分区
+
+1. 在[kiddin9大佬的仓库](https://op.supes.top/packages/aarch64_generic/)里下载`luci-app-diskman`
+2. **System** > **Software** > **Upload Package**，上传`luci-app-diskman.ipk`安装包
+   ![upload_ipk.png](/post/openwrt/upload_ipk.png)
+3. 进入 **System** > **Disk Man** > **Edit**,（如页面报错，则需要安装`luci-compat`）
+   ![diskman_edit.png](/post/openwrt/diskman_edit.png)
+4. 填写分区起始、结束位置（一般默认就行），点击**New**，完成分区新建
+   ![diskman_new.png](/post/openwrt/diskman_new.png)
+5. 格式化分区为**ext4**格式
+6. **System** > **Software**，搜索并下载`block-mount`
+7. 进入 **System** > **Mount Points**，找到新建的分区，然后**Edit** > **Enable** > **Save&Apply**
+   ![partition_enable.png](/post/openwrt/partition_enable.png)
+
 ## 软件安装
+
+### Argon主题
+
+> OpenWrt下的高颜值主题
+
+1. 依然是在[kiddin9大佬的仓库](https://op.supes.top/packages/aarch64_generic/)里搜索下载`luci-theme-argon`
+2. 然后使用同样的方式上传安装包安装即可
+3. **System** > **System** > **Language and Style**，选择Argon主题并保存生效
+   ![argon_enable.png](/post/openwrt/argon_enable.png)
 
 ### Docker
 
@@ -151,15 +205,16 @@ docker run -it --name debian debian /bin/bash
 2. 安装后在 System > Services > Aria2可找到
 
 #### 配置
+
 1. 在 Basic Options 中开启Aria服务，并设置下载目录，这里我是下载到samba路径下方便分享
    ![aria_enable.png](/post/openwrt/aria_enable.png)
 2. 在 RPC Options 生成RPC令牌
    ![aria2_rpc.png](/post/openwrt/aria2_rpc.png)
 3. 返回 Basic Options ，点击上方的“WEBUI-ARIA2”按钮
-   1. 设置 > 连接设置中填写aria2服务的ip、端口、rpc密钥
-      ![aria2_webui.png](/post/openwrt/aria2_webui.png)
-   2. 保存连接配置
-   3. 现在可以试试下载一个url文件或者BT种子
+    1. 设置 > 连接设置中填写aria2服务的ip、端口、rpc密钥
+       ![aria2_webui.png](/post/openwrt/aria2_webui.png)
+    2. 保存连接配置
+    3. 现在可以试试下载一个url文件或者BT种子
 
 ### [OpenClash](https://github.com/vernesong/OpenClash)
 
