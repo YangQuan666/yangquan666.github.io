@@ -45,6 +45,7 @@ tags:
 #### 扩容分区大小
 
 > OpenWrt默认的系统分区只有100M左右，如果你的SD卡空间较大，建议进行扩容
+>
 > ⚠️以下命令只能在Linux环境下运行
 
 1. 执行下面的命令，对镜像包进行分区扩容
@@ -82,7 +83,7 @@ tags:
    ![upload_ipk.png](/post/openwrt/upload_ipk.png)
 3. 进入 **System** > **Disk Man** > **Edit**,（如页面报错，则需要安装`luci-compat`）
    ![diskman_edit.png](/post/openwrt/diskman_edit.png)
-4. 填写分区起始、结束位置（一般默认就行），点击**New**，完成分区新建
+4. 填写分区起始、结束位置（一般默认就行），点击「New」，完成分区新建
    ![diskman_new.png](/post/openwrt/diskman_new.png)
 5. 格式化分区为**ext4**格式
 6. **System** > **Software**，搜索并下载`block-mount`
@@ -136,6 +137,20 @@ docker pull debian
 docker run -it --name debian debian /bin/bash
 ```
 
+##### MariaDB
+
+```shell
+docker pull mariadb
+docker run --name mariadb -v /my/own/datadir:/var/lib/mysql -e MARIADB_ROOT_PASSWORD=my-secret-pw -d mariadb:latest
+```
+
+##### Redis
+
+```shell
+docker pull redis
+docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-server /usr/local/etc/redis/redis.conf
+```
+
 ### Samba
 
 > Samba 是一组不同功能程序组成的应用集合，它能让 Linux 服务器实现文件服务器、身份授权和认证、名称解析和打印服务等功能。
@@ -144,7 +159,7 @@ docker run -it --name debian debian /bin/bash
 
 #### 安装
 
-在 `System` > `Software` 中安装samba的服务端 `samba4-server` ,以及可视化配置页面 `luci-app-samba4`
+在 **System** > **Software** 中安装samba的服务端 `samba4-server` ,以及可视化配置页面 `luci-app-samba4`
 ![openwrt_install_samba.png](/post/openwrt/openwrt_install_samba.png)
 
 #### 添加用户
@@ -168,7 +183,7 @@ docker run -it --name debian debian /bin/bash
 
 #### 软件配置
 
-1. 进入Samba配置页面： `Services` > `Network Shares`
+1. 进入Samba配置页面： **Services** > **Network Shares**
 2. 共享目录，注意 `Path` 一定要选之前创建的，例如我的就是 `/opt/samba`，其他的可以参照我的截图来
    ![shared_directories](/post/openwrt/shared_directories.png)
 3. 兼容苹果设备访问(建议打开)
@@ -183,7 +198,7 @@ docker run -it --name debian debian /bin/bash
     3. 按照提示输入用户名和密码即可成功连接
        ![windows_samba.png](/post/openwrt/windows_samba.png)
 2. Mac
-    1. 打开finder
+    1. 打开Finder
     2. 按下快捷键 `⌘` + `K` 打开连接
     3. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
     4. 按照提示输入用户名和密码即可成功连接
@@ -201,12 +216,12 @@ docker run -it --name debian debian /bin/bash
 
 #### 安装
 
-1. 在 `System` > `Software` 中安装 `aria2`, `luci-app-aria2`, `webui-aria2`
+1. 在 **System** > **Software** 中安装 `aria2`, `luci-app-aria2`, `webui-aria2`
 2. 安装后在 System > Services > Aria2可找到
 
 #### 配置
 
-1. 在 Basic Options 中开启Aria服务，并设置下载目录，这里我是下载到samba路径下方便分享
+1. 在 **Basic Options** 中开启Aria服务，并设置下载目录，这里我是下载到samba路径下方便分享
    ![aria_enable.png](/post/openwrt/aria_enable.png)
 2. 在 RPC Options 生成RPC令牌
    ![aria2_rpc.png](/post/openwrt/aria2_rpc.png)
@@ -215,6 +230,47 @@ docker run -it --name debian debian /bin/bash
        ![aria2_webui.png](/post/openwrt/aria2_webui.png)
     2. 保存连接配置
     3. 现在可以试试下载一个url文件或者BT种子
+
+### 网络唤醒
+
+> 教你如何使用Siri唤醒你的PC电脑
+
+#### 安装
+
+在 **System** > **Software** 中安装 `luci-app-wol` (会自动安装`etherwake`等依赖)
+
+#### PC设置
+
+1. 在 Windows 10 中，运行 > ncpa.cpl 打开「网络连接」设置，然后找到当前在使用的有线网卡，右键点击「属性」：
+   ![pc_etherwake.png](/post/openwrt/pc_etherwake.png)
+2. 然后选择「配置」：
+   ![pc_etherwake2.png](/post/openwrt/pc_etherwake2.png)
+3. 在随后弹出的面板中找到「电源管理」，勾选「允许此设备唤醒计算机」以及「只允许幻数据包唤醒计算机」
+   ![pc_etherwake3.png](/post/openwrt/pc_etherwake3.png)
+
+#### 主板设置
+
+除此之外，我们可能还需要启用适当的 BIOS 设置才能使用 WoL 功能，具体方法视厂商而定，进入 BIOS 后注意选项附加的说明即可，可以参考的关键词包括：
+
+- Network Stack
+- Automatic Power On
+- Wake on LAN/WLAN
+- Power Management
+- Power On by Onboard LAN
+- Power On by PCI-E Devices
+
+#### 测试唤醒
+
+1. **Service** > **Wake On LAN**
+2. 选择网口和待唤醒的主机IP，点击「WAKE UP HOST」
+
+#### iOS
+
+1. **捷径** > **新建快捷指令** > **添加操作**，选择「通过SSH运行脚本」
+2. 填写脚本代码: `etherwake -D ${需要唤醒的MAC地址}`
+3. 填写ssh连接信息
+   ![wakeup_shortcut.png](/post/openwrt/wakeup_shortcut.png)
+4. 之后需要唤醒电脑时：「嘿Siri，唤醒电脑」
 
 ### [OpenClash](https://github.com/vernesong/OpenClash)
 
@@ -236,16 +292,16 @@ docker run -it --name debian debian /bin/bash
 3. 在[OpenClash Release页面](https://github.com/vernesong/OpenClash/releases)找到最新版本的ipk安装包，复制连接地址
    下载安装包: `wget https://github.com/vernesong/OpenClash/releases/download/v0.45.110-beta/luci-app-openclash_0.45.110-beta_all.ipk -O luci-app-openclash.ipk`
 4. 安装OpenClash: `opkg install ./luci-app-openclash.ipk`
-5. 在Web页面 > Services > OpenClash中即可找到
+5. 在 **Services** > **OpenClash** 中即可找到
 
 #### 配置
 
 1. 下载clash内核
-    1. OpenClash > Plugin Setting > Version Update
+    1. **OpenClash** > **Plugin Setting** > **Version Update**
     2. 找到如图位置，点击即可下载最新版clash内核
        ![openclash_download.png](/post/openwrt/openclash_download.png)
 2. 添加clash订阅
-    1. OpenClash > Config Subscribe > ADD
+    1. **OpenClash** > **Config Subscribe** > **ADD**
        ![openclash_subscribe_add.png](/post/openwrt/openclash_subscribe_add.png)
     2. 在`Subscribe Address`中填写自己的clash订阅地址并点击`COMMIT SETTING`保存
 3. 点击OpenClash首页左下角“ENABLE OPENCLASH”即可启动
@@ -298,6 +354,12 @@ docker run -it --name debian debian /bin/bash
 
 1. 浏览器访问`192.168.1.1:5212`，使用admin账号登录
    ![cloudreve_login.png](/post/openwrt/cloudreve_login.png)
-2. 登录后点右上角头像 > 管理面板 > 离线下载节点，添加新的主节点
+2. 登录后点右上角**头像** > **管理面板** > **离线下载节点**，修改主节点
 3. 在离线下载部分填写Aria2对应的信息，保存后即可使用离线下载功能
    ![cloudreve_login.png](/post/openwrt/cloudreve_aria2.png)
+
+## 参考文章
+
+- [彧繎博客](https://opclash.com/luyou/16.html)
+- [OpenClash-使用手册](https://github.com/vernesong/OpenClash/wiki)
+- [嘿 Siri，唤醒电脑](https://sspai.com/post/67037)
