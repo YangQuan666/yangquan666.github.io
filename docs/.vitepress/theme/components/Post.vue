@@ -34,12 +34,12 @@
     <Outline/>
 </template>
 <script lang="ts" setup>
-import {onMounted, onUnmounted, onUpdated, ref} from 'vue';
-import {useData} from 'vitepress';
-import {throttleOnScroll, uniqueItemKey} from '../composables/outline';
-import {isPost, readingTime} from '../composables/store';
-import Outline from './Outline.vue';
-import {date} from 'quasar';
+import {onMounted, onUnmounted, onUpdated, ref} from 'vue'
+import {useData} from 'vitepress'
+import {throttleOnScroll, uniqueItemKey} from '../composables/outline'
+import {isPost, readingTime} from '../composables/store'
+import Outline from './Outline.vue'
+import {date} from 'quasar'
 
 const content = ref()
 const {page, site} = useData()

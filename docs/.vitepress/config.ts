@@ -79,7 +79,7 @@ export default {
         })
 
         indexs.push({
-            link: pageData.relativePath,
+            link: pageData.relativePath.replace(/((^|\/)index)?\.md$/, '$2'),
             lastUpdated: pageData.lastUpdated,
             title: pageData.title,
             excerpt: pageData.frontmatter.excerpt,
