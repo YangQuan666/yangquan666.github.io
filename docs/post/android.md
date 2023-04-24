@@ -3,10 +3,8 @@ title: 关于Android刷机相关的，看这篇文章就够了
 date: 2022-05-01
 excerpt: "关于Android刷机相关的，看这篇文章就够了"
 tags:
-
-- Android
-- 技术
-
+  - Android
+  - 技术
 ---
 
 # 关于Android刷机相关的，看这篇文章就够了
@@ -78,8 +76,8 @@ tags:
 
 1. 下载 [LineageOS ROM](https://download.lineageos.org/enchilada)
 2. 将下载好的`.zip`文件放入手机根目录：
-   1. 在手机端进入：`TWRP - Advanced - ADB Sideload`
-   2. 在电脑端执行：`adb sideload {lineageos刷机包}.zip`
+    1. 在手机端进入：`TWRP - Advanced - ADB Sideload`
+    2. 在电脑端执行：`adb sideload {lineageos刷机包}.zip`
 3. 安装完之后，如果你不需要安装后续的附加组件，则可以选择重启进入系统
 
 至此刷机的必要操作就完成了，你可以尽情的享受LineageOS系统的流畅丝滑体验😎
@@ -94,7 +92,8 @@ tags:
 >
 > 如果你想使用谷歌商店，或者你想使用谷歌的应用入YouTube等，则必须安装谷歌套件GAPPS，缺少谷歌套件会导致一些国外应用、游戏无法使用
 
-你可以选择下载[LineageOS提供的GAPPS](https://wiki.lineageos.org/gapps)，也可以选择使用[Open GApps提供的GAPPS](https://opengapps.org)
+你可以选择下载[LineageOS提供的GAPPS](https://wiki.lineageos.org/gapps)
+，也可以选择使用[Open GApps提供的GAPPS](https://opengapps.org)
 
 1. 安装完ROM之后不要重启系统
 2. 继续使用线刷的方式刷入GAPPS：`adb sideload {GAPPS安装包}.zip`
