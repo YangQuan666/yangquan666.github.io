@@ -6,6 +6,7 @@ tags:
   - VPN
   - gfw
   - clash
+display: false
 ---
 
 # 如何科学的科学上网
