@@ -12,10 +12,11 @@
                             @input-value="(value) => refine(value)"
                             :options="getOptions(currentRefinement, indices)"
                             :option-label="opt => opt.title"
-                            @blur="searchClose = true"
-                            @focus="searchClose = false"
+                            @blur="handleBlur"
+                            @focus="handleFocus"
                             label="Search"
                             behavior="menu"
+                            hide-selected
                             standout
                             use-input
                             hide-dropdown-icon
@@ -68,4 +69,12 @@ const getOptions = computed(() => (currentRefinement, indices) => {
 
 })
 
+function handleFocus(){
+    searchClose.value = false
+}
+
+function handleBlur() {
+    model.value = ''
+    searchClose.value = true
+}
 </script>
