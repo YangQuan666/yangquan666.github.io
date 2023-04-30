@@ -17,6 +17,8 @@ tags:
 ### 响应式
 ### 为Dark模式优化
 ### 支持全局搜索
+### SEO优化
+google console地址
 
 ## 用到了哪些技术
 > 站在巨人的肩膀，可以看得更远 --沃兹基·硕得
@@ -27,3 +29,4 @@ git分支、自动部署
 ### Algolia
 ### Markdown CSS
 ### Netlify
+### Sitemap

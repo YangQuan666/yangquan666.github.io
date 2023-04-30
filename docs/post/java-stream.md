@@ -11,7 +11,7 @@ tags:
 
 # Java 函数式编程入门
 
-> 本文是自己当时在海康工作时做的一次分享，现整理并发表到个人博客中
+> 本文是自己当时刚工作时做的一次分享，现整理并发表到个人博客中
 
 ![lambda.jpg](/post/java-stream/lambda.jpg)
 
@@ -156,6 +156,8 @@ void functionalTest() {
 比如如下的函数表示入参有三种不同类型，同时也有返回值：
 
 ```java
+$ TriFunction.java
+
 /**
  * 接收三个参数并带有返回值
  */
@@ -168,6 +170,8 @@ interface TriFunction<T, U, V, R> {
 调用自定义的lambda函数
 
 ```java
+$ CustomFunctionalTest.java
+
 void test(){
     TriFunction<Integer, Boolean, Double, String> triFunction=(i,b,d)->String.format("i=%d, b=%b, d=%.2f", i, b, d);
     
@@ -188,7 +192,7 @@ void test(){
 
 1. 假设我们有如下的函数接口
    ```java
-   $ MethodReferenceTest.java
+   $ Callable.java
    
    @FunctionalInterface
    interface Callable { 
@@ -197,7 +201,7 @@ void test(){
    ```
 2. 有如下的User类
    ```java
-   $ MethodReferenceTest.java
+   $ User.java
    
    class User {
    
@@ -228,6 +232,8 @@ void test(){
 #### 静态方法引用
 
 ```java
+$ MethodReferenceTest.java
+
 void staticMethodReferenceTest() {
     // 静态方法引用
     Callable callable = User::play;
@@ -241,6 +247,8 @@ void staticMethodReferenceTest() {
 ##### 错误的方式
 
 ```java
+$ MethodReferenceTest.java
+
 void staticMethodReferenceErrorTest() {
 
     // 方法签名不一致，编译不通过
@@ -252,6 +260,8 @@ void staticMethodReferenceErrorTest() {
 #### 实例方法引用
 
 ```java
+$ MethodReferenceTest.java
+
 void instanceMethodReferenceTest() {
     // 实例方法引用
     User user = new User();
@@ -266,6 +276,8 @@ void instanceMethodReferenceTest() {
 
 - 无参构造方法引用
   ```java
+  $ MethodReferenceTest.java
+  
   void noArgConstructMethodReferenceTest(){
     Supplier<User> supplier=User::new;
   User user = supplier.get();
@@ -274,18 +286,19 @@ void instanceMethodReferenceTest() {
 
 - 有参构造方法引用
   ```java
+  $ MethodReferenceTest.java
+  
   void allArgConstructMethodReferenceTest() {
       Function<String, User> function = User::new;
       User bob = function.apply("bob");
   }
   ```
 
-
 ## 函数组合
+
 > 函数组合（Function Composition）意为“多个函数组合成新函数”。它通常是函数式编程的基本组成部分
 
 > 注意: 函数组合的返回值仍然是一个函数！！！
-
 
 ### 常见的函数组合方法
 
@@ -296,7 +309,6 @@ void instanceMethodReferenceTest() {
 | and(arg)     | 自身和传入函数「逻辑与」  | Predicate                      |
 | or(arg)      | 自身和传入函数「逻辑或」  | Predicate                      |
 | negate       | 自身「逻辑非」       | Predicate                      |
-
 
 ### 用法演示
 
@@ -320,7 +332,7 @@ public class FunctionalComposeTest {
         Function<String, String> function = str -> str + " apply";
 
         // 传入compose函数并执行原函数
-        String res = function.compose(s -> s + " compose").apply("hello");
+        String res = function.compose(s -> "compose " + s).apply("hello");
     }
 
     @Test
@@ -329,7 +341,7 @@ public class FunctionalComposeTest {
         Predicate<Integer> predicate = i -> i > 0;
 
         // 传入and函数并执行原函数
-        boolean res = predicate.and(i -> i % 2 == 0).test(3);
+        boolean res = predicate.and(i -> i % 2 == 1).test(3);
     }
 
     @Test
@@ -347,9 +359,115 @@ public class FunctionalComposeTest {
         Predicate<Integer> predicate = i -> i > 0;
 
         // 调用negate方法并执行原函数
-        boolean res = predicate.negate().test(4);
+        boolean res = predicate.negate().test(-4);
     }
 }
 ```
 
 ## 流式编程
+
+![stream.png](/post/java-stream/stream.png)
+
+### 特点
+
+- **无存储**：stream不是一种数据结构，它只是某种数据源的一个视图，数据源可以是数组、Java容器或者I/O通道
+- **为函数而成**：对stream的任何修改都不会影响原本的数据源，比如对stream的过滤操作并不会删除被过滤的元素，而是会产生一个不包含被过滤元素的新stream
+- **惰性执行**：stream的操作并不会立即执行，只有用户执行结束操作才会真正执行
+- **可消费性**：stream只能被消费一次，一旦遍历过就会失效，就像容器的迭代器那样，想要再次遍历必须重新生成
+
+### Java集合类
+
+> 图中实心的接口表示加入了新的stream方法
+
+![collection.png](..%2Fpublic%2Fpost%2Fjava-stream%2Fcollection.png)
+
+#### 代码阅读
+
+> 阅读如下的两段代码
+
+代码1:
+```java
+$ StreamTest.java
+
+void randomNumber() {
+    SortedSet<Integer> sortedSet = new TreeSet<>();
+    Random rand = new Random(47);
+    while (sortedSet.size() < 7) {
+        int r = rand.nextInt(20);
+        if (r < 5) {
+            continue;
+        }
+        sortedSet.add(r);
+    }
+    System.out.println(sortedSet);
+}
+```
+
+代码2:
+```java
+$ StreamTest.java
+
+void randomNumberStream() {
+    int[] array = new Random(47)
+            .ints(5, 20)
+            .distinct()
+            .limit(7)
+            .sorted()
+            .toArray();
+
+    System.out.println(Arrays.toString(array));
+}
+```
+
+其实两段代码的功能都是一样的，就是创建一个长度为7的随机有序并且不重复的集合，但是你会发现「代码2」明显可阅读行更强，这就是流式编程的优点之一：易读性好
+
+### 创建流
+
+#### 使用Stream.of
+
+> 你可以通过 Stream.of() 很容易地将一组元素转化成为流
+
+```java
+$ CreateStreamTest.java
+
+void streamOfTest() {
+
+    // int
+    IntStream intStream = IntStream.of(1, 2, 3, 4, 5);
+    intStream.forEach(System.out::print);
+
+    // double
+    DoubleStream doubleStream = DoubleStream.of(3.14159, 2.718, 1.618);
+    doubleStream.forEach(System.out::println);
+
+    // String
+    Stream<String> stringStream = Stream.of("hello", "world");
+    stringStream.forEach(System.out::println);
+
+    // 对象
+    Stream<User> userStream = Stream.of(new User("yang"), new User("quan"));
+    userStream.forEach(System.out::println);
+
+}
+```
+
+### 中间操作
+
+### 结束操作
+
+#### forEach
+
+#### reduce
+
+#### collect
+
+### 思考
+
+#### 流的性能如何
+
+#### 如何调试
+
+## 参考资料
+
+- 《On Java 8》中文版
+- 《Effective Java 中文版》（第3版）
