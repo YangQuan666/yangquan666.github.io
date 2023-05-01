@@ -150,7 +150,7 @@ void functionalTest() {
 
 ### 自定义函数
 
-- java规定如果一个interface类中只包含一个方法，则这个类可以作为函数类型去使用
+- java规定如果一个`interface`接口类中只包含一个方法，则这个类可以作为函数类型去使用
 - 手动添加`@FunctionalInterface`可以帮助编译器静态检查「可选」
 
 比如如下的函数表示入参有三种不同类型，同时也有返回值：
@@ -167,13 +167,13 @@ interface TriFunction<T, U, V, R> {
 }
 ```
 
-调用自定义的lambda函数
+使用自定义的函数类型来创建lambda函数
 
 ```java
 $ CustomFunctionalTest.java
 
 void test(){
-    TriFunction<Integer, Boolean, Double, String> triFunction=(i,b,d)->String.format("i=%d, b=%b, d=%.2f", i, b, d);
+    TriFunction<Integer, Boolean, Double, String> triFunction=(i,b,d) -> String.format("i=%d, b=%b, d=%.2f", i, b, d);
     
     String str=triFunction.apply(1,true,3.14);
     System.out.println(str);
@@ -423,9 +423,9 @@ void randomNumberStream() {
 
 ### 创建流
 
-#### 使用Stream.of
+#### Stream.of
 
-> 你可以通过 Stream.of() 很容易地将一组元素转化成为流
+> 你可以通过`Stream.of()`很容易地将一组元素转化成为流
 
 ```java
 $ CreateStreamTest.java
@@ -434,20 +434,74 @@ void streamOfTest() {
 
     // int
     IntStream intStream = IntStream.of(1, 2, 3, 4, 5);
-    intStream.forEach(System.out::print);
 
     // double
-    DoubleStream doubleStream = DoubleStream.of(3.14159, 2.718, 1.618);
-    doubleStream.forEach(System.out::println);
+    DoubleStream doubleStream=DoubleStream.of(3.14159,2.718,1.618);
 
     // String
-    Stream<String> stringStream = Stream.of("hello", "world");
-    stringStream.forEach(System.out::println);
+    Stream<String> stringStream=Stream.of("hello","world");
 
     // 对象
-    Stream<User> userStream = Stream.of(new User("yang"), new User("quan"));
-    userStream.forEach(System.out::println);
+    Stream<User> userStream=Stream.of(new User("yang"),new User("quan"));
 
+}
+```
+
+#### Stream.generate
+
+> 传入一个`Supplier`函数来告诉它怎么去生成stream中的元素
+
+```java
+$ CreateStreamTest.java
+
+void streamGenerateTest(){
+
+    Supplier<String> supplier= () -> LocalDateTime.now().toString();
+
+    // 将supplier传给generate方法
+    Stream<String> stream = Stream.generate(supplier);
+    stream.limit(5).forEach(System.out::println);
+}
+```
+
+#### 使用Stream.iterate
+
+> iterate方法提供两种重载形式，起作用类似while或者for循环
+
+```java
+$ CreateStreamTest.java
+
+void streamIterateTest() {
+
+    // 如下的逻辑相当于 for(int i = 1; ; i++)
+    Stream<Integer> stream1 = Stream.iterate(1, i -> i + 1);
+    stream1.limit(10).forEach(System.out::println);
+
+    // 如下的逻辑相当于 for(int i = 1; i < 10; i +=2 )
+    Stream<Integer> stream2 = Stream.iterate(1, i -> i < 10, i -> i + 2);
+    stream2.forEach(System.out::println);
+}
+```
+
+#### 将集合转化为流
+
+> Java8对集合接口类新增了许多`default`方法，可以方便的将集合转为stream
+
+```java
+$ CreateStreamTest.java
+
+void collectionToStreamTest(){
+    // List 转 Stream
+    List<User> list = List.of(new User("yang"),new User("quan"));
+    Stream<User> listStream = list.stream();
+    
+    // Set 转 Stream
+    Set<String> set = Set.of("hello","world");
+    Stream<String> setStream = set.stream();
+    
+    // Map 转 Stream
+    Map<String, Double> map = Map.of("pi",3.14159,"e",2.718);
+    Stream<Map.Entry<String, Double>> mapStream = map.entrySet().stream();
 }
 ```
 
