@@ -375,13 +375,7 @@ public class FunctionalComposeTest {
 - **惰性执行**：stream的操作并不会立即执行，只有用户执行结束操作才会真正执行
 - **可消费性**：stream只能被消费一次，一旦遍历过就会失效，就像容器的迭代器那样，想要再次遍历必须重新生成
 
-### Java集合类
-
-> 图中实心的接口表示加入了新的stream方法
-
-![collection.png](..%2Fpublic%2Fpost%2Fjava-stream%2Fcollection.png)
-
-#### 代码阅读
+### 代码阅读
 
 > 阅读如下的两段代码
 
@@ -485,7 +479,11 @@ void streamIterateTest() {
 
 #### 将集合转化为流
 
-> Java8对集合接口类新增了许多`default`方法，可以方便的将集合转为stream
+> Java8对集合接口类新增了许多`default`方法，可以方便的将集合转为stream，图中实心的接口表示加入了新的stream方法
+
+![collection.png](/post/java-stream/collection.png)
+
+示例代码：
 
 ```java
 $ CreateStreamTest.java
