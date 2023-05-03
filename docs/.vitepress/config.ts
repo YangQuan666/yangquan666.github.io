@@ -47,7 +47,6 @@ export default {
             // },
         ],
         socialLinks: [
-            {icon: biMastodon, link: 'https://mastodon.social/@Kourtsis'},
             {icon: biGithub, link: 'https://github.com/YangQuan666'},
             {icon: biDiscord, link: 'https://discord.gg/J8BVvnsWeB'}
         ],
