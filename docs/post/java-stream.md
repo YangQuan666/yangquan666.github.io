@@ -35,7 +35,7 @@ tags:
 
 - 传统方式
   ```java
-  $ FunctionalTest.java
+  // FunctionalTest.java
   
   /**
    * 使用匿名类实现Runnable接口来创建一个线程
@@ -51,7 +51,7 @@ tags:
   ```
 - lambda表达式
   ```java
-  $ FunctionalTest.java
+  // FunctionalTest.java
   
   /**
    * 传入lambda表达式来代替匿名类
@@ -62,7 +62,7 @@ tags:
   ```
 - 方法引用
   ```java
-  $ FunctionalTest.java
+  // FunctionalTest.java
   
   /**
    * 使用方法引用代替匿名内部类
@@ -95,7 +95,7 @@ tags:
 特点：无入参，无返回
 
 ```java
-$ LambdaTest.java
+// LambdaTest.java
 
 void runnableTest() {
     Runnable runnable = () -> System.out.println("Runnable#run");
@@ -109,7 +109,7 @@ void runnableTest() {
 特点：无入参，有返回
 
 ```java
-$ LambdaTest.java
+// LambdaTest.java
 
 void supplierTest() {
     Supplier<String> supplier = () -> "Supplier#get";
@@ -123,7 +123,7 @@ void supplierTest() {
 特点：有入参，无返回
 
 ```java
-$ LambdaTest.java
+// LambdaTest.java
 
 void consumerTest() {
     Consumer<String> consumer = (s) -> System.out.println("Consumer#accept: " + s);
@@ -137,7 +137,7 @@ void consumerTest() {
 特点：有入参，有返回
 
 ```java
-$ LambdaTest.java
+// LambdaTest.java
 
 void functionalTest() {
     Function<String, String> function = str -> "Function#apply: " + str;
@@ -156,7 +156,7 @@ void functionalTest() {
 比如如下的函数表示入参有三种不同类型，同时也有返回值：
 
 ```java
-$ TriFunction.java
+// TriFunction.java
 
 /**
  * 接收三个参数并带有返回值
@@ -170,7 +170,7 @@ interface TriFunction<T, U, V, R> {
 使用自定义的函数类型来创建lambda函数
 
 ```java
-$ CustomFunctionalTest.java
+// CustomFunctionalTest.java
 
 void test(){
     TriFunction<Integer, Boolean, Double, String> triFunction=(i,b,d) -> String.format("i=%d, b=%b, d=%.2f", i, b, d);
@@ -192,7 +192,7 @@ void test(){
 
 1. 假设我们有如下的函数接口
    ```java
-   $ Callable.java
+   // Callable.java
    
    @FunctionalInterface
    interface Callable { 
@@ -201,7 +201,7 @@ void test(){
    ```
 2. 有如下的User类
    ```java
-   $ User.java
+   // User.java
    
    class User {
    
@@ -232,7 +232,7 @@ void test(){
 #### 静态方法引用
 
 ```java
-$ MethodReferenceTest.java
+// MethodReferenceTest.java
 
 void staticMethodReferenceTest() {
     // 静态方法引用
@@ -247,7 +247,7 @@ void staticMethodReferenceTest() {
 ##### 错误的方式
 
 ```java
-$ MethodReferenceTest.java
+// MethodReferenceTest.java
 
 void staticMethodReferenceErrorTest() {
 
@@ -260,7 +260,7 @@ void staticMethodReferenceErrorTest() {
 #### 实例方法引用
 
 ```java
-$ MethodReferenceTest.java
+// MethodReferenceTest.java
 
 void instanceMethodReferenceTest() {
     // 实例方法引用
@@ -276,7 +276,7 @@ void instanceMethodReferenceTest() {
 
 - 无参构造方法引用
   ```java
-  $ MethodReferenceTest.java
+  // MethodReferenceTest.java
   
   void noArgConstructMethodReferenceTest(){
     Supplier<User> supplier=User::new;
@@ -286,7 +286,7 @@ void instanceMethodReferenceTest() {
 
 - 有参构造方法引用
   ```java
-  $ MethodReferenceTest.java
+  // MethodReferenceTest.java
   
   void allArgConstructMethodReferenceTest() {
       Function<String, User> function = User::new;
@@ -313,7 +313,7 @@ void instanceMethodReferenceTest() {
 ### 用法演示
 
 ```java
-$ FunctionalComposeTest.java
+// FunctionalComposeTest.java
 
 public class FunctionalComposeTest {
 
@@ -381,7 +381,7 @@ public class FunctionalComposeTest {
 
 代码1:
 ```java
-$ StreamTest.java
+// StreamTest.java
 
 void randomNumber() {
     SortedSet<Integer> sortedSet = new TreeSet<>();
@@ -399,7 +399,7 @@ void randomNumber() {
 
 代码2:
 ```java
-$ StreamTest.java
+// StreamTest.java
 
 void randomNumberStream() {
     int[] array = new Random(47)
@@ -422,7 +422,7 @@ void randomNumberStream() {
 > 你可以通过`Stream.of()`很容易地将一组元素转化成为流
 
 ```java
-$ CreateStreamTest.java
+// CreateStreamTest.java
 
 void streamOfTest() {
 
@@ -446,7 +446,7 @@ void streamOfTest() {
 > 传入一个`Supplier`函数来告诉它怎么去生成stream中的元素
 
 ```java
-$ CreateStreamTest.java
+// CreateStreamTest.java
 
 void streamGenerateTest(){
 
@@ -463,7 +463,7 @@ void streamGenerateTest(){
 > iterate方法提供两种重载形式，起作用类似while或者for循环
 
 ```java
-$ CreateStreamTest.java
+// CreateStreamTest.java
 
 void streamIterateTest() {
 
@@ -486,7 +486,7 @@ void streamIterateTest() {
 示例代码：
 
 ```java
-$ CreateStreamTest.java
+// CreateStreamTest.java
 
 void collectionToStreamTest(){
     // List 转 Stream
@@ -505,19 +505,211 @@ void collectionToStreamTest(){
 
 ### 中间操作
 
+> 「中间操作」总是会惰性执行，调用「中间操作」只会生成一个标记了该操作的新的stream，仅此而已
+
+#### map
+
+**解释说明**：用于将流中的元素映射成新的元素
+
+**参数类型**：Function函数
+
+![map.png](/post/java-stream/map.png)
+
+#### filter
+
+**解释说明**：用于过滤流中的元素
+
+**参数类型**：Predicate函数
+
+![filter.png](/post/java-stream/filter.png)
+
+#### sort
+
+**解释说明**：对流中的元素进行排序
+
+**参数类型**：Comparator函数
+
+![sort.png](/post/java-stream/sort.png)
+
+#### 其他
+
+| 方法                         | 作用                     |
+|----------------------------|------------------------|
+| peek(Comparator action)    | 查看流中的元素，帮助调试           |
+| limit(long maxSize)        | 限制流中元素数量不超过maxSize个    |
+| skip(long n)               | 跳过前n个元素                |
+| concat(Stream a, Stream b) | 将a,b两个流合并为一个新的流        |
+| distinct()                 | 将流中元素进行去重，基于equals方法判断 |
+| parallel()                 | 启用并行流                  |
+
 ### 结束操作
+
+> 结束操作会触发实际的计算，计算发生时会把所有「中间操作」以pipline的方式执行，这样就可以减少迭代次数
+>
+> 计算完成后流就会失效
 
 #### forEach
 
+**解释说明**：遍历流中的所有元素
+
+**参数类型**：Consumer函数
+
+**冷知识**: 你知道java的for循环有几种写法吗？其实不同的写法会有不一样的性能哦
+
+如下的代码，我们分别测试了`for`，`forIn`，`forEach`三种写法的循环遍历，你会发现`forTest`
+方法耗时明显比其他两个方法多，原因就是因为我们这里使用多态的思想将`List`引用到了其子类`LinkedList`，众所周知`LinkedList`
+底层数据结构是链表，这就导致`list.get(i)`操作时间复杂度上升为`O(n)`
+
+_因此平时在迭代集合的时候，最好使用`forIn`或者`forEach`，因为他们底层都是使用集合的迭代器`Iterator`进行遍历的，这样才是最优的方式_
+
+```java
+// ForLoopTest.java
+
+public class ForLoopTest {
+
+    private static List<String> list;
+    private static final int size = 30000;
+
+    @BeforeAll
+    static void setList() {
+
+        list = new LinkedList<>();
+
+        for (int i = 0; i < size; i++) {
+            list.add("str" + i);
+        }
+    }
+
+    @Test
+    void forTest() {
+        for (int i = 0; i < list.size(); i++) {
+            String str = list.get(i);
+            System.out.println(str);
+        }
+    }
+
+    @Test
+    void forInTest() {
+        for (String str : list) {
+            System.out.println(str);
+        }
+    }
+
+    @Test
+    void forEachTest() {
+        list.forEach(System.out::println);
+    }
+}
+```
+
 #### reduce
+
+> 对流中的元素进行规约操作，最终合成为一个值
+
+reduce有三种重载形式，本次主要介绍第三种，学会后前两种也就自然理解了
+
+1. `Optional<T> reduce(BinaryOperator<T> accumulator)`
+2. `T reduce(T identity, BinaryOperator<T> accumulator)`
+3. `<U> U reduce(U identity, BiFunction<U, ? super T, U> accumulator, BinaryOperator<U> combiner)`
+
+方法3等价于如下代码：
+
+```java
+// 初始值为 identity 对流种的元素进行累计操作
+U result = identity;
+
+// 使用 accumulator 函数
+for (T element : this stream)
+    result = accumulator.apply(result, element)
+
+// 并行流会将任务拆分，combiner函数用来合并多个子任务结果，需要满足如下的条件，即使用combiner和不使用combiner最终的计算结果一致：
+combiner.apply(u, accumulator.apply(identity, t)) == accumulator.apply(u, t)
+
+return result;
+```
+
+示例代码：
+
+```java
+// OperatorTest.java
+
+void reduceTest3() {
+    // 求流中单词长度之和
+    Integer value = strStream.reduce(0, // 初始值
+            (result, element) -> result + element.length(), // 累加器
+            (integer, integer2) -> integer + integer2); // 如果在并行流的情况下，多个部分如何进行合并
+    System.out.println(value);
+}
+```
 
 #### collect
 
-### 思考
+> 用于收集流中元素
+> 
+> 不夸张的讲，如果你发现某个功能在Stream接口中没找到，十有八九可以通过`Stream.collect()`方法实现
 
-#### 流的性能如何
+> 本次主要分享如何使用Collectors收集器进行元素收集
 
-#### 如何调试
+常用方法：
+
+| 方法                                             | 作用           |
+|------------------------------------------------|--------------|
+| toList()                                       | 收集为ArrayList |
+| toSet()                                        | 收集为HashSet   |
+| toMap(Function keyMapper,Function valueMapper) | 收集为HashMap   |
+| joining()                                      | 收集为字符串       |
+| groupingBy(Function classifier)                | 分组为map       |
+| counting()                                     | 统计元素数量       |
+| minBy(Comparator comparator)                   | 获取最小元素       |
+| maxBy(Comparator comparator)                   | 获取最大元素       |
+
+示例代码：
+```java
+// CollectTest.java
+
+// 收集所有用户名，结果为ArrayList
+List<String> list = users.stream()
+        .map(User::getName)
+        .collect(Collectors.toList());
+
+// 收集所有用户名，结果为TreeSet
+Set<String> set = users.stream()
+        .map(User::getName)
+        .collect(Collectors.toCollection(TreeSet::new));
+
+// 将用户名收集为String
+String name = users.stream()
+        .map(User::getName)
+        .collect(Collectors.joining(", "));
+
+// 计算所有user的年龄之和
+int total = users.stream()
+        .collect(Collectors.summingInt(User::getAge));
+
+// 根据用户名分组
+Map<String, List<User>> map = users.stream()
+        .collect(Collectors.groupingBy(User::getName));
+
+// 根据用户名统计年龄之和
+Map<String, Integer> map = users.stream()
+        .collect(Collectors.groupingBy(User::getName, Collectors.summingInt(User::getAge)));
+
+// 根据年龄阈值分组用户
+Map<Boolean, List<User>> map = users.stream()
+        .collect(Collectors.partitioningBy(u -> u.getAge() >= 30));
+```
+
+### 调试流
+
+> 由于流只能使用一次，因此必须在流结束前才能对其进行调试
+
+具体步骤：
+1. 在代码中加上断点
+   ![debug.png](/post/java-stream/debug.png)
+2. 在调试栏找到「Trace Current Stream Chain」
+   ![trace.png](/post/java-stream/trace.png)
+3. 查看流的追踪链
+   ![stream_trace.png](/post/java-stream/stream_trace.png)
 
 ## 参考资料
 
