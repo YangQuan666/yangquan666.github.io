@@ -3,13 +3,20 @@ import { nextTick } from 'vue';
 const getKey = (key: string) => `2048_GAME_${key}`;
 export const useLocalStorage = () => {
     const getItem = (key: string): any => {
-        const rawValue = window.localStorage.getItem(getKey(key));
-        return rawValue ? JSON.parse(rawValue) : void 0;
+        if (typeof window !== "undefined") {
+            // Client-side-only code
+            const rawValue = window.localStorage.getItem(getKey(key));
+            return rawValue ? JSON.parse(rawValue) : void 0;
+        }
+        return void 0;
     };
 
     const setItem = (key: string, value: unknown, sync?: boolean) => {
         const setter = () => {
-            window.localStorage.setItem(getKey(key), JSON.stringify(value));
+            if (typeof window !== "undefined") {
+                // Client-side-only code
+                window.localStorage.setItem(getKey(key), JSON.stringify(value));
+            }
         };
 
         if (sync) {
