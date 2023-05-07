@@ -5,6 +5,7 @@ excerpt: "从基本的硬件介绍到主机的安装走线，希望能帮助你�
 tags:
   - 电脑
   - 技术
+display: false
 ---
 # 我组装了一台ITX小主机
 先立个flag，后面会写
