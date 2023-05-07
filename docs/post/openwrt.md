@@ -31,7 +31,7 @@ tags:
 
 ![topology.png](/post/openwrt/topology.png)
 
-## 系统安装
+## 开始之前
 
 > OpenWrt 是一款基于 Linux
 > 的开源软路由系统，专为嵌入式设备（如路由器、网关、无线接入点等）设计。它提供丰富的网络功能和插件，支持多种硬件平台，允许用户自定义配置和扩展功能，从而实现灵活、定制化的路由器管理和网络服务。
@@ -39,15 +39,58 @@ tags:
 > Web 界面进行配置和管理。OpenWrt 具有强大的路由和网络功能，如防火墙、端口转发、虚拟专网（VPN）、负载均衡、QoS（服务质量）、无线网络管理等，同时还支持大量的第三方软件包，如
 > DNS 服务器、VPN 服务器、网络存储（NAS）等，可以根据需要进行安装和配置。
 
+![openwrt_logo.png](/post/openwrt/openwrt_logo.png)
+
 ### 下载镜像
 
-| 镜像地址                                                                                   | 特点                                         |
-|----------------------------------------------------------------------------------------|--------------------------------------------|
-| [OpenWrt官方镜像](https://firmware-selector.openwrt.org)                                   | 优点：最为纯净，稳定性也最好<br/>缺点：默认存储空间只有500M，而且不能扩展  |
-| [友善官方镜像](https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R4S#Download_Image_Files) | 优点：较为稳定，自带docker<br/>缺点：系统太过臃肿，自定义性差       |
-| 第三方固件，如 [supes.top](https://supes.top/)                                                | 优点：由kiddin9大佬贴心定制，适合大多数用户<br/>缺点：比起官方的稳定性差 |
+| 镜像地址                                                                                   | 特点                                        |
+|----------------------------------------------------------------------------------------|-------------------------------------------|
+| [OpenWrt官方镜像](https://firmware-selector.openwrt.org)「推荐」                               | 优点：最为纯净，稳定性也最好<br/>缺点：默认存储空间只有500M，而且不能扩展 |
+| [友善官方镜像](https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R4S#Download_Image_Files) | 优点：较为稳定，自带docker<br/>缺点：系统太过臃肿，自定义性差      |
+| [supes.top](https://supes.top/)                                                        | 优点：由kiddin9大佬贴心定制，适合小白用户<br/>缺点：比起官方的稳定性差 |
 
-#### 扩容分区大小
+当然如果你熟悉linux系统的话，也可以自己下载OpenWrt源代码后来编译生成固件，这就不在本篇文章的范围内了
+
+### 软件安装
+
+> 以下三种方式任选一种即可
+>
+> luci软件安装后在「Service」菜单中可找到
+
+#### 官方仓库
+
+1. 登录openwrt后台web界面
+2. 访问：**System** > **Software** > **Update lists**，更新软件源
+3. 在上方的红框中输入软件课程，然后在中意的软件右侧点击「Install」
+   ![luci_install.png](/post/openwrt/luci_install.png)
+
+#### 手动上传安装包
+
+ipk文件仓库列表：
+
+| 名称           | 仓库地址                                    |
+|--------------|-----------------------------------------|
+| openwrt官方仓库  | https://downloads.openwrt.org/releases/ |
+| kiddin9大佬的仓库 | https://op.supes.top/packages/          |
+
+1. 下载好需要的`.ipk`安装包文件
+2. web页面访问：**System** > **Software** > **Upload Package**，上传`.ipk`安装包
+   ![upload_ipk.png](/post/openwrt/upload_ipk.png)
+
+#### 命令行安装
+
+1. 使用ssh连接到openwrt
+2. 执行如下的命令
+   ```shell
+   #更新源
+   opkg update
+   #搜索安装包
+   opkg search {package_name}
+   #安装
+   opkg install {package_name}
+   ```
+
+### 扩容分区
 
 > OpenWrt默认的系统分区只有100M左右，如果你的SD卡空间较大，建议进行扩容
 >
@@ -81,29 +124,31 @@ tags:
    ![img_partition.png](/post/openwrt/img_partition.png)
 3. 使用u盘工具刷入镜像包，如: [Rufus](https://rufus.ie/zh/), [Etcher](https://www.balena.io/etcher)
 
-#### 磁盘分区
+### 磁盘分区
 
-1. 在[kiddin9大佬的仓库](https://op.supes.top/packages/aarch64_generic/)里下载`luci-app-diskman`
-2. **System** > **Software** > **Upload Package**，上传`luci-app-diskman.ipk`安装包
-   ![upload_ipk.png](/post/openwrt/upload_ipk.png)
-3. 进入 **System** > **Disk Man** > **Edit**,（如页面报错，则需要安装`luci-compat`）
+1. 搜索下载`luci-app-diskman.ipk`
+2. 进入 **System** > **Disk Man** > **Edit**,（如页面报错，则需要安装`luci-compat`）
    ![diskman_edit.png](/post/openwrt/diskman_edit.png)
-4. 填写分区起始、结束位置（一般默认就行），点击「New」，完成分区新建
+3. 填写分区起始、结束位置（一般默认就行），点击「New」，完成分区新建
    ![diskman_new.png](/post/openwrt/diskman_new.png)
-5. 格式化分区为**ext4**格式
-6. **System** > **Software**，搜索并下载`block-mount`
-7. 进入 **System** > **Mount Points**，找到新建的分区，然后**Edit** > **Enable** > **Save&Apply**
+4. 格式化分区为**ext4**格式
+5. **System** > **Software**，搜索并下载`block-mount`
+6. 进入 **System** > **Mount Points**，找到新建的分区，然后**Edit** > **Enable** > **Save&Apply**
    ![partition_enable.png](/post/openwrt/partition_enable.png)
 
-## 软件安装
+## 推荐软件
 
 ### Argon主题
 
 > OpenWrt下的高颜值主题
 
-1. 依然是在[kiddin9大佬的仓库](https://op.supes.top/packages/aarch64_generic/)里搜索下载`luci-theme-argon`
-2. 然后使用同样的方式上传安装包安装即可
-3. **System** > **System** > **Language and Style**，选择Argon主题并保存生效
+#### 安装清单
+
+- `luci-theme-argon`：argon主题
+
+#### 启用
+
+2. **System** > **System** > **Language and Style**，选择Argon主题并保存
    ![argon_enable.png](/post/openwrt/argon_enable.png)
 
 ### Docker
@@ -164,7 +209,9 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 
 #### 安装
 
-在 **System** > **Software** 中安装samba的服务端 `samba4-server` ,以及可视化配置页面 `luci-app-samba4`
+- `samba4-server`：samba的服务端
+- `luci-app-samba4`：可视化配置页面
+
 ![openwrt_install_samba.png](/post/openwrt/openwrt_install_samba.png)
 
 #### 添加用户
@@ -196,33 +243,41 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 
 #### 其他平台访问方式
 
-1. Windows
-    1. 在启用或关闭windows功能中打开 `SMB 1.0/CIFS 文件共享支持` 和 `SMB直通`
-       ![windows_samba_enable](/post/openwrt/windows_samba_enable.png)
-    2. 打开文件夹，访问samba服务地址，例如 `smb://192.168.1.1`，然后回车
-    3. 按照提示输入用户名和密码即可成功连接
-       ![windows_samba.png](/post/openwrt/windows_samba.png)
-2. Mac
-    1. 打开Finder
-    2. 按下快捷键 `⌘` + `K` 打开连接
-    3. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
-    4. 按照提示输入用户名和密码即可成功连接
-       ![mac_finder_samba](/post/openwrt/mac_finder_samba.png)
-3. iPhone/iPad
-    1. 打开文件 -> 浏览，然后点击右上角 更多 -> 连接服务器
-       ![iOS_samba_connect.png](/post/openwrt/iOS_samba_connect.png)
-    2. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
-    3. 按照提示输入用户名和密码即可成功连接
-       ![iOS_samba_display.png](/post/openwrt/iOS_samba_display.png)
+##### Windows
+
+1. 在启用或关闭windows功能中打开 `SMB 1.0/CIFS 文件共享支持` 和 `SMB直通`
+   ![windows_samba_enable](/post/openwrt/windows_samba_enable.png)
+2. 打开文件资源管理器，右键「此电脑」-> 「映射网络驱动器」
+   ![windows_add_driver.png](/post/openwrt/windows_add_driver.png)
+3. 文件夹填入`\\192.168.1.1\samba`，然后回车
+4. 按照提示输入用户名和密码即可成功连接
+   ![windows_samba.png](/post/openwrt/windows_samba.png)
+
+##### Mac
+
+1. 打开Finder
+2. 按下快捷键 `⌘ + k` 打开连接
+3. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
+4. 按照提示输入用户名和密码即可成功连接
+   ![mac_finder_samba](/post/openwrt/mac_finder_samba.png)
+
+##### iPhone/iPad
+
+1. 打开文件 -> 浏览，然后点击右上角 更多 -> 连接服务器
+   ![iOS_samba_connect.png](/post/openwrt/iOS_samba_connect.png)
+2. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
+3. 按照提示输入用户名和密码即可成功连接
+   ![iOS_samba_display.png](/post/openwrt/iOS_samba_display.png)
 
 ### Aria2
 
 > Linux 平台下知名的下载工具
 
-#### 安装
+#### 安装清单
 
-1. 在 **System** > **Software** 中安装 `aria2`, `luci-app-aria2`, `webui-aria2`
-2. 安装后在 System > Services > Aria2可找到
+- `aria2`：aria2内核
+- `luci-app-aria2`：luci界面
+- `webui-aria2`：web界面
 
 #### 配置
 
@@ -240,9 +295,9 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 
 > 教你如何使用Siri唤醒你的PC电脑
 
-#### 安装
+#### 安装清单
 
-在 **System** > **Software** 中安装 `luci-app-wol` (会自动安装`etherwake`等依赖)
+- `luci-app-wol` (会自动安装`etherwake`等依赖)
 
 #### PC设置
 
@@ -362,6 +417,21 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 2. 登录后点右上角**头像** > **管理面板** > **离线下载节点**，修改主节点
 3. 在离线下载部分填写Aria2对应的信息，保存后即可使用离线下载功能
    ![cloudreve_login.png](/post/openwrt/cloudreve_aria2.png)
+
+### 网易UU加速器
+
+#### 安装清单
+
+- `uugamebooster`：网易uu加速器
+- `luci-app-uugamebooster`：对应的luci界面
+
+#### 启用
+
+1. 勾选「enable」，保存并应用
+   ![uugamebooster.png](/post/openwrt/uugamebooster.png)
+2. 然后使用手机APP即可进行加速
+
+其他加速器如：灵缇加速器、迅游加速器等等，步骤都是类似的
 
 ## 参考文章
 
