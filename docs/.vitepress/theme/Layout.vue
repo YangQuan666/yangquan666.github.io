@@ -52,7 +52,7 @@
                             {{ child.title }}
                         </q-item-section>
                         <q-item-section avatar>
-                            <q-icon :name="item.icon"/>
+                            <q-icon :name="child.icon"/>
                         </q-item-section>
                     </q-item>
                 </q-expansion-item>
