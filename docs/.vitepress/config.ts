@@ -34,10 +34,9 @@ export default {
                 title: '主页', icon: 'home', link: '/'
             },
             {
-                title: '小游戏', icon: 'smart_toy', children: [
-                    // {title: 'Chrome Dinosaur', link: '/game/dinosaur', icon: 'casino'},
-                    // {title: 'Flappy Bird', link: '/game/flappyBird', icon: 'casino'},
-                    {title: '2048', link: '/game/2048', icon: 'casino'},
+                title: '小游戏', icon: 'videogame_asset', children: [
+                    {title: 'Chrome Dinosaur', link: '/game/dinosaur/', icon: 'smart_toy'},
+                    {title: '2048', link: '/game/2048/', icon: 'casino'}
                 ]
             },
             // {

@@ -17,6 +17,7 @@
                             label="Search"
                             behavior="menu"
                             hide-selected
+                            dark
                             standout
                             use-input
                             hide-dropdown-icon
