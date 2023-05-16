@@ -1,7 +1,9 @@
 <template>
-    <div ref="gamePanelRef">
-        <div>is dark mode: {{ dark }}</div>
-        <div>is touch device: {{ isTouchDevice }}</div>
+    <div class="row">
+        <div class="col-12 offset-sm-3 col-sm-6">
+            <div class="q-drawer--top-padding" ref="gamePanelRef">
+            </div>
+        </div>
     </div>
 </template>
 <script setup>
@@ -12,32 +14,29 @@ import {computed, onMounted, onUnmounted, reactive, ref} from 'vue'
 const gamePanelRef = ref()
 
 const $q = useQuasar()
-const dark = computed(() => $q.dark.isActive)
 const isTouchDevice = $q.platform.has.touch
 
 const game = new DinoGame()
 
 onMounted(() => {
     const gamePanel = gamePanelRef.value;
-    game.createCanvas(600, 400, gamePanel)
+    game.createCanvas(gamePanel.offsetWidth, 400, gamePanel)
     game.start().catch(console.error)
 
     if (isTouchDevice) {
-        // 绑定触屏设备上的单击和双击事件
-        gamePanel.addEventListener('click', handleMobileTap)
-        gamePanel.addEventListener('dblclick', handleMobileDoubleTap)
-    } else {
+        // 绑定触屏设备上的单击事件
+        gamePanel.addEventListener('touchstart', handleMobileTap)
+    } else if (typeof window !== 'undefined') {
         // 绑定键盘事件
         window.addEventListener('keydown', handleDesktopKeyDown)
-
-        window.addEventListener('keyup', handleDesktopKeyUp)
+        window.addEventListener('keyup', handleDesktopKeyUp);
     }
 })
 
 onUnmounted(() => {
     console.log(game)
     game.stop()
-    if (!isTouchDevice) {
+    if (!isTouchDevice && typeof window !== 'undefined') {
         window.removeEventListener('keydown', handleDesktopKeyDown)
         window.removeEventListener('keyup', handleDesktopKeyUp)
     }
@@ -70,40 +69,6 @@ const handleDesktopKeyUp = event => {
         game.onInput('stop-duck')
     }
 }
-
-// if (isTouchDevice) {
-//     document.addEventListener('touchstart', ({touches}) => {
-//         if (touches.length === 1) {
-//             game.onInput('jump')
-//         } else if (touches.length === 2) {
-//             game.onInput('duck')
-//         }
-//     })
-//
-//     document.addEventListener('touchend', ({ touches }) => {
-//         game.onInput('stop-duck')
-//     })
-// } else {
-//     const keycodes = {
-//         // up, spacebar
-//         JUMP: { 38: 1, 32: 1 },
-//         // down
-//         DUCK: { 40: 1 },
-//     }
-//
-//     document.addEventListener('keydown', ({ keyCode }) => {
-//         if (keycodes.JUMP[keyCode]) {
-//             game.onInput('jump')
-//         } else if (keycodes.DUCK[keyCode]) {
-//             game.onInput('duck')
-//         }
-//     })
-//
-//     document.addEventListener('keyup', ({keyCode}) => {
-//         if (keycodes.DUCK[keyCode]) {
-//             game.onInput('stop-duck')
-//         }
-//     })
-// }
-
 </script>
+<style scoped>
+</style>

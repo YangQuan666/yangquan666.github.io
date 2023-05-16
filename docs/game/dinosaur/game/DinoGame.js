@@ -12,6 +12,7 @@ import {
   randInteger,
 } from '../utils.js'
 import GameRunner from './GameRunner.js'
+import {useQuasar} from 'quasar'
 
 export default class DinoGame extends GameRunner {
   constructor(width, height, gamePanel) {
@@ -278,6 +279,7 @@ export default class DinoGame extends GameRunner {
 
   drawBackground() {
     this.canvasCtx.fillStyle = '#f7f7f7'
+    // this.canvasCtx.fillStyle = $q.dark.isActive ? $q.config.brand.dark : 'rgb(18,18,18)'
     this.canvasCtx.fillRect(0, 0, this.width, this.height)
   }
 

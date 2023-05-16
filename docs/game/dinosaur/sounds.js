@@ -1,15 +1,17 @@
-const AudioContext = window.AudioContext || window.webkitAudioContext
-const audioContext = new AudioContext()
+// if (typeof window == 'undefined') {
+// }
+// const AudioContext = window.AudioContext || window.webkitAudioContext;
+// const audioContext = new AudioContext()
 const soundNames = ['game-over', 'jump', 'level-up']
 const soundBuffers = {}
 let SOUNDS_LOADED = false
 
 loadSounds().catch(console.error)
 export function playSound(name) {
-  if (SOUNDS_LOADED) {
-    audioContext.resume()
-    playBuffer(soundBuffers[name])
-  }
+  // if (SOUNDS_LOADED) {
+  //   audioContext.resume()
+  //   playBuffer(soundBuffers[name])
+  // }
 }
 
 async function loadSounds() {
@@ -23,22 +25,22 @@ async function loadSounds() {
 }
 
 function loadBuffer(filepath) {
-  return new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest()
+  // return new Promise((resolve, reject) => {
+    // const request = new XMLHttpRequest()
 
-    request.open('GET', filepath)
-    request.responseType = 'arraybuffer'
-    request.onload = () =>
-      audioContext.decodeAudioData(request.response, resolve)
-    request.onerror = reject
-    request.send()
-  })
+    // request.open('GET', filepath)
+    // request.responseType = 'arraybuffer'
+    // request.onload = () =>
+    //   audioContext.decodeAudioData(request.response, resolve)
+    // request.onerror = reject
+    // request.send()
+  // })
 }
 
 function playBuffer(buffer) {
-  const source = audioContext.createBufferSource()
-
-  source.buffer = buffer
-  source.connect(audioContext.destination)
-  source.start()
+  // const source = audioContext.createBufferSource()
+  //
+  // source.buffer = buffer
+  // source.connect(audioContext.destination)
+  // source.start()
 }
