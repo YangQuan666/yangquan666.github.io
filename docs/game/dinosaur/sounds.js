@@ -1,46 +1,20 @@
-// if (typeof window == 'undefined') {
-// }
-// const AudioContext = window.AudioContext || window.webkitAudioContext;
-// const audioContext = new AudioContext()
-const soundNames = ['game-over', 'jump', 'level-up']
-const soundBuffers = {}
-let SOUNDS_LOADED = false
+import jump from '/game/dino/jump.mp3'
+import levelUp from '/game/dino/level-up.mp3'
+import gameOver from '/game/dino/game-over.mp3'
+import {ref} from 'vue'
 
-loadSounds().catch(console.error)
+const map = {'jump': jump, 'level-up': levelUp, 'game-over': gameOver}
+const audioRef = ref()
+
+if (typeof Audio != "undefined") {
+    // Browser-only code
+    audioRef.value = new Audio();
+}
+
 export function playSound(name) {
-  // if (SOUNDS_LOADED) {
-  //   audioContext.resume()
-  //   playBuffer(soundBuffers[name])
-  // }
-}
-
-async function loadSounds() {
-  await Promise.all(
-    soundNames.map(async (soundName) => {
-      soundBuffers[soundName] = await loadBuffer(`./assets/${soundName}.mp3`)
+    const audio = audioRef.value;
+    audio.src = map[name]
+    audio.play().catch((error) => {
+        console.error('播放音频时出错：', error);
     })
-  )
-
-  SOUNDS_LOADED = true
-}
-
-function loadBuffer(filepath) {
-  // return new Promise((resolve, reject) => {
-    // const request = new XMLHttpRequest()
-
-    // request.open('GET', filepath)
-    // request.responseType = 'arraybuffer'
-    // request.onload = () =>
-    //   audioContext.decodeAudioData(request.response, resolve)
-    // request.onerror = reject
-    // request.send()
-  // })
-}
-
-function playBuffer(buffer) {
-  // const source = audioContext.createBufferSource()
-  //
-  // source.buffer = buffer
-  // source.connect(audioContext.destination)
-  // source.start()
 }
