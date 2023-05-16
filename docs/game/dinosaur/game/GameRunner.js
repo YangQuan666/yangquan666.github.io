@@ -83,7 +83,7 @@ export default class GameRunner {
         }
       }
 
-      if (shouldLoop && (typeof window !== 'undefined')) {
+      if (shouldLoop) {
         window.requestAnimationFrame(this.__loop)
       }
     }
