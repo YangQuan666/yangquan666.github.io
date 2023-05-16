@@ -90,8 +90,8 @@ export default class DinoGame extends GameRunner {
   async preload() {
     const { settings } = this.state
     const [spriteImage] = await Promise.all([
-      loadImage('./assets/sprite.png'),
-      loadFont('./assets/PressStart2P-Regular.ttf', 'PressStart2P'),
+      loadImage('/game/dino/sprite.png'),
+      loadFont('/game/dino/PressStart2P-Regular.ttf', 'PressStart2P'),
     ])
     this.spriteImage = spriteImage
     this.spriteImageData = getImageData(spriteImage)

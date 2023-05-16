@@ -1,15 +1,14 @@
 <template>
     <div class="row">
         <div class="col-12 offset-sm-3 col-sm-6">
-            <div class="q-drawer--top-padding" ref="gamePanelRef">
-            </div>
+            <div ref="gamePanelRef"/>
         </div>
     </div>
 </template>
 <script setup>
 import DinoGame from './game/DinoGame.js'
 import {useQuasar} from 'quasar'
-import {computed, onMounted, onUnmounted, reactive, ref} from 'vue'
+import {onMounted, onUnmounted, ref} from 'vue'
 
 const gamePanelRef = ref()
 

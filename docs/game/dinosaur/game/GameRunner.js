@@ -7,7 +7,7 @@ export default class GameRunner {
     this.frameRate = 0
     this.paused = false
     this.stepFrames = null
-    this._lastFrameTime = window.performance.now()
+    this._lastFrameTime = Date.now()
 
     // store this bound function so we don't have to create
     // one every single time we call requestAnimationFrame
@@ -52,11 +52,11 @@ export default class GameRunner {
       this.stepFrames = frames
     }
 
-    this.__loop(window.performance.now())
+    this.__loop(Date.now())
   }
 
   _loop(timestamp) {
-    const now = window.performance.now()
+    const now = Date.now()
     const timeSinceLast = now - this._lastFrameTime
     const targetTimeBetweenFrames = 1000 / this.targetFrameRate
 
@@ -83,7 +83,7 @@ export default class GameRunner {
         }
       }
 
-      if (shouldLoop) {
+      if (shouldLoop && (typeof window !== 'undefined')) {
         window.requestAnimationFrame(this.__loop)
       }
     }
