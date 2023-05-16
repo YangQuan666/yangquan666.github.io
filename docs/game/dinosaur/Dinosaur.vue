@@ -69,5 +69,3 @@ const handleDesktopKeyUp = event => {
     }
 }
 </script>
-<style scoped>
-</style>
