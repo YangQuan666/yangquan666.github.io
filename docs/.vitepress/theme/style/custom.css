@@ -1,6 +1,9 @@
 /**
  * Search Field
  * -------------------------------------------------------------------------- */
+.q-field__marginal {
+    color: rgba(255, 255, 255, 1) !important;
+}
 
 .search-field {
     transition: width .36s;
