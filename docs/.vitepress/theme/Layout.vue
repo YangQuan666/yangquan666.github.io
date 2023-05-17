@@ -68,7 +68,7 @@
             </q-page>
         </q-page-container>
 
-        <q-footer bordered>
+        <q-footer bordered class="bg-dark text-white">
             <q-toolbar>
                 {{ footer.message }}
                 <q-space/>
