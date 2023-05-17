@@ -12,7 +12,7 @@
                 预计阅读{{ readTime }}分钟
                 <q-space/>
                 <q-icon name="update"/>
-                {{ date.formatDate(page.lastUpdated, 'YYYY-MM-DD') }}更新
+                {{ date.formatDate(frontmatter.date, 'YYYY-MM-DD') }}发表
             </q-card-actions>
 
             <Content ref="content" v-scroll="throttleOnScroll" class="markdown-body"/>
@@ -42,7 +42,7 @@ import Outline from './Outline.vue'
 import {date} from 'quasar'
 
 const content = ref()
-const {page, site} = useData()
+const {site, frontmatter} = useData()
 const readTime = ref()
 
 onMounted(() => {
