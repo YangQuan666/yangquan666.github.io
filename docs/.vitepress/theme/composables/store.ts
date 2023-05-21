@@ -45,6 +45,9 @@ export function toggleMiniDrawer(e: Event) {
     }
 }
 
+// 搜索框是否关闭
+export const searchClose = ref(true)
+
 /**
  * 计算阅读大概时间
  * @param el 文章所在的html元素

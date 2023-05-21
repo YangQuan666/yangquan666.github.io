@@ -22,12 +22,10 @@
 import {ref} from 'vue'
 import {useQuasar} from 'quasar'
 import {useData} from 'vitepress'
-import {isPost, toggleMiniDrawer} from '../composables/store'
+import {isPost, searchClose, toggleMiniDrawer} from '../composables/store'
 import Search from './Search.vue'
 
 const $q = useQuasar()
 const {site} = useData()
-const searchClose = ref(true)
-
 const keyword = ref('')
 </script>

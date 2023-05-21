@@ -54,9 +54,9 @@ import {useRouter} from 'vitepress'
 import {indexName, searchClient} from '../composables/algolia'
 import {AisAutocomplete, AisInstantSearch} from 'vue-instantsearch/vue3/es/index.js'
 import {date} from 'quasar'
+import {searchClose} from '../composables/store'
 
 const router = useRouter()
-const searchClose = ref(true)
 
 const model = ref('')
 
