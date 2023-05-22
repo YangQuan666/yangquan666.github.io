@@ -33,7 +33,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-    console.log(game)
     game.stop()
     if (!isTouchDevice && typeof window !== 'undefined') {
         window.removeEventListener('keydown', handleDesktopKeyDown)

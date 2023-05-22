@@ -156,3 +156,13 @@
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
 }
+
+
+/* Img Rotate CSS */
+.image-container {
+    transition: transform 0.8s ease !important;
+}
+
+.image-container:hover {
+    transform: rotate(360deg) !important;
+}

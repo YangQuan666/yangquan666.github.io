@@ -3,13 +3,14 @@
         <q-btn flat round icon="menu" @click="$emit('updateDrawer')"/>
 
         <q-toolbar-title
-                shrink
-                class="row items-center no-wrap"
+            shrink
+            class="row items-center no-wrap"
+            @click="route.path !== '/' ? router.go('/') : undefined"
         >
-            <q-avatar>
-                <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" alt="logo">
-            </q-avatar>
-            <span class="q-ml-sm" v-if="$q.screen.gt.xs || searchClose">{{ site.title }}</span>
+          <q-avatar>
+            <img src="/logo.svg" alt="logo" class="image-container">
+          </q-avatar>
+          <span class="q-ml-sm" v-if="$q.screen.gt.xs || searchClose">{{ site.title }}</span>
         </q-toolbar-title>
         <q-space/>
         <Search/>
@@ -21,11 +22,16 @@
 <script lang="ts" setup>
 import {ref} from 'vue'
 import {useQuasar} from 'quasar'
-import {useData} from 'vitepress'
+import {useData, useRoute, useRouter} from 'vitepress'
 import {isPost, searchClose, toggleMiniDrawer} from '../composables/store'
 import Search from './Search.vue'
 
 const $q = useQuasar()
 const {site} = useData()
+const router = useRouter()
+const route = useRoute()
 const keyword = ref('')
 </script>
+<style scoped>
+
+</style>
