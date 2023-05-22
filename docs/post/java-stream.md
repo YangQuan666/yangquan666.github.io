@@ -1,7 +1,7 @@
 ---
 title: Java函数式编程入门
 date: 2020-09-01
-excerpt: "Java函数式编程入门"
+excerpt: "本文介绍了Java函数式编程的基础知识和入门要点，读者将了解函数式编程的核心概念：Lambda表达式的使用、函数接口和Stream API等关键技术。帮助读者初步掌握Java函数式编程的基本原理和应用，为进一步深入学习提供基础。"
 tags:
   - java
   - lambda
