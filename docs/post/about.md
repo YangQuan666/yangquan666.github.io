@@ -12,7 +12,7 @@ tags:
 
 # 关于这个博客
 
-![blog.webp](..%2Fpublic%2Fpost%2Fabout%2Fblog.webp)
+![blog.webp](/post/about/blog.webp)
 
 ## 背景
 
@@ -38,8 +38,12 @@ tags:
 
 ### 传统的建站步骤
 
+优点：丰富的主题、成熟的方案
+缺点：自定义性差、步骤麻烦
 ### 我的
 
+优点：步骤简单、成本低
+缺点：开发周期长（一次开发、终身受用）
 ## 用到了哪些技术
 
 > 站在巨人的肩膀，可以看得更远 --沃兹基·硕得
@@ -52,9 +56,22 @@ tags:
 
 ### VitePress
 
+1. markdown 渲染
+2. vue3，vite
+3. 支持自定义主题
+
+#### 文档
+
+#### 安装使用
+
 ### Quasar
 
+1. 支持vue的前端UI框架
+2. 丰富的组件
+
 ### Algolia
+
+1. 搜索索引
 
 ### Markdown CSS
 
@@ -62,4 +79,5 @@ tags:
 
 ### Sitemap
 
-google console地址
+1. google console地址
+2. npm sitemap

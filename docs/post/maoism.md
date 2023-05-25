@@ -38,7 +38,7 @@ display: false
 >
 > —— 1951年 教员的回忆
 
-![Maoflag.png](..%2Fpublic%2Fpost%2Fmaoism%2FMaoflag.png)
+![Maoflag.png](/post/maoism/Maoflag.png)
 
 ## 为什么年轻人开始读《毛选》了
 
