@@ -102,8 +102,8 @@ export default {
                 const token = tokens[idx]
                 const url = token.attrGet('src')
                 const alt = token.attrGet('alt')
-                // return `<q-img src="${url}" alt="${alt}" style="max-height: 400px" loading="lazy" fit="contain"/>`
-                return `<div><img src="${url}" alt="${alt}" style="max-height: 400px" loading="lazy"/></div>`
+                return `<q-img src="${url}" alt="${alt}" style="max-height: 400px" loading="lazy" fit="contain"/>`
+                // return `<div><img src="${url}" alt="${alt}" style="max-height: 400px" loading="lazy"/></div>`
             }
             // md.renderer.rules.table_open = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
             //     return '<q-markup-table separator="cell"><table>'
