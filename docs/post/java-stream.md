@@ -11,7 +11,7 @@ tags:
 
 # Java 函数式编程入门
 
-> 本文是自己当时刚工作时做的一次分享，现整理并发表到个人博客中
+> **说明**：本文是自己当时刚工作时做的一次分享，现整理并发表到个人博客中，所有代码均可在[我的github仓库](https://github.com/YangQuan666/demo/tree/functional)中找到
 
 ![lambda.jpg](/post/java-stream/lambda.jpg)
 
