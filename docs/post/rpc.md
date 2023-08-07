@@ -13,7 +13,7 @@ tags:
 
 > 一直以来都对RPC框架的实现很感兴趣，因此占用了几个下班时间，写出了这篇文章，希望能让读者对RPC框架的原理有个深刻的认识
 >
-> **说明**：本文所有代码均可在[我的github仓库](https://github.com/YangQuan666/demo/tree/functional)中找到
+> **说明**：本文所有代码均可在[我的github仓库](https://github.com/YangQuan666/demo/tree/rpc)中找到
 
 ![rpc](/post/rpc/rpc.svg)
 
