@@ -705,10 +705,13 @@ Map<Boolean, List<User>> map = users.stream()
 
 具体步骤：
 1. 在代码中加上断点
+
    ![debug.png](/post/java-stream/debug.png)
 2. 在调试栏找到「Trace Current Stream Chain」
+
    ![trace.png](/post/java-stream/trace.png)
 3. 查看流的追踪链
+
    ![stream_trace.png](/post/java-stream/stream_trace.png)
 
 ## 参考资料

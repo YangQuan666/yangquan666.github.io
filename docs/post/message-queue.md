@@ -182,31 +182,40 @@ tags:
 #### Kafka时间轮
 
 1. `Kafka`中一个时间轮(TimingWheel)默认是由20个时间格组成，每格的时间跨度是`1ms`，时间轮底层采用数组实现，数组中的每个元素可以存放一个定时任务列表（TimerTaskList）。`TimerTaskList`是一个环形的双向链表，链表中的每一项表示的都是定时任务项（TimerTaskEntry），其中封装了真正的定时任务`TimerTask`
+   
    ![shijianlun1.png](/post/message-queue/shijianlun1.png)
 
 2. 假设初始的时候一个格子一秒，时间轮的指针定格在`0`。此时添加一个超时时间为`2ms`的任务, 那么这个任务将会插入到第二个时间格中
+   
    ![shijianlun2.gif](/post/message-queue/shijianlun2.gif)
 
 3. 时间轮的指针到达第二个时间格时, 会处理该时间格上对应的任务
+   
    ![shijianlun3.gif](/post/message-queue/shijianlun3.gif)
 
 4. 如果这个时候又插入一个延时时间为`8ms`的任务进来, 这个任务的过期时间就是在当前时间`2ms`的基础上加`8ms`, 也就是`10ms`, 那么这个任务将会插入到过期时间为`10ms`的时间格中。
+   
    ![shijianlun4.gif](/post/message-queue/shijianlun4.gif)
 
 5. 如果在当前时间是`2ms`的时候, 插入一个延时时间为`19ms`的任务时, 这个任务的过期时间就是在当前时间`2ms`的基础上加`19ms`,
    也就是`21ms`，那么这个任务就会插入到过期时间为`21ms`的时间格中
+   
    ![shijianlun5.gif](/post/message-queue/shijianlun5.gif)
 
 6. 如果在当前时间是`2ms`的时候, 插入一个延时时间为`22ms`的任务, 这个任务的过期时间就是在`2ms`的基础上加`22ms`，也就是`24ms`，但是显然没有`24ms`的格子
+   
    ![shijianlun6.png](/post/message-queue/shijianlun6.png)
 
 7. 第一层的时间轮装不下的时候，任务就会放入第二层的时间轮格子中
+   
    ![shijianlun7.gif](/post/message-queue/shijianlun7.gif)
 
 8. 当第二层时间轮上的任务到期后，就会执行时间轮的降级，原本超时时间为`24ms`的任务会被从第二层取出来，放入第一层到期时间为`24ms`的格子中
+   
    ![shijianlun8.gif](/post/message-queue/shijianlun8.gif)
 
 9. 从这里可以看出时间轮的巧妙之处，两层时间轮只用了`40`个数组元素，却可以承载`[0-399s]`的定时任务。而三层时间轮用`60`个数组元素，就可以承载`[0-7999s]`的定时任务
+   
    ![shijianlun9.png](/post/message-queue/shijianlun9.png)
 
 **总结**
@@ -235,8 +244,6 @@ rocketmq在kafka的时间轮基础上提供了延迟消息可靠的存储方式
    ![r_shijianlun1.png](/post/message-queue/r_shijianlun1.png)
 
 ##### 工作流程
-
-![r_shijianlun1.png](/post/message-queue/r_shijianlun1.png)
 
 1. 针对放置定时消息的`service`，每`50ms`从`commitLog`读取指定`topic`的定时消息
    1. `TimerEnqueueGetService`从`commitLog`读取得到定时主题的消息，并先将其放入`enqueuePutQueue`
@@ -282,6 +289,7 @@ RocketMQ发送延时消息时先把消息按照延迟时间段发送到指定的
 
 ::: details 答案2
 答：消费者端创建多个内存队列，具有相同`key`的数据都路由到同一个内存队列；然后每个线程分别消费一个内存队列即可，这样可以保证多个顺序的同时尽可能提高吞吐量
+
 ![shunxu.png](/post/message-queue/shunxu.png)
 :::
 
@@ -319,11 +327,13 @@ MsgBroker消息服务端在处理消息时会进行埋点，轨迹数据就在�
 #### 高可用
 
 数据备份和故障转移
+
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20441/1666871933931-97904c34-ab95-4778-9266-8a724d652213.png#clientId=uecce1891-4c1f-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=242&id=ue475ed04&margin=%5Bobject%20Object%5D&name=image.png&originHeight=483&originWidth=1037&originalType=binary&ratio=1&rotation=0&showTitle=false&size=59699&status=done&style=none&taskId=u85dd854e-7f54-4fe9-8d6c-addca350b18&title=&width=518.5)
 
 ##### 消费一致性
 
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20441/1666873658825-a41e31e0-f7dd-44e7-910c-f1a497841dd2.png#clientId=uecce1891-4c1f-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=153&id=ubf45f24c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=306&originWidth=1080&originalType=binary&ratio=1&rotation=0&showTitle=false&size=155906&status=done&style=none&taskId=ud3f002cb-af85-4049-9add-af69a19790c&title=&width=540)
+
 LogEndOffset：每个partition的log最后一条Message的位置。
 HighWatermark：取最小LEO，consumer能够看到的此partition的位置。
 
@@ -342,16 +352,20 @@ HighWatermark：取最小LEO，consumer能够看到的此partition的位置。
 
 为了提升整体的吞吐量与提供跨副本组的高可用能力，RocketMQ 服务端一般会为单个 Topic 创建多个逻辑分区，即在多个副本组上各自维护部分分区 (
 Partition)，我们把它称为队列 (MessageQueue)。同一个副本组上同一个 Topic 的队列数相同并从 0 开始连续编号，不同副本组上的 MessageQueue 数量可以不同。
+
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20156646/1667211128802-1ebe1226-c430-4b6b-a95b-64ae84602146.png#clientId=u732f2838-f0ad-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=610&id=u13a63bf6&margin=%5Bobject%20Object%5D&name=image.png&originHeight=610&originWidth=750&originalType=binary&ratio=1&rotation=0&showTitle=false&size=217091&status=done&style=none&taskId=u1a163547-d3c6-45a3-bacb-68c9b9605a3&title=&width=750)
+
 每个Topic在Broker上会划分成几个逻辑队列，每个逻辑队列保存一部分消息数据。从上面模型可以看出，要解决消费并发，就是要利用Queue,一个Topic可以分出更多的queue,每一个queue可以存放在不同的硬件上来提高并发。
 
 ##### 2. 持久化
 
 在RocketMQ中消息刷盘主要可以分为同步刷盘和异步刷盘两种。
+
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20156646/1667301973880-fbab5567-a642-42b6-8ead-7fa8e666e23d.png#clientId=ub92ab98a-bea2-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=540&id=u5e5e4647&margin=%5Bobject%20Object%5D&name=image.png&originHeight=908&originWidth=583&originalType=binary&ratio=1&rotation=0&showTitle=false&size=48292&status=done&style=none&taskId=u1e3a47a0-19e3-4baa-b8f2-559591abd3e&title=&width=347)
 消息写入内存的PAGECACHE后，立刻通知刷盘线程刷盘，然后等待刷盘完成，刷盘线程执行完成后唤醒等待的线程，返回消息写成功的状态。
 
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20156646/1667302024113-a2ca21dc-b78c-4e84-a005-2a84c19c0f75.png#clientId=ub92ab98a-bea2-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=592&id=ud39bf6fa&margin=%5Bobject%20Object%5D&name=image.png&originHeight=906&originWidth=542&originalType=binary&ratio=1&rotation=0&showTitle=false&size=49898&status=done&style=none&taskId=uc5830126-bfa6-4900-9880-40955d7f100&title=&width=354)
+
 在返回写成功状态时，消息可能只是被写入了内存的PAGECACHE，写操作的返回快，吞吐量大；当内存里的消息量积累到一定程度时，统一触发写磁盘操作，快速写入。
 
 ##### 3. 消息发送
@@ -371,6 +385,7 @@ Slave 的 Broker。
 
 批量消息是指将多条小的消息合并成一个批量消息，一次发送出去。这样的好处是可以减少网络IO，提升吞吐量。
 比如说原本我有三条消息,如果三条消息分三次发的话,会走三次网络IO,如果我给三条消息整成一起发送,这样就走一次网络了。
+
 ![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2022/png/20156646/1667304196521-865cb3ee-ab0d-4c62-90e5-7b6cf5bff2f4.png#clientId=ub92ab98a-bea2-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=846&id=uec728440&margin=%5Bobject%20Object%5D&name=image.png&originHeight=846&originWidth=1402&originalType=binary&ratio=1&rotation=0&showTitle=false&size=220474&status=done&style=none&taskId=u2ccac6c3-73d4-409a-9418-120c3c6ec4c&title=&width=1402)
 
 ## 总结

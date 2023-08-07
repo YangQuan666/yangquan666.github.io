@@ -62,6 +62,7 @@ tags:
 1. 登录openwrt后台web界面
 2. 访问：**System** > **Software** > **Update lists**，更新软件源
 3. 在上方的红框中输入软件课程，然后在中意的软件右侧点击「Install」
+
    ![luci_install.png](/post/openwrt/luci_install.png)
 
 #### 手动上传安装包
@@ -75,6 +76,7 @@ ipk文件仓库列表：
 
 1. 下载好需要的`.ipk`安装包文件
 2. web页面访问：**System** > **Software** > **Upload Package**，上传`.ipk`安装包
+
    ![upload_ipk.png](/post/openwrt/upload_ipk.png)
 
 #### 命令行安装
@@ -121,19 +123,28 @@ ipk文件仓库列表：
     
     ```
 2. 分区之后的数据类似下图
+
    ![img_partition.png](/post/openwrt/img_partition.png)
 3. 使用u盘工具刷入镜像包，如: [Rufus](https://rufus.ie/zh/), [Etcher](https://www.balena.io/etcher)
 
 ### 磁盘分区
 
 1. 搜索下载`luci-app-diskman.ipk`
+
 2. 进入 **System** > **Disk Man** > **Edit**,（如页面报错，则需要安装`luci-compat`）
+
    ![diskman_edit.png](/post/openwrt/diskman_edit.png)
+
 3. 填写分区起始、结束位置（一般默认就行），点击「New」，完成分区新建
+
    ![diskman_new.png](/post/openwrt/diskman_new.png)
+
 4. 格式化分区为**ext4**格式
+
 5. **System** > **Software**，搜索并下载`block-mount`
+
 6. 进入 **System** > **Mount Points**，找到新建的分区，然后**Edit** > **Enable** > **Save&Apply**
+
    ![partition_enable.png](/post/openwrt/partition_enable.png)
 
 ## 推荐软件
@@ -149,6 +160,7 @@ ipk文件仓库列表：
 #### 启用
 
 2. **System** > **System** > **Language and Style**，选择Argon主题并保存
+
    ![argon_enable.png](/post/openwrt/argon_enable.png)
 
 ### Docker
@@ -236,9 +248,12 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 #### 软件配置
 
 1. 进入Samba配置页面： **Services** > **Network Shares**
+
 2. 共享目录，注意 `Path` 一定要选之前创建的，例如我的就是 `/opt/samba`，其他的可以参照我的截图来
+  
    ![shared_directories](/post/openwrt/shared_directories.png)
 3. 兼容苹果设备访问(建议打开)
+   
    ![macOS_compatible](/post/openwrt/macOS_compatible.png)
 
 #### 其他平台访问方式
@@ -246,27 +261,41 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 ##### Windows
 
 1. 在启用或关闭windows功能中打开 `SMB 1.0/CIFS 文件共享支持` 和 `SMB直通`
+   
    ![windows_samba_enable](/post/openwrt/windows_samba_enable.png)
+
 2. 打开文件资源管理器，右键「此电脑」-> 「映射网络驱动器」
+   
    ![windows_add_driver.png](/post/openwrt/windows_add_driver.png)
+
 3. 文件夹填入`\\192.168.1.1\samba`，然后回车
+
 4. 按照提示输入用户名和密码即可成功连接
+   
    ![windows_samba.png](/post/openwrt/windows_samba.png)
 
 ##### Mac
 
 1. 打开Finder
+
 2. 按下快捷键 `⌘ + k` 打开连接
+
 3. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
+
 4. 按照提示输入用户名和密码即可成功连接
+   
    ![mac_finder_samba](/post/openwrt/mac_finder_samba.png)
 
 ##### iPhone/iPad
 
 1. 打开文件 -> 浏览，然后点击右上角 更多 -> 连接服务器
+   
    ![iOS_samba_connect.png](/post/openwrt/iOS_samba_connect.png)
+
 2. 输入samba的服务器地址，例如 `smb://192.168.1.1`，点击连接
+
 3. 按照提示输入用户名和密码即可成功连接
+
    ![iOS_samba_display.png](/post/openwrt/iOS_samba_display.png)
 
 ### Aria2
@@ -282,11 +311,17 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 #### 配置
 
 1. 在 **Basic Options** 中开启Aria服务，并设置下载目录，这里我是下载到samba路径下方便分享
+   
    ![aria_enable.png](/post/openwrt/aria_enable.png)
+
 2. 在 RPC Options 生成RPC令牌
+   
    ![aria2_rpc.png](/post/openwrt/aria2_rpc.png)
+
 3. 返回 Basic Options ，点击上方的“WEBUI-ARIA2”按钮
+
     1. 设置 > 连接设置中填写aria2服务的ip、端口、rpc密钥
+   
        ![aria2_webui.png](/post/openwrt/aria2_webui.png)
     2. 保存连接配置
     3. 现在可以试试下载一个url文件或者BT种子
@@ -302,10 +337,15 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 #### PC设置
 
 1. 在 Windows 10 中，运行 > ncpa.cpl 打开「网络连接」设置，然后找到当前在使用的有线网卡，右键点击「属性」：
+   
    ![pc_etherwake.png](/post/openwrt/pc_etherwake.png)
+
 2. 然后选择「配置」：
+   
    ![pc_etherwake2.png](/post/openwrt/pc_etherwake2.png)
+
 3. 在随后弹出的面板中找到「电源管理」，勾选「允许此设备唤醒计算机」以及「只允许幻数据包唤醒计算机」
+   
    ![pc_etherwake3.png](/post/openwrt/pc_etherwake3.png)
 
 #### 主板设置
@@ -322,14 +362,19 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 #### 测试唤醒
 
 1. **Service** > **Wake On LAN**
+
 2. 选择网口和待唤醒的主机IP，点击「WAKE UP HOST」
 
 #### iOS
 
 1. **捷径** > **新建快捷指令** > **添加操作**，选择「通过SSH运行脚本」
+
 2. 填写脚本代码: `etherwake -D ${需要唤醒的MAC地址}`
+
 3. 填写ssh连接信息
+   
    ![wakeup_shortcut.png](/post/openwrt/wakeup_shortcut.png)
+
 4. 之后需要唤醒电脑时：「嘿Siri，唤醒电脑」
 
 ### [OpenClash](https://github.com/vernesong/OpenClash)
@@ -339,6 +384,7 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 #### 安装
 
 1. 登录路由器后台，比如 `ssh root@192.168.1.1`
+
 2. 下载安装前依赖：
    ```shell
     #如果是新的nftables
@@ -351,7 +397,9 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
     ```
 3. 在[OpenClash Release页面](https://github.com/vernesong/OpenClash/releases)找到最新版本的ipk安装包，复制连接地址
    下载安装包: `wget https://github.com/vernesong/OpenClash/releases/download/v0.45.110-beta/luci-app-openclash_0.45.110-beta_all.ipk -O luci-app-openclash.ipk`
+
 4. 安装OpenClash: `opkg install ./luci-app-openclash.ipk`
+
 5. 在 **Services** > **OpenClash** 中即可找到
 
 #### 配置
@@ -359,13 +407,16 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 1. 下载clash内核
     1. **OpenClash** > **Plugin Setting** > **Version Update**
     2. 找到如图位置，点击即可下载最新版clash内核
+       
        ![openclash_download.png](/post/openwrt/openclash_download.png)
 2. 添加clash订阅
     1. **OpenClash** > **Config Subscribe** > **ADD**
+       
        ![openclash_subscribe_add.png](/post/openwrt/openclash_subscribe_add.png)
     2. 在`Subscribe Address`中填写自己的clash订阅地址并点击`COMMIT SETTING`保存
 3. 点击OpenClash首页左下角“ENABLE OPENCLASH”即可启动
 4. 点击中间的“OPEN PANEL”可以访问clash前端UI面板
+   
    ![openclash_enable.png](/post/openwrt/openclash_enable.png)
 
 ### [Cloudreve](https://docs.cloudreve.org/)
@@ -413,9 +464,13 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 #### 配置离线下载
 
 1. 浏览器访问`192.168.1.1:5212`，使用admin账号登录
+   
    ![cloudreve_login.png](/post/openwrt/cloudreve_login.png)
+
 2. 登录后点右上角**头像** > **管理面板** > **离线下载节点**，修改主节点
+
 3. 在离线下载部分填写Aria2对应的信息，保存后即可使用离线下载功能
+   
    ![cloudreve_login.png](/post/openwrt/cloudreve_aria2.png)
 
 ### 网易UU加速器
@@ -428,7 +483,9 @@ docker run -v /myredis/conf:/usr/local/etc/redis --name myredis redis redis-serv
 #### 启用
 
 1. 勾选「enable」，保存并应用
+   
    ![uugamebooster.png](/post/openwrt/uugamebooster.png)
+
 2. 然后使用手机APP即可进行加速
 
 其他加速器如：灵缇加速器、迅游加速器等等，步骤都是类似的

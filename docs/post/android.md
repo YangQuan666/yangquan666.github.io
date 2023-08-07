@@ -45,7 +45,9 @@ tags:
 2. 重新到fastboot模式，命令`adb reboot bootloader`
 3. 解锁命令`fastboot flashing unlock`
 4. 手机选择"UNLOCK THE BOOTLOADER"(音量键选择，电源键确定)
+
    ![oem-lock.jpg](/post/android/oem-lock.jpg)
+
 5. 解锁完成，等待开机（第一次开机会有点慢）
 
 ### 解锁后有什么问题？
