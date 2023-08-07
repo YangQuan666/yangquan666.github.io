@@ -100,10 +100,12 @@ export default {
         config: (md: MarkdownIt) => {
             md.renderer.rules.image = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
                 const token = tokens[idx]
-                const url = token.attrGet('src')
-                const alt = token.attrGet('alt')
-                // return `<q-img src="${url}" alt="${alt}" style="max-height: 400px" loading="lazy" fit="contain"/>`
-                return `<div><img src="${url}" alt="${alt}" style="max-height: 400px" loading="lazy"/></div>`
+                if(token.type === 'image' && token.tag === 'img'){
+                    const url = token.attrGet('src')
+                    // return `<q-img src="${url}" style="max-height: 400px" loading="lazy" fit="contain"/>`
+                    return `<img src="${url}" style="max-height: 400px" loading="lazy"/>`
+                }
+                return self.renderToken(tokens, idx, options, env)
             }
             // md.renderer.rules.table_open = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
             //     return '<q-markup-table separator="cell"><table>'
