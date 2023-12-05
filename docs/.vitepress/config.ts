@@ -1,5 +1,5 @@
 import {buildSummary} from './theme/composables/metadata'
-import {biAlipay, biDiscord, biGithub, biMastodon} from '@quasar/extras/bootstrap-icons'
+import {biAlipay, biDiscord, biGithub} from '@quasar/extras/bootstrap-icons'
 import {version} from '../../package.json'
 import Renderer from 'markdown-it/lib/renderer';
 import Token from 'markdown-it/lib/token';
@@ -98,14 +98,14 @@ export default {
     },
     markdown: {
         config: (md: MarkdownIt) => {
-            md.renderer.rules.image = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
+            md.renderer.rules.image = (tokens: Token[], idx: number, options: MarkdownIt.Options, self: Renderer) => {
                 const token = tokens[idx]
                 if(token.type === 'image' && token.tag === 'img'){
                     const url = token.attrGet('src')
                     // return `<q-img src="${url}" style="max-height: 400px" loading="lazy" fit="contain"/>`
                     return `<img src="${url}" style="max-height: 400px" loading="lazy"/>`
                 }
-                return self.renderToken(tokens, idx, options, env)
+                return self.renderToken(tokens, idx, options)
             }
             // md.renderer.rules.table_open = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
             //     return '<q-markup-table separator="cell"><table>'
@@ -113,6 +113,8 @@ export default {
             // md.renderer.rules.table_close = (tokens: Token[], idx: number, options: MarkdownIt.Options, env: any, self: Renderer) => {
             //     return '</table></q-markup-table>'
             // }
-        }
+        },
+        // theme: { light: 'github-light', dark: 'github-dark' }
+        theme: 'github-dark-dimmed'
     }
 }
