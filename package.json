@@ -18,17 +18,17 @@
     "@types/node": "^18.11.18",
     "front-matter": "^4.0.2",
     "sitemap": "^7.1.1",
-    "vitepress": "^1.0.0-beta.7",
-    "vue": "^3.3.4"
+    "vitepress": "^1.0.0-rc.31",
+    "vue": "^3.3.10"
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.5",
-    "algoliasearch": "^4.17.0",
-    "github-markdown-css": "^5.2.0",
-    "quasar": "^2.12.2",
+    "@quasar/extras": "^1.16.9",
+    "algoliasearch": "^4.20.0",
+    "github-markdown-css": "^5.4.0",
+    "quasar": "^2.14.1",
     "sass": "^1.57.1",
     "scss": "^0.2.4",
-    "vue-instantsearch": "^4.8.9"
+    "vue-instantsearch": "^4.12.1"
   },
   "packageManager": "yarn@3.5.0"
 }
