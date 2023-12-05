@@ -29,6 +29,5 @@
     "sass": "^1.57.1",
     "scss": "^0.2.4",
     "vue-instantsearch": "^4.12.1"
-  },
-  "packageManager": "yarn@3.5.0"
+  }
 }
