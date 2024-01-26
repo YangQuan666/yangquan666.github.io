@@ -1,0 +1,1 @@
+import{a7 as e,D as t,C as a}from"./chunks/framework.YixF1Q1-.js";const l=JSON.parse('{"title":"主页","description":"","frontmatter":{"title":"主页"},"headers":[],"relativePath":"index.md","filePath":"index.md","lastUpdated":1672191522000}'),n={name:"index.md"};function r(s,d,o,i,c,p){return a(),t("div")}const m=e(n,[["render",r]]);export{l as __pageData,m as default};
