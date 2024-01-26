@@ -6,25 +6,7 @@
   </q-img>
   <div class="row animate__animated animate__fadeIn">
     <div class="col-10 offset-1 col-sm-8 offset-sm-2">
-      <q-timeline layout="comfortable" class="gt-sm" color="secondary">
-        <q-timeline-entry heading>时间轴（{{summaries.length}}）</q-timeline-entry>
-        <q-timeline-entry
-            v-for="summary in summaries"
-            :title="summary.title"
-            :subtitle="summary.time"
-            side="left"
-        >
-          <div class="text-caption">{{ summary.excerpt }}</div>
-          <q-btn
-              flat
-              color="info"
-              @click="router.go(summary.link)"
-          >
-            阅读全文
-          </q-btn>
-        </q-timeline-entry>
-      </q-timeline>
-      <q-timeline layout="dense" class="lt-sm" color="secondary">
+      <q-timeline layout="dense" color="secondary">
         <q-timeline-entry heading>时间轴（{{summaries.length}}）</q-timeline-entry>
         <q-timeline-entry
             v-for="summary in summaries"
