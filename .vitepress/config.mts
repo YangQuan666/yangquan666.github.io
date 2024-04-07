@@ -5,5 +5,10 @@ export default defineConfig({
     title: "萨科的魔术盒",
     description: "YangQuan的个人博客网站",
     srcDir: "post",
-    srcExclude: []
+    srcExclude: [],
+    lastUpdated: true,
+    appearance: true,
+    markdown: {
+        theme: { light: 'github-light', dark: 'github-dark' }
+    }
 })

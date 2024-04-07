@@ -1,10 +1,17 @@
 {
-  "devDependencies": {
-    "vitepress": "^1.0.2"
-  },
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:preview": "vitepress preview",
+    "docs:deploy": "vitepress build && vitepress serve"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.11",
+    "quasar": "^2.15.2"
+  },
+  "devDependencies": {
+    "@quasar/vite-plugin": "^1.6.0",
+    "sass": "^1.74.1",
+    "vitepress": "^1.0.2"
   }
 }
