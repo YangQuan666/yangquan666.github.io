@@ -55,13 +55,13 @@
             v-for="item in nav"
             :key="item"
             :icon="item.icon"
-            :label="item.title"
-            :hide-expand-icon="!item.children"
+            :label="item.text"
+            :hide-expand-icon="!item.items"
             @click="drawerClick(item.link)"
             :header-class="{'text-primary': route.path === '/' && item.link === '/'}"
         >
           <q-item
-              v-for="child in item.children"
+              v-for="child in item.items"
               :key="child"
               @click="drawerClick(child.link)"
               :active="route.path.includes(child.link)"
@@ -70,7 +70,7 @@
           >
             <q-item-section avatar/>
             <q-item-section>
-              {{ child.title }}
+              {{ child.text }}
             </q-item-section>
             <q-item-section avatar>
               <q-icon :name="child.icon"/>

@@ -50,7 +50,6 @@ export default defineConfig({
             version: version
         }
     },
-    srcDir: "post",
     srcExclude: [],
     lastUpdated: true,
     appearance: true,
