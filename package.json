@@ -1,4 +1,8 @@
 {
+  "version": "1.0.0",
+  "author": "YangQuan666 <quark.yeung@icloud.com>",
+  "license": "GPL-3.0",
+  "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",

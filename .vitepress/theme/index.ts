@@ -3,7 +3,7 @@
 import Layout from './Layout.vue'
 import type {Theme} from 'vitepress'
 import './style.css'
-import {initQuasar} from './composables/quasar'
+import {initQuasar} from './composable/quasar'
 
 export default {
     Layout,
