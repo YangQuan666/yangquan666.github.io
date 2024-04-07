@@ -1,2 +1,27 @@
+/**
+ * Search Field
+ * -------------------------------------------------------------------------- */
+.q-field__marginal {
+    color: rgba(255, 255, 255, 1) !important;
+}
 
+.search-field {
+    transition: width .36s;
+    width: 50%;
+}
+
+@media (max-width: 1023.98px) {
+
+    .search-field {
+        width: 70%;
+    }
+
+    .search-field.search-closed {
+        width: 46px;
+    }
+
+    .search-field.search-closed .q-field__control {
+        background: transparent !important;
+    }
+}
 
