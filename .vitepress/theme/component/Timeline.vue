@@ -37,5 +37,4 @@ const $q = useQuasar()
 
 import { data as posts } from '../composable/post.data'
 
-console.log(posts)
 </script>

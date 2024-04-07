@@ -15,7 +15,7 @@
         {{ date.formatDate(page.lastUpdated, 'YYYY-MM-DD') }}更新
       </q-card-actions>
 
-      <Content ref="content" v-scroll="throttleOnScroll" class="markdown-body"/>
+      <Content ref="content" v-scroll="throttleOnScroll" class="vp-doc"/>
       <q-separator/>
 
       <q-card-actions>
