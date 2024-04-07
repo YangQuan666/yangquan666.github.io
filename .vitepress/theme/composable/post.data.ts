@@ -17,7 +17,10 @@ export default createContentLoader('post/*.md', {
                 page.src     // 原始 markdown 源
                 page.html    // 渲染的整页 HTML
                 page.excerpt // 渲染的摘录 HTML（第一个 `---` 上面的内容）
-                return page.frontmatter
+                return {
+                    url: page.url,
+                    ...page.frontmatter,
+                }
             })
     }
 })

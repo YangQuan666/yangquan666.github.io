@@ -84,8 +84,8 @@
     <q-page-container>
       <q-page padding>
                 <Timeline v-if="frontmatter.home"/>
-        <!--        <Post v-else-if="route.path.startsWith('/post')"/>-->
-        <!--        <Content v-else/>-->
+                <Post v-else-if="route.path.startsWith('/post')"/>
+                <Content v-else/>
       </q-page>
     </q-page-container>
 
@@ -107,7 +107,7 @@ import {ref} from 'vue'
 import {useData, useRoute, useRouter} from 'vitepress'
 import {useQuasar} from 'quasar'
 
-// import Post from './component/Post.vue'
+import Post from './component/Post.vue'
 import Timeline from './component/Timeline.vue'
 import Toolbar from './component/Toolbar.vue'
 import {progress} from './composable/store'

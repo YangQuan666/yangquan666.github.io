@@ -18,7 +18,7 @@
           <q-btn
               flat
               color="info"
-              @click="router.go(post.link)"
+              @click="router.go(post.url)"
           >
             阅读全文
           </q-btn>
