@@ -55,5 +55,8 @@ export default defineConfig({
     appearance: true,
     markdown: {
         theme: { light: 'github-light', dark: 'github-dark' }
+    },
+    sitemap: {
+        hostname: 'https://yangquan.netlify.app'
     }
 })
