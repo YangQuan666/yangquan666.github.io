@@ -8,13 +8,14 @@
     <div class="col-12 col-sm-10 offset-sm-1">
 
       <q-card-actions>
-        <q-icon name="schedule"/>
-        预计阅读{{ readTime }}分钟
+        <q-chip outline color="deep-orange" text-color="white" icon="event">
+          预计阅读{{ readTime }}分钟
+        </q-chip>
         <q-space/>
-        <q-icon name="update"/>
-        {{ date.formatDate(page.lastUpdated, 'YYYY-MM-DD') }}更新
+        <q-chip outline color="deep-orange" text-color="white" icon="event">
+          {{ date.formatDate(page.lastUpdated, 'YYYY-MM-DD') }}更新
+        </q-chip>
       </q-card-actions>
-
       <Content ref="content" v-scroll="throttleOnScroll" class="vp-doc"/>
       <q-separator/>
 
