@@ -11,6 +11,7 @@
       </h4>
     </div>
   </v-parallax>
+  <Content/>
 </template>
 
 <script setup>
