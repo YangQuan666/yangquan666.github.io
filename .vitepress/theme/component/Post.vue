@@ -11,7 +11,7 @@
       </h4>
     </div>
   </v-parallax>
-  <Content/>
+  <Content class="vp-doc"/>
 </template>
 
 <script setup>
