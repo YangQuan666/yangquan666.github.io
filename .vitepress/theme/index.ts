@@ -10,7 +10,7 @@ import { createVuetify } from 'vuetify'
 const vuetify = createVuetify({ components, directives})
 
 export default {
-  ...DefaultTheme,
+  extends: DefaultTheme,
   Layout,
   enhanceApp({ app }) {
     app.use(vuetify)
