@@ -13,7 +13,7 @@
         </template>
       </v-app-bar>
       <v-navigation-drawer
-          class="bg-deep-purple"
+          class="bg-primary"
           v-model="drawer"
       >
         <template v-slot:prepend>
