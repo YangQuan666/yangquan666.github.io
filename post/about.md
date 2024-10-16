@@ -2,6 +2,7 @@
 title: 关于这个博客
 date: 2020-05-01
 excerpt: "我为什么想自己做一个博客，以及我是怎么搭建起来这个博客网站的"
+background: "/post/about/bg.png"
 tags:
   - blog
   - vitepress
@@ -9,11 +10,6 @@ tags:
   - quasar
   - markdown
 ---
-
-# 关于这个博客
-
-![blog.webp](/post/about/blog.webp)
-
 ## 背景
 
 众所周知，哪个程序员不希望有一个自己的博客网站呢，其实我刚毕业就一直想做一个个人博客网站，

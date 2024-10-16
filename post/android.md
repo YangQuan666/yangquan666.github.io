@@ -2,16 +2,11 @@
 title: 关于Android刷机相关的，看这篇文章就够了
 date: 2022-05-01
 excerpt: "本文探讨了Android刷机的基本概念和步骤，包括解锁引导程序、刷入自定义固件和恢复原厂系统等操作。通过详细的指导和注意事项，读者将了解如何安全地刷机、定制系统和解锁更多功能"
+background: "/post/android/fastboot.png"
 tags:
   - Android
   - 技术
 ---
-
-# 关于Android刷机相关的，看这篇文章就够了
-
-> 本文以OnePlus 6作为演示机型，刷入的ROM包为LineageOS，操作环境为MacOS
-
-![fastboot.png](/post/android/fastboot.png)
 
 ## 什么是刷机
 
