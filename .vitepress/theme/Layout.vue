@@ -68,8 +68,8 @@
           class="align-center justify-center"
       >
         <v-container>
-          <Timeline v-if="router.route.path === '/'"/>
-          <Post v-else-if="router.route.path.startsWith('/post')"/>
+          <Timeline v-if="page.frontmatter.layout === 'home'"/>
+          <Post v-else-if="page.frontmatter.layout === 'post'"/>
           <Content v-else/>
         </v-container>
       </v-main>
@@ -114,8 +114,8 @@ import Timeline from "./component/Timeline.vue"
 const router = useRouter()
 
 const drawer = ref()
-const {site} = useData()
-const {themeConfig, nav} = site.value
+const {site, page} = useData()
+const {themeConfig} = site.value
 
 ///----///
 const theme = ref('light')
@@ -123,7 +123,6 @@ const theme = ref('light')
 function changeTheme () {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
-const open = ['游戏']
 const icons = [
   'mdi-facebook',
   'mdi-twitter',

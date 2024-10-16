@@ -1,4 +1,5 @@
 ---
+layout: 'post'
 title: 新手如何入门钢琴
 date: 2022-05-01
 excerpt: "新手如何入门钢琴"
