@@ -7,9 +7,9 @@
   >
     <div class="text-center text-h3 font-weight-bold bg-secondary">When in doubt, use brute force.</div>
   </v-img>
-  <v-timeline align="center">
+  <v-timeline align="center" side="end">
     <v-timeline-item
-        v-for="({title, excerpt, time, url}, i) in summary"
+        v-for="({title, excerpt, date, url}, i) in summary"
         :key="i"
         dot-color="info"
         size="small"
@@ -17,7 +17,7 @@
       <template v-slot:opposite>
         <div
             class="pt-1 headline font-weight-bold"
-            v-text="time"
+            v-text="dateInstance.format(date,'fullDate')"
         ></div>
       </template>
       <v-card variant="flat">
@@ -40,10 +40,9 @@
 
 <script setup>
 import {useRouter} from 'vitepress'
+import {useDate} from 'vuetify'
 import { data as summary } from '../composable/post.data'
+
 const router = useRouter()
+const dateInstance = useDate()
 </script>
-
-<style scoped>
-
-</style>

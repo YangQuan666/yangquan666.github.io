@@ -36,7 +36,7 @@
                        value="home"
                        href="/"
                        @click="changeTheme"
-                       :active="router.route.path==='/'">
+                       :active="router.route.path===site.base">
           </v-list-item>
           <v-list-group :value="nav.title" v-for="nav in themeConfig.nav">
             <template v-slot:activator="{ props }">
@@ -111,11 +111,13 @@ import {useData, useRouter} from 'vitepress'
 import Post from './component/Post.vue'
 import Timeline from "./component/Timeline.vue"
 
-const router = useRouter()
-
 const drawer = ref()
 const {site, page} = useData()
 const {themeConfig} = site.value
+const router = useRouter()
+
+router.onBeforeRouteChange = ()=>{}
+router.onAfterRouteChanged = ()=>{}
 
 ///----///
 const theme = ref('light')
