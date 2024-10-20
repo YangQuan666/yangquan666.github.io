@@ -1,7 +1,7 @@
 <template>
   <v-img
       class="align-center justify-center"
-      height="400px"
+      height="500px"
       src="/map.svg"
       cover
   >

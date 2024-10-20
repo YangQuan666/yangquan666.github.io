@@ -1,23 +1,30 @@
 <template>
+  <v-navigation-drawer location="right">
+    <v-list>
+      <v-list-item title="Drawer right" value="item01"></v-list-item>
+    </v-list>
+  </v-navigation-drawer>
   <v-parallax
-      src="/background.svg" height="400px"
+      :src="frontmatter.background ? frontmatter.background : '/background.svg'" height="500px"
   >
+
     <div class="d-flex flex-column fill-height justify-center align-center">
-      <h1 class="text-h4 font-weight-thin mb-4">
-        Vuetify
-      </h1>
-      <h4 class="subheading">
-        Build your application today!
-      </h4>
+      <div class="text-h4 font-weight-bold mb-4">
+        {{ page.title }}
+      </div>
+      <div class="subheading">
+        <v-icon>mdi-calendar</v-icon>
+        最近更新: {{ date.format(page.lastUpdated, 'keyboardDate') }}
+      </div>
     </div>
   </v-parallax>
   <Content class="vp-doc"/>
 </template>
 
 <script setup>
+import {useData} from 'vitepress'
+import {useDate} from 'vuetify'
 
+const date = useDate()
+const {page, frontmatter} = useData()
 </script>
-
-<style scoped>
-
-</style>
