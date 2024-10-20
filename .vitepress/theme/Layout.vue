@@ -7,6 +7,11 @@
         </template>
         <v-avatar :image="themeConfig.logo"></v-avatar>
         <v-app-bar-title>{{ site.title }}</v-app-bar-title>
+        <v-progress-linear indeterminate absolute
+                           color="secondary"
+                           :active="loading"
+                           :indeterminate="loading"
+        ></v-progress-linear>
         <template v-slot:append>
           <v-btn icon="mdi-magnify"></v-btn>
           <v-btn icon="mdi-dots-vertical"></v-btn>
@@ -36,7 +41,7 @@
                        value="home"
                        href="/"
                        @click="changeTheme"
-                       :active="router.route.path===site.base">
+                       :active="route.path===site.base">
           </v-list-item>
           <v-list-group :value="nav.title" v-for="nav in themeConfig.nav">
             <template v-slot:activator="{ props }">
@@ -52,7 +57,7 @@
                 :append-icon="icon"
                 :title="title"
                 :value="title"
-                :active="router.route.path===link"
+                :active="route.path===link"
                 @click="router.go(link)"
             ></v-list-item>
           </v-list-group>
@@ -102,7 +107,8 @@
 </template>
 <script setup>
 import {ref} from 'vue'
-import {useData, useRouter} from 'vitepress'
+import {useData, useRouter, useRoute} from 'vitepress'
+import {useDisplay} from 'vuetify'
 import Post from './component/Post.vue'
 import Timeline from "./component/Timeline.vue"
 
@@ -110,13 +116,21 @@ const drawer = ref()
 const {site, page} = useData()
 const {themeConfig} = site.value
 const router = useRouter()
+const route = useRoute()
+const loading = ref(false)
+const display = useDisplay()
 
-router.onBeforeRouteChange = ()=>{}
-router.onAfterRouteChanged = ()=>{}
-
+router.onBeforeRouteChange = ()=>{
+  loading.value = true
+}
+router.onAfterRouteChanged = ()=>{
+  loading.value = false
+  if (display.mdAndDown) {
+    drawer.value = false
+  }
+}
 ///----///
 const theme = ref('light')
-
 function changeTheme () {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
