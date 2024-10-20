@@ -7,23 +7,21 @@
   >
     <div class="text-center text-h3 font-weight-bold bg-secondary">When in doubt, use brute force.</div>
   </v-img>
-  <v-timeline align="center" side="end">
-    <v-timeline-item
-        v-for="({title, excerpt, date, url}, i) in summary"
-        :key="i"
-        dot-color="info"
-        size="small"
-    >
+  <v-timeline align="start" side="end">
+    <v-timeline-item size="small"
+                     v-for="({title, excerpt, date, url}, i) in summary"
+                     :key="i"
+                     dot-color="info">
       <template v-slot:opposite>
         <div
             class="pt-1 headline font-weight-bold"
-            v-text="dateInstance.format(date,'fullDate')"
+            v-text="dateInstance.format(date,'keyboardDate')"
         ></div>
       </template>
-      <v-card variant="flat">
-        <v-card-title>{{ title }}</v-card-title>
-        <v-card-text>
-          <p>{{ excerpt }}</p>
+      <div class="d-flex">
+        <div>
+          <div class="text-h5 font-weight-bold">{{ title }}</div>
+          <div class="text-caption">{{ excerpt }}</div>
           <v-btn
               color="info"
               variant="plain"
@@ -31,8 +29,8 @@
           >
             阅读全文
           </v-btn>
-        </v-card-text>
-      </v-card>
+        </div>
+      </div>
     </v-timeline-item>
   </v-timeline>
 
@@ -41,7 +39,7 @@
 <script setup>
 import {useRouter} from 'vitepress'
 import {useDate} from 'vuetify'
-import { data as summary } from '../composable/post.data'
+import {data as summary} from '../composable/post.data'
 
 const router = useRouter()
 const dateInstance = useDate()
