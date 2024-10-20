@@ -7,7 +7,11 @@ import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
 import { createVuetify } from 'vuetify'
 
-const vuetify = createVuetify({ components, directives})
+const vuetify = createVuetify({
+  components, directives, locale: {
+    locale: 'zhHans',
+  },
+})
 
 export default {
   extends: DefaultTheme,
