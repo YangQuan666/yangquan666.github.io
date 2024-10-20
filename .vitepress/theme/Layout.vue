@@ -58,11 +58,6 @@
           </v-list-group>
         </v-list>
       </v-navigation-drawer>
-      <v-navigation-drawer location="right">
-        <v-list>
-          <v-list-item title="Drawer right" value="item01"></v-list-item>
-        </v-list>
-      </v-navigation-drawer>
 
       <v-main
           class="align-center justify-center"
