@@ -1,4 +1,5 @@
 import {defineConfig} from 'vitepress'
+import {tr} from "vuetify/locale";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -27,6 +28,7 @@ export default defineConfig({
                 ]
             }
         ],
+        outline: 'deep',
         footer:  {
             message: 'Released under the GPL License.',
             copyright: 'Copyright © 2019-present Yang Quan',
@@ -42,6 +44,9 @@ export default defineConfig({
         ssr: {
             noExternal: ['vuetify']
         }
+    },
+    markdown: {
+        headers: {level: [2, 3, 4, 5, 6]},
     },
     sitemap: {
         hostname: 'https://yangquan.netlify.app/'
