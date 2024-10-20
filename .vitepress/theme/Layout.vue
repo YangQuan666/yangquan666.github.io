@@ -125,7 +125,7 @@ router.onBeforeRouteChange = ()=>{
 }
 router.onAfterRouteChanged = ()=>{
   loading.value = false
-  if (display.mdAndDown) {
+  if (display.mdAndDown.value) {
     drawer.value = false
   }
 }
