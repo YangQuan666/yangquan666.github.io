@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer location="right">
+  <v-navigation-drawer location="right" v-model="drawer">
     <v-list>
       <v-list-item title="Drawer right" value="item01"></v-list-item>
     </v-list>
@@ -23,8 +23,10 @@
 
 <script setup>
 import {useData} from 'vitepress'
+import {ref} from 'vue'
 import {useDate} from 'vuetify'
 
 const date = useDate()
 const {page, frontmatter} = useData()
+const drawer = ref()
 </script>
