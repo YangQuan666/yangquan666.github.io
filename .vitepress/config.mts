@@ -6,6 +6,20 @@ export default defineConfig({
     title: "萨科的魔盒",
     description: "YangQuan的个人博客网站",
     lang: 'zh-CN',
+    head: [
+        [
+            'script',
+            {async: '', src: 'https://www.googletagmanager.com/gtag/js?id=TAG_ID'}
+        ],
+        [
+            'script',
+            {},
+            `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'TAG_ID');`
+        ]
+    ],
     themeConfig: {
         logo: '/logo.svg',
         author: 'Yang Quan',
