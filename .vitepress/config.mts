@@ -1,5 +1,4 @@
 import {defineConfig} from 'vitepress'
-import {tr} from "vuetify/locale";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
