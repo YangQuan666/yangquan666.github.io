@@ -7,6 +7,28 @@
         </template>
         <v-avatar :image="themeConfig.logo"></v-avatar>
         <v-app-bar-title>{{ site.title }}</v-app-bar-title>
+        <v-autocomplete
+            :items="country"
+            @update:search="search"
+            label="Search"
+            menu-icon=""
+            variant="solo"
+            style="min-width: 250px"
+            append-inner-icon="mdi-magnify"
+            required hide-details single-line
+            hide-no-data
+            loading
+        >
+          <template v-slot:loader>
+            <v-progress-linear
+                :active="searching"
+                color="success"
+                height="7"
+                indeterminate
+            ></v-progress-linear>
+          </template>
+        </v-autocomplete>
+        <v-spacer/>
         <v-progress-linear indeterminate absolute
                            color="secondary"
                            :active="loading"
@@ -14,7 +36,6 @@
         ></v-progress-linear>
         <template v-slot:append>
           <v-btn icon="mdi-magnify"></v-btn>
-          <v-btn icon="mdi-dots-vertical"></v-btn>
         </template>
       </v-app-bar>
       <v-navigation-drawer
@@ -120,10 +141,10 @@ const route = useRoute()
 const loading = ref(false)
 const display = useDisplay()
 
-router.onBeforeRouteChange = ()=>{
+router.onBeforeRouteChange = () => {
   loading.value = true
 }
-router.onAfterRouteChanged = ()=>{
+router.onAfterRouteChanged = () => {
   loading.value = false
   if (display.mdAndDown.value) {
     drawer.value = false
@@ -131,13 +152,29 @@ router.onAfterRouteChanged = ()=>{
 }
 ///----///
 const theme = ref('light')
-function changeTheme () {
+
+function changeTheme() {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
+
 const icons = [
   'mdi-facebook',
   'mdi-twitter',
   'mdi-linkedin',
   'mdi-instagram',
 ]
+
+const searching = ref(false)
+const country = ref(['recent'])
+
+const search = function (value) {
+  console.log('searching....' + value)
+  searching.value = true
+  setTimeout(() => {
+    country.value = ['beijing', 'hebei']
+    searching.value = false
+  }, 1000); // 延迟 1 秒
+
+}
+
 </script>

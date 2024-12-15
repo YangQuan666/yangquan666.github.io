@@ -19,6 +19,7 @@ export default defineConfig({
       gtag('config', 'TAG_ID');`
         ]
     ],
+    appearance: true,
     themeConfig: {
         logo: '/logo.svg',
         author: 'Yang Quan',
