@@ -10,15 +10,17 @@
         <v-autocomplete
             :items="country"
             @update:search="search"
-            label="Search"
-            menu-icon=""
-            variant="solo"
-            style="min-width: 250px"
             append-inner-icon="mdi-magnify"
-            required hide-details single-line
-            hide-no-data
+            density="comfortable"
+            menu-icon=""
+            placeholder="Search Google or type a URL"
+            style="min-width: 350px;"
+            variant="solo"
+            auto-select-first
+            item-props
+            hide-details
             loading
-        >
+          >
           <template v-slot:loader>
             <v-progress-linear
                 :active="searching"
@@ -165,13 +167,18 @@ const icons = [
 ]
 
 const searching = ref(false)
-const country = ref(['recent'])
+
+// TODO 从cookies中加载历史搜索信息，放到country中
+const country = ref([{
+          prependIcon: 'mdi-clock-outline',
+          title: 'recipe with chicken',
+        }])
 
 const search = function (value) {
   console.log('searching....' + value)
   searching.value = true
   setTimeout(() => {
-    country.value = ['beijing', 'hebei']
+    country.value = ['beijing', value]
     searching.value = false
   }, 1000); // 延迟 1 秒
 
