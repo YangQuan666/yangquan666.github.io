@@ -7,29 +7,8 @@
         </template>
         <v-avatar :image="themeConfig.logo"></v-avatar>
         <v-app-bar-title>{{ site.title }}</v-app-bar-title>
-        <v-autocomplete
-            :items="country"
-            @update:search="search"
-            append-inner-icon="mdi-magnify"
-            density="comfortable"
-            menu-icon=""
-            placeholder="Search Google or type a URL"
-            style="min-width: 350px;"
-            variant="solo"
-            auto-select-first
-            item-props
-            hide-details
-            loading
-          >
-          <template v-slot:loader>
-            <v-progress-linear
-                :active="searching"
-                color="success"
-                height="7"
-                indeterminate
-            ></v-progress-linear>
-          </template>
-        </v-autocomplete>
+        <Search/>
+<!--        <VPNavBarSearch class="search" />-->
         <v-spacer/>
         <v-progress-linear indeterminate absolute
                            color="secondary"
@@ -133,7 +112,8 @@ import {ref} from 'vue'
 import {useData, useRouter, useRoute} from 'vitepress'
 import {useDisplay} from 'vuetify'
 import Post from './component/Post.vue'
-import Timeline from "./component/Timeline.vue"
+import Timeline from './component/Timeline.vue'
+import Search from './component/Search.vue'
 
 const drawer = ref()
 const {site, page} = useData()
@@ -146,7 +126,7 @@ const display = useDisplay()
 router.onBeforeRouteChange = () => {
   loading.value = true
 }
-router.onAfterRouteChanged = () => {
+router.onAfterRouteChange = () => {
   loading.value = false
   if (display.mdAndDown.value) {
     drawer.value = false
@@ -165,23 +145,4 @@ const icons = [
   'mdi-linkedin',
   'mdi-instagram',
 ]
-
-const searching = ref(false)
-
-// TODO 从cookies中加载历史搜索信息，放到country中
-const country = ref([{
-          prependIcon: 'mdi-clock-outline',
-          title: 'recipe with chicken',
-        }])
-
-const search = function (value) {
-  console.log('searching....' + value)
-  searching.value = true
-  setTimeout(() => {
-    country.value = ['beijing', value]
-    searching.value = false
-  }, 1000); // 延迟 1 秒
-
-}
-
 </script>
