@@ -10,7 +10,7 @@ import { createVuetify } from 'vuetify'
 
 const vuetify = createVuetify({
   components, directives, locale: {
-    locale: 'zhHans',
+    // locale: 'zhHans',
   },
 })
 

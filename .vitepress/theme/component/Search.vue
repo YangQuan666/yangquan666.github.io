@@ -1,11 +1,11 @@
 <template>
   <v-autocomplete
-      :items="items"
+      :items="results"
       @update:search="search"
       append-inner-icon="mdi-magnify"
       density="comfortable"
       menu-icon=""
-      placeholder="Search Google or type a URL"
+      placeholder="搜索"
       style="min-width: 350px;"
       variant="solo"
       auto-select-first
@@ -21,29 +21,76 @@
           indeterminate
       ></v-progress-linear>
     </template>
+    <template v-slot:chip="{ props, item }">
+      <v-chip
+          v-bind="props"
+          :prepend-avatar="item.raw.avatar"
+          :text="item.raw.name"
+      ></v-chip>
+    </template>
+    <template v-slot:item="{ props, item }">
+      <v-list-item
+          v-bind="props"
+          title=""
+          @click="router.go(item.raw.id)"
+      >
+        <v-breadcrumbs :items="item.raw.terms" >
+          <template v-slot:divider>
+            <v-icon icon="mdi-chevron-right"></v-icon>
+          </template>
+        </v-breadcrumbs>
+      </v-list-item>
+    </template>
   </v-autocomplete>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script lang="ts" setup>
+import {markRaw, ref, shallowRef, watch} from 'vue'
+import MiniSearch from 'minisearch'
+import localSearchIndex from '@localSearchIndex'
+import type {SearchResult} from "minisearch"
+import {useData, useRouter} from 'vitepress'
+import type {Ref} from 'vue'
+import {computedAsync} from '@vueuse/core'
 
-// TODO 从cookies中加载历史搜索信息，放到items中
-const items = ref([{
-  prependIcon: 'mdi-clock-outline',
-  title: 'recipe with chicken',
-}])
-
+const router = useRouter()
+const searchIndexData = shallowRef(localSearchIndex)
 const searching = ref(false)
+const vitePressData = useData()
+const {localeIndex, theme} = vitePressData
+
+const searchIndex = computedAsync(async () =>
+    markRaw(
+        MiniSearch.loadJSON<Result>(
+            (await searchIndexData.value[localeIndex.value]?.())?.default,
+            {
+              fields: ['title', 'titles', 'text'],
+              storeFields: ['title', 'titles'],
+              searchOptions: {
+                fuzzy: 0.2,
+                prefix: true,
+                boost: {title: 4, text: 2, titles: 1},
+                ...theme.value.search.options?.miniSearch?.searchOptions
+              },
+              ...theme.value.search.options?.miniSearch?.options
+            }
+        )
+    )
+)
+
+const results: Ref<SearchResult[]> = shallowRef([])
 
 const search = function (value) {
-  console.log('searching....' + value)
   searching.value = true
-  setTimeout(() => {
-    // country.value = ['beijing', value]
+  computedAsync(async () => {
+    results.value = searchIndex.value.search(value).slice(0, 16)
     searching.value = false
-  }, 1000); // 延迟 1 秒
-
+  })
 }
+
+watch(results, (value, oldValue, onCleanup)=>{
+  console.log('watch',value)
+})
 </script>
 
 <style scoped>
