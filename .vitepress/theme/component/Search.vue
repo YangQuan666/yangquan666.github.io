@@ -2,6 +2,7 @@
   <v-autocomplete
       :items="results"
       @update:search="search"
+      :custom-filter="filter"
       append-inner-icon="mdi-magnify"
       density="comfortable"
       menu-icon=""
@@ -24,17 +25,18 @@
     <template v-slot:chip="{ props, item }">
       <v-chip
           v-bind="props"
-          :prepend-avatar="item.raw.avatar"
           :text="item.raw.name"
       ></v-chip>
     </template>
     <template v-slot:item="{ props, item }">
       <v-list-item
           v-bind="props"
+          :value="item.raw.id"
           title=""
           @click="router.go(item.raw.id)"
       >
-        <v-breadcrumbs :items="item.raw.terms" >
+      <!-- {{ item.raw }} -->
+        <v-breadcrumbs :items="item.raw.titles" >
           <template v-slot:divider>
             <v-icon icon="mdi-chevron-right"></v-icon>
           </template>
@@ -80,17 +82,21 @@ const searchIndex = computedAsync(async () =>
 
 const results: Ref<SearchResult[]> = shallowRef([])
 
-const search = function (value) {
+const search = function (str) {
+  if (str === "") {
+    return
+  }
   searching.value = true
   computedAsync(async () => {
-    results.value = searchIndex.value.search(value).slice(0, 16)
+    const resp = await searchIndex.value.search(str)
+    results.value = resp.slice(0, 16)
     searching.value = false
   })
 }
 
-watch(results, (value, oldValue, onCleanup)=>{
-  console.log('watch',value)
-})
+const filter = function (value, queryText, item) {
+  return true
+}
 </script>
 
 <style scoped>
