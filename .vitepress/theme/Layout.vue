@@ -8,7 +8,6 @@
         <v-avatar :image="themeConfig.logo"></v-avatar>
         <v-app-bar-title>{{ site.title }}</v-app-bar-title>
         <Search/>
-<!--        <VPNavBarSearch class="search" />-->
         <v-spacer/>
         <v-progress-linear indeterminate absolute
                            color="secondary"
@@ -126,7 +125,7 @@ const display = useDisplay()
 router.onBeforeRouteChange = () => {
   loading.value = true
 }
-router.onAfterRouteChange = () => {
+router.onAfterRouteChanged = () => {
   loading.value = false
   if (display.mdAndDown.value) {
     drawer.value = false
