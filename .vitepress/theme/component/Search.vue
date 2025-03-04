@@ -1,5 +1,6 @@
 <template>
   <v-autocomplete
+      v-model="val"
       :items="results"
       @update:search="search"
       :custom-filter="()=> true"
@@ -33,7 +34,6 @@
       <v-list-item
           v-bind="props"
           title=""
-          @click="router.go(item.raw.id)"
       >
         <v-breadcrumbs :items="item.raw.titles">
           <template v-slot:divider>
@@ -49,9 +49,7 @@
 import {markRaw, ref, shallowRef, watch} from 'vue'
 import MiniSearch from 'minisearch'
 import localSearchIndex from '@localSearchIndex'
-import type {SearchResult} from "minisearch"
 import {useData, useRouter} from 'vitepress'
-import type {Ref} from 'vue'
 import {computedAsync} from '@vueuse/core'
 
 const router = useRouter()
@@ -60,9 +58,16 @@ const searching = ref(false)
 const vitePressData = useData()
 const {localeIndex, theme} = vitePressData
 
+const val = ref()
+
+watch(val, (val) => {
+  if (val) {
+    router.go(val.id)
+  }
+})
 const searchIndex = computedAsync(async () =>
     markRaw(
-        MiniSearch.loadJSON<Result>(
+        MiniSearch.loadJSON(
             (await searchIndexData.value[localeIndex.value]?.())?.default,
             {
               fields: ['title', 'titles', 'text'],
@@ -79,9 +84,9 @@ const searchIndex = computedAsync(async () =>
     )
 )
 
-const results: Ref<SearchResult[]> = shallowRef([])
+const results = shallowRef([])
 
-const search = function (str) {
+const search = function (str: string) {
   searching.value = true
   computedAsync(async () => {
     const resp = searchIndex.value.search(str)
