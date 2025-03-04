@@ -4,7 +4,7 @@
       :items="results"
       @update:search="search"
       :custom-filter="()=> true"
-      append-inner-icon="mdi-magnify"
+      prepend-inner-icon="mdi-magnify"
       density="comfortable"
       menu-icon=""
       placeholder="键入 [/] 搜索"
@@ -16,7 +16,7 @@
       hide-no-data
       hide-details
       loading
-      closable-chips
+      clearable
   >
     <template v-slot:loader>
       <v-progress-linear
