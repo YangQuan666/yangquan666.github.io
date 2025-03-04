@@ -7,7 +7,8 @@
       append-inner-icon="mdi-magnify"
       density="comfortable"
       menu-icon=""
-      placeholder="搜索"
+      placeholder="键入 [/] 搜索"
+      ref="focused"
       style="min-width: 350px;"
       variant="solo"
       auto-select-first
@@ -53,7 +54,7 @@ import {markRaw, ref, shallowRef, watch} from 'vue'
 import MiniSearch from 'minisearch'
 import localSearchIndex from '@localSearchIndex'
 import {useData, useRouter} from 'vitepress'
-import {computedAsync} from '@vueuse/core'
+import {computedAsync, onKeyStroke} from '@vueuse/core'
 
 const router = useRouter()
 const searchIndexData = shallowRef(localSearchIndex)
@@ -104,4 +105,10 @@ const search = function (str: string) {
     searching.value = false
   })
 }
+
+const focused = ref()
+onKeyStroke('/', (e) => {
+  e.preventDefault()
+  focused.value.focus()
+})
 </script>
