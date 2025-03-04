@@ -15,6 +15,7 @@
       hide-no-data
       hide-details
       loading
+      closable-chips
   >
     <template v-slot:loader>
       <v-progress-linear
@@ -26,6 +27,8 @@
     </template>
     <template v-slot:chip="{ props, item }">
       <v-chip
+          label
+          color="primary"
           v-bind="props"
           :text="item.raw.name"
       ></v-chip>
