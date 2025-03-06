@@ -32,7 +32,7 @@
       </div>
       <div class="subheading">
         <v-icon>mdi-calendar</v-icon>
-        最近更新: {{ date.format(page.lastUpdated, 'keyboardDate') }}
+        最近更新: {{ useDateFormat(page.lastUpdated, 'YYYY-MM-DD') }}
       </div>
     </div>
   </v-parallax>
@@ -42,9 +42,8 @@
 <script setup>
 import {useData} from 'vitepress'
 import {ref} from 'vue'
-import {useDate} from 'vuetify'
+import {useDateFormat} from '@vueuse/core'
 
-const date = useDate()
 const {page, frontmatter} = useData()
 const drawer = ref()
 
