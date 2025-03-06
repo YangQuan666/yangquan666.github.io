@@ -3,11 +3,6 @@ layout: 'post'
 title: 从零开始写一个RPC框架
 date: 2023-04-09
 excerpt: "本文基于netty和springboot实现了一个基础的RPC框架服务，提供寻址、自动注入、远程调用等功能"
-tags:
-   - RPC
-   - Spring
-   - Netty
-   - Java
 ---
 
 > 一直以来都对RPC框架的实现很感兴趣，因此占用了几个下班时间，写出了这篇文章，希望能让读者对RPC框架的原理有个深刻的认识
