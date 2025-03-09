@@ -25,9 +25,9 @@ export default defineConfig({
         author: 'Yang Quan',
         signature: '一个爱折腾的程序员 )=￣ω￣=)',
         socialLinks: [
-            {icon: 'mdi-twitter', link: 'https://discord.gg/J8BVvnsWeB'},
             {icon: 'mdi-github', link: 'https://github.com/YangQuan666'},
-            {icon: 'mdi-email', link: 'quark.yeung@icloud.com'}
+            {icon: 'mdi-reddit', link: 'https://reddit.com/user/QuarkYeung'},
+            {icon: 'mdi-email', link: 'mailto:quark.yeung@icloud.com'}
         ],
         nav: [
             {

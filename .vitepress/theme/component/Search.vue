@@ -113,7 +113,5 @@ onKeyStroke('/', (e) => {
 })
 onKeyStroke('Escape', () => {
   focused.value.blur()
-  console.log('blur');
-  
 })
 </script>
