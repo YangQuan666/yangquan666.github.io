@@ -5,14 +5,13 @@
         <template v-slot:prepend>
           <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         </template>
-        <v-avatar :image="themeConfig.logo"></v-avatar>
-        <v-app-bar-title>{{ site.title }}</v-app-bar-title>
+        <v-avatar :image="themeConfig.logo" class="ma-2"></v-avatar>
+        <v-app-bar-title v-if="!display.mobile.value">{{ site.title }}</v-app-bar-title>
         <Search />
-        <v-spacer />
+        <v-spacer v-if="!display.mobile.value"/>
         <v-progress-linear indeterminate absolute color="secondary" :active="loading"
           :indeterminate="loading"></v-progress-linear>
         <template v-slot:append>
-          <v-btn icon="mdi-magnify"></v-btn>
           <v-btn icon="mdi-theme-light-dark" @click="isDark = !isDark"></v-btn>
         </template>
       </v-app-bar>

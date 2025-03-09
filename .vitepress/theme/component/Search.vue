@@ -9,7 +9,6 @@
       menu-icon=""
       placeholder="键入 [/] 搜索"
       ref="focused"
-      style="min-width: 350px;"
       variant="solo"
       auto-select-first
       item-props
