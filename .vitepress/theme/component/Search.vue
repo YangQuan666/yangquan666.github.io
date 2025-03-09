@@ -111,4 +111,9 @@ onKeyStroke('/', (e) => {
   e.preventDefault()
   focused.value.focus()
 })
+onKeyStroke('Escape', () => {
+  focused.value.blur()
+  console.log('blur');
+  
+})
 </script>

@@ -16,6 +16,7 @@
         ></v-progress-linear>
         <template v-slot:append>
           <v-btn icon="mdi-magnify"></v-btn>
+           <v-btn icon="mdi-theme-light-dark" @click="isDark= !isDark"></v-btn>
         </template>
       </v-app-bar>
       <v-navigation-drawer
@@ -41,7 +42,6 @@
                        title="主页"
                        value="home"
                        href="/"
-                       @click="changeTheme"
                        :active="route.path===site.base">
           </v-list-item>
           <v-list-group :value="nav.title" v-for="nav in themeConfig.nav">
@@ -107,7 +107,7 @@
   </v-responsive>
 </template>
 <script setup>
-import {ref} from 'vue'
+import {ref, watchPostEffect} from 'vue'
 import {useData, useRouter, useRoute} from 'vitepress'
 import {useDisplay} from 'vuetify'
 import Post from './component/Post.vue'
@@ -115,12 +115,17 @@ import Timeline from './component/Timeline.vue'
 import Search from './component/Search.vue'
 
 const drawer = ref()
-const {site, page} = useData()
+const {site, page, isDark} = useData()
 const {themeConfig} = site.value
 const router = useRouter()
 const route = useRoute()
 const loading = ref(false)
 const display = useDisplay()
+const theme = ref('light')
+
+watchPostEffect(() => {
+  theme.value = isDark.value ? 'dark' : 'light'
+})
 
 router.onBeforeRouteChange = () => {
   loading.value = true
@@ -130,12 +135,6 @@ router.onAfterRouteChanged = () => {
   if (display.mdAndDown.value) {
     drawer.value = false
   }
-}
-///----///
-const theme = ref('light')
-
-function changeTheme() {
-  theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
 
 const icons = [
