@@ -50,10 +50,9 @@
         </v-container>
       </v-main>
 
-      <v-footer name="footer" class="bg-indigo-lighten-1 text-center d-flex flex-column">
-        <div class="pt-0">Released under the GPLv3 License.</div>
-        <v-divider></v-divider>
-        <div>Copyright © 2019-present <strong>Vuetify</strong></div>
+      <v-footer name="footer" class="bg-indigo-lighten-1 d-flex flex-column">
+        <div class="pt-0">Released under the GPLv3 License.
+          Copyright © 2019-present <strong>{{ themeConfig.author }}</strong></div>
       </v-footer>
     </v-app>
   </v-responsive>
@@ -88,11 +87,4 @@ router.onAfterRouteChanged = () => {
     drawer.value = false
   }
 }
-
-const icons = [
-  'mdi-facebook',
-  'mdi-twitter',
-  'mdi-linkedin',
-  'mdi-instagram',
-]
 </script>
