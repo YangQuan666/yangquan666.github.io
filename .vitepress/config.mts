@@ -53,6 +53,7 @@ export default defineConfig({
         }
     },
     lastUpdated: true,
+    cleanUrls: true,
     vite: {
         // ...
         ssr: {
