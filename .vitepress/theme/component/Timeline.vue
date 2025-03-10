@@ -1,6 +1,8 @@
 <template>
   <v-img class="align-center justify-center" height="500px" src="/map.svg" cover>
-    <div class="text-center text-h3 font-weight-bold bg-secondary">When in doubt, use brute force.</div>
+    <div class="text-center text-h3 font-weight-bold">
+      <span class="bg-success"> When in doubt, use brute force.</span>
+    </div>
   </v-img>
   <v-timeline side="end">
     <v-timeline-item v-for="({ title, excerpt, date, url }, i) in summary" size="small" dot-color="primary">

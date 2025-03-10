@@ -5,10 +5,10 @@
         <template v-slot:prepend>
           <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         </template>
-        <v-avatar :image="themeConfig.logo" class="ma-2"></v-avatar>
+        <v-avatar :image="themeConfig.logo" @click="router.go('/')" variant="elevated" class="ma-2" />
         <v-app-bar-title v-if="!display.mobile.value">{{ site.title }}</v-app-bar-title>
         <Search />
-        <v-spacer v-if="!display.mobile.value"/>
+        <v-spacer v-if="!display.mobile.value" />
         <v-progress-linear indeterminate absolute color="secondary" :active="loading"
           :indeterminate="loading"></v-progress-linear>
         <template v-slot:append>
