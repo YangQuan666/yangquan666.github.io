@@ -32,13 +32,13 @@ export default defineConfig({
         nav: [
             {
                 title: '游戏', icon: 'mdi-gamepad-circle-up', items: [
-                    {title: 'Chrome Dinosaur', icon: 'mdi-google-downasaur', link: '/game/dinosaur/'},
+                    // {title: 'Chrome Dinosaur', icon: 'mdi-google-downasaur', link: '/game/dinosaur/'},
                     {title: '2048', icon: 'mdi-numeric-2-box-multiple', link: '/game/2048/'}
                 ]
             }, {
                 title: '工具', icon: 'mdi-toolbox', items: [
                     {title: '历史上的今天', icon: 'mdi-calendar-today', link: '/tool/history/'},
-                    {title: 'flag', icon: 'mdi-flag-checkered', link: '/tool/flag/'}
+                    // {title: 'flag', icon: 'mdi-flag-checkered', link: '/tool/flag/'}
                 ]
             }
         ],
