@@ -65,8 +65,8 @@ const flattenJson = (data) => {
 }
 
 const outline = flattenJson(page.value.headers)
-const activeStack = [] 
-const observer = new IntersectionObserver(entries => {
+const activeStack = []
+const observer = typeof window !== 'undefined' ? new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       activeStack.push(entry.target)
@@ -74,18 +74,18 @@ const observer = new IntersectionObserver(entries => {
       activeStack.splice(activeStack.indexOf(entry.target), 1)
     }
     const href = activeStack.at(0)?.querySelector('a')?.getAttribute('href')
-    activeItem.value = href || activeItem.value 
+    activeItem.value = href || activeItem.value
   })
-})
+}) : null
 
 onMounted(() => {
   activeItem.value = ''
-  observer.disconnect()
+  observer?.disconnect()
   const headers = [
     ...document.querySelectorAll('.vp-doc :where(h1,h2,h3,h4,h5,h6)')
   ]
   headers.forEach(item => {
-    item && observer.observe(item)
+    item && observer?.observe(item)
   })
 })
 </script>

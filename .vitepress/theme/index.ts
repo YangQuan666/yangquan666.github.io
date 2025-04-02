@@ -14,7 +14,6 @@ const vuetify = createVuetify({
   },
 })
 
-const IN_BROWSER = typeof window !== 'undefined'
 
 export default {
   extends: DefaultTheme,
