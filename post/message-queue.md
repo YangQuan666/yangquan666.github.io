@@ -185,7 +185,7 @@ tags:
    
    ![shijianlun1.png](/post/message-queue/shijianlun1.png)
 
-2. 假设初始的时候一个格子一秒，时间轮的指针定格在`0`。此时添加一个超时时间为`2ms`的任务, 那么这个任务将会插入到第二个时间格中
+2. 假设初始的时候一个格子`1ms`，时间轮的指针定格在`0`。此时添加一个超时时间为`2ms`的任务, 那么这个任务将会插入到第二个时间格中
    
    ![shijianlun2.gif](/post/message-queue/shijianlun2.gif)
 

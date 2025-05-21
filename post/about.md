@@ -71,7 +71,7 @@ background: "/post/about/bg.png"
             ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         ```
 
-### VitePress
+### VitePress [🔗](https://vitepress.dev)
 > VitePress 是一个静态站点生成器，专为构建快速、以内容为中心的站点而设计。简而言之，VitePress 获取用 Markdown 编写的内容，对其应用主题，并生成可以轻松部署到任何地方的静态 HTML 页面。
 > VitePress 支持很多丰富的功能，详细可以查看[官方文档](https://vitepress.dev/zh/)
 
@@ -94,8 +94,10 @@ npx vitepress init
   ...
 }
 ```
+### Vuetify.js [🔗](https://vuetifyjs.com/zh-Hans/)
+> Vuetify 是一个功能强大的 Vue 组件框架，每个组件都是根据 Google 的 Material Design 规范制作的，并提供数百个自定义选项，适合任何风格或设计。即使不是 Material Design也是如此。只需使用props、slots（插槽） 和 components（组件），或将它们结合使用，就能随心所欲地编写简洁或冗长的 Vue 模板。
 
-3. 可以直接引用我已经打包好的个人博客主题：`npm add -D vitepress-vuetify-theme @mdi/font`，该主题基于Vuetify.js创建，界面符合Material Design风格
+可以直接引用我已经打包好的个人博客主题：`npm add -D vitepress-vuetify-theme @mdi/font`
 
 ### 其他
 
