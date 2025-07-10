@@ -1,7 +1,7 @@
 <template>
   <v-img class="align-center justify-center" height="500px" src="/map.svg" cover>
     <div class="text-center text-h3 font-weight-bold">
-      <span class="bg-success"> When in doubt, use brute force.</span>
+      <span>Shit It Until You Make It</span>
     </div>
   </v-img>
   <v-timeline side="end">
