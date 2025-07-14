@@ -12,7 +12,7 @@
         <v-progress-linear indeterminate absolute color="secondary" :active="loading"
           :indeterminate="loading"></v-progress-linear>
         <template v-slot:append>
-          <v-btn icon="mdi-theme-light-dark" @click="isDark = !isDark"></v-btn>
+          <v-btn :icon="mdiThemeLightDark" @click="isDark = !isDark"></v-btn>
         </template>
       </v-app-bar>
       <v-navigation-drawer class="bg-primary" v-model="drawer">
@@ -28,7 +28,7 @@
         </template>
         <v-divider />
         <v-list nav>
-          <v-list-item prepend-icon="mdi-view-dashboard" title="主页" value="home" href="/"
+          <v-list-item :prepend-icon="mdiViewDashboard" title="主页" value="home" href="/"
             :active="route.path === site.base">
           </v-list-item>
           <v-list-group :value="nav.title" v-for="nav in themeConfig.nav">
@@ -59,6 +59,7 @@
 <script setup>
 import { ref, watchPostEffect } from 'vue'
 import { useData, useRouter, useRoute } from 'vitepress'
+import {mdiViewDashboard, mdiThemeLightDark}  from '@mdi/js'
 import { useDisplay } from 'vuetify'
 import Post from './component/Post.vue'
 import Timeline from './component/Timeline.vue'

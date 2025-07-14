@@ -4,7 +4,7 @@
       :items="results"
       @update:search="search"
       :custom-filter="()=> true"
-      prepend-inner-icon="mdi-magnify"
+      :prepend-inner-icon="mdiMagnify"
       density="comfortable"
       menu-icon=""
       placeholder="键入 [/] 搜索"
@@ -54,6 +54,7 @@ import MiniSearch from 'minisearch'
 import localSearchIndex from '@localSearchIndex'
 import {useData, useRouter} from 'vitepress'
 import {computedAsync, onKeyStroke} from '@vueuse/core'
+import {mdiMagnify}  from '@mdi/js'
 
 const router = useRouter()
 const searchIndexData = shallowRef(localSearchIndex)

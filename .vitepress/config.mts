@@ -1,4 +1,5 @@
 import {defineConfig} from 'vitepress'
+import {mdiGithub, mdiReddit, mdiEmail, mdiGamepadCircleUp, mdiNumeric2BoxMultiple, mdiToolbox, mdiCalendarToday} from '@mdi/js'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -6,18 +7,10 @@ export default defineConfig({
     description: "YangQuan的个人博客网站",
     lang: 'zh-CN',
     head: [
-    //     [
-    //         'script',
-    //         {async: '', src: 'https://www.googletagmanager.com/gtag/js?id=TAG_ID'}
-    //     ],
-    //     [
-    //         'script',
-    //         {},
-    //         `window.dataLayer = window.dataLayer || [];
-    //   function gtag(){dataLayer.push(arguments);}
-    //   gtag('js', new Date());
-    //   gtag('config', 'TAG_ID');`
-    //     ]
+        // [
+        //     'link',
+        //     { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css' }
+        // ]
     ],
     appearance: true,
     themeConfig: {
@@ -25,19 +18,19 @@ export default defineConfig({
         author: 'Yang Quan',
         signature: '一个爱折腾的程序员 )=￣ω￣=)',
         socialLinks: [
-            {icon: 'mdi-github', link: 'https://github.com/YangQuan666'},
-            {icon: 'mdi-reddit', link: 'https://reddit.com/user/QuarkYeung'},
-            {icon: 'mdi-email', link: 'mailto:quark.yeung@icloud.com'}
+            {icon: mdiGithub, link: 'https://github.com/YangQuan666'},
+            {icon: mdiReddit, link: 'https://reddit.com/user/QuarkYeung'},
+            {icon: mdiEmail, link: 'mailto:quark.yeung@icloud.com'}
         ],
         nav: [
             {
-                title: '游戏', icon: 'mdi-gamepad-circle-up', items: [
+                title: '游戏', icon: mdiGamepadCircleUp, items: [
                     // {title: 'Chrome Dinosaur', icon: 'mdi-google-downasaur', link: '/game/dinosaur/'},
-                    {title: '2048', icon: 'mdi-numeric-2-box-multiple', link: '/game/2048/'}
+                    {title: '2048', icon: mdiNumeric2BoxMultiple, link: '/game/2048/'}
                 ]
             }, {
-                title: '工具', icon: 'mdi-toolbox', items: [
-                    {title: '历史上的今天', icon: 'mdi-calendar-today', link: '/tool/history/'},
+                title: '工具', icon: mdiToolbox, items: [
+                    {title: '历史上的今天', icon: mdiCalendarToday, link: '/tool/history/'},
                     // {title: 'flag', icon: 'mdi-flag-checkered', link: '/tool/flag/'}
                 ]
             }
