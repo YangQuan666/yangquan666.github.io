@@ -11,9 +11,6 @@
         <v-spacer v-if="!display.mobile.value" />
         <v-progress-linear indeterminate absolute color="secondary" :active="loading"
           :indeterminate="loading"></v-progress-linear>
-        <template v-slot:append>
-          <v-btn :icon="mdiThemeLightDark" @click="isDark = !isDark"></v-btn>
-        </template>
       </v-app-bar>
       <v-navigation-drawer class="bg-primary" v-model="drawer">
         <template v-slot:prepend>
@@ -39,6 +36,16 @@
               :value="title" :active="route.path === link" @click="router.go(link)"></v-list-item>
           </v-list-group>
         </v-list>
+        <template v-slot:append>
+          <v-divider/>
+          <v-row justify="center" class="pa-2">            
+            <v-switch v-model="isDark" color="dark" hide-details>
+            <template v-slot:label>
+              <span class="text-caption">切换主题</span>
+            </template>
+          </v-switch>
+          </v-row>
+        </template>
       </v-navigation-drawer>
 
       <v-main class="align-center justify-center">
@@ -59,7 +66,7 @@
 <script setup>
 import { ref, watchPostEffect } from 'vue'
 import { useData, useRouter, useRoute } from 'vitepress'
-import {mdiViewDashboard, mdiThemeLightDark}  from '@mdi/js'
+import { mdiViewDashboard } from '@mdi/js'
 import { useDisplay } from 'vuetify'
 import Post from './component/Post.vue'
 import Timeline from './component/Timeline.vue'
