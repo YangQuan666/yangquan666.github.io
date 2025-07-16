@@ -6,9 +6,9 @@
           <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         </template>
         <v-avatar :image="themeConfig.logo" @click="router.go('/')" variant="plain" class="ma-2" />
-        <v-app-bar-title v-if="!display.mobile.value">{{ site.title }}</v-app-bar-title>
+        <v-app-bar-title v-if="display.mdAndUp.value">{{ site.title }}</v-app-bar-title>
         <Search />
-        <v-spacer v-if="!display.mobile.value" />
+        <v-spacer v-if="display.mdAndUp.value" />
         <v-progress-linear indeterminate absolute color="secondary" :active="loading"
           :indeterminate="loading"></v-progress-linear>
       </v-app-bar>
