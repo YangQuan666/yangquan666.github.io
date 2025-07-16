@@ -39,7 +39,7 @@
         <template v-slot:append>
           <v-divider/>
           <v-row justify="center" class="pa-2">            
-            <v-switch v-model="isDark" color="dark" hide-details>
+            <v-switch :model-value="theme === 'dark' ? true : false" color="dark" hide-details @update:model-value="isDark = !isDark">
             <template v-slot:label>
               <span class="text-caption">切换主题</span>
             </template>
