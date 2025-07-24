@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>萨科的魔盒</title>
+        <link>http://yangquan666.github.io</link>
+        <description>YangQuan的个人博客网站</description>
+        <lastBuildDate>Thu, 24 Jul 2025 12:12:51 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <image>
+            <title>萨科的魔盒</title>
+            <url>http://yangquan666.github.io/avatar.webp</url>
+            <link>http://yangquan666.github.io</link>
+        </image>
+        <copyright>Released under the GPLv3 License. Copyright © 2019-present, YangQuan666</copyright>
+        <item>
+            <title><![CDATA[使用两年半后，我仍然推荐你学双拼输入法]]></title>
+            <link>http://yangquan666.github.io/post/shuangpin.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/shuangpin.html</guid>
+            <pubDate>Mon, 20 May 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[你还在为打字速度还烦恼吗，五笔学了又忘，老是记不住字形怎么办，别担心，使用小鹤双拼帮你重拾打字信心]]></description>
+        </item>
+        <item>
+            <title><![CDATA[我读《毛选》的一点感悟]]></title>
+            <link>http://yangquan666.github.io/post/maoism.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/maoism.html</guid>
+            <pubDate>Sat, 10 Jun 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[小时候在大人的教育下崇拜他，少年时在敌人的忽悠下怀疑他，长大后在自己的探索中敬佩他]]></description>
+        </item>
+        <item>
+            <title><![CDATA[新手养猫指南]]></title>
+            <link>http://yangquan666.github.io/post/cat.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/cat.html</guid>
+            <pubDate>Mon, 01 May 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[如何养好一只猫，怎么理解猫的意图，人与猫如何和谐相处]]></description>
+        </item>
+        <item>
+            <title><![CDATA[从零开始写一个RPC框架]]></title>
+            <link>http://yangquan666.github.io/post/rpc.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/rpc.html</guid>
+            <pubDate>Sun, 09 Apr 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[本文基于netty和springboot实现了一个基础的RPC框架服务，提供寻址、自动注入、远程调用等功能]]></description>
+        </item>
+        <item>
+            <title><![CDATA[如何拥有更舒适的Apple生态]]></title>
+            <link>http://yangquan666.github.io/post/apple.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/apple.html</guid>
+            <pubDate>Sat, 01 Apr 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[结合自己使用Apple设备两年多的经验，分享一些可以提升iDevice设备幸福感的小功能]]></description>
+        </item>
+        <item>
+            <title><![CDATA[内容安全识别引擎的工作原理]]></title>
+            <link>http://yangquan666.github.io/post/infosec.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/infosec.html</guid>
+            <pubDate>Fri, 20 Jan 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[介绍下内容安全的识别引擎工作原理，包括路由、策略、能力、规则、审核、打标、回溯等]]></description>
+        </item>
+        <item>
+            <title><![CDATA[我的桌面搭建]]></title>
+            <link>http://yangquan666.github.io/post/desk-setup.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/desk-setup.html</guid>
+            <pubDate>Thu, 15 Dec 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[分享我的桌面都有哪些设备]]></description>
+        </item>
+        <item>
+            <title><![CDATA[你真的了解消息队列吗]]></title>
+            <link>http://yangquan666.github.io/post/message-queue.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/message-queue.html</guid>
+            <pubDate>Fri, 11 Nov 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[消息队列是一种高效的异步通信机制，能够在分布式系统中实现解耦、削峰填谷和可靠性等优势。我们将深入探讨消息队列的工作原理、应用场景以及常见的消息队列系统，为读者提供全面的了解和应用指导]]></description>
+        </item>
+        <item>
+            <title><![CDATA[几种常见的关键词匹配算法介绍]]></title>
+            <link>http://yangquan666.github.io/post/keyword-check.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/keyword-check.html</guid>
+            <pubDate>Sun, 10 Jul 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[本文介绍几种Java常见的关键词识别算法，包括暴力匹配、字典树和KMP。通过代码示例和详细解释，帮助读者深入理解和应用关键词识别算法在Java编程中的作用]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Xbox游戏机，你想知道的都在这]]></title>
+            <link>http://yangquan666.github.io/post/xbox.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/xbox.html</guid>
+            <pubDate>Wed, 01 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Xbox游戏机，你想知道的都在这]]></description>
+        </item>
+        <item>
+            <title><![CDATA[关于Android刷机相关的，看这篇文章就够了]]></title>
+            <link>http://yangquan666.github.io/post/android.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/android.html</guid>
+            <pubDate>Sun, 01 May 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[本文探讨了Android刷机的基本概念和步骤，包括解锁引导程序、刷入自定义固件和恢复原厂系统等操作。通过详细的指导和注意事项，读者将了解如何安全地刷机、定制系统和解锁更多功能]]></description>
+        </item>
+        <item>
+            <title><![CDATA[新手如何入门钢琴]]></title>
+            <link>http://yangquan666.github.io/post/piano.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/piano.html</guid>
+            <pubDate>Sun, 01 May 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[新手如何入门钢琴]]></description>
+        </item>
+        <item>
+            <title><![CDATA[面向小白的软路由入门指南]]></title>
+            <link>http://yangquan666.github.io/post/openwrt.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/openwrt.html</guid>
+            <pubDate>Sat, 30 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[OpenWrt是一款开源的路由器操作系统，能够把你们的路由器变成一台强大的网络工具。它的灵活性和可扩展性让用户能够定制路由器的功能，让路由器发挥最大的潜力。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[【FLAG】USB协议的前生今世]]></title>
+            <link>http://yangquan666.github.io/post/usb.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/usb.html</guid>
+            <pubDate>Thu, 10 Feb 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[USB-A, USB-C, Type-C, 雷电3这些传输协议还傻傻分不清楚吗，一文带你彻底弄懂这些概念]]></description>
+        </item>
+        <item>
+            <title><![CDATA[个人简历]]></title>
+            <link>http://yangquan666.github.io/post/hik-resume.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/hik-resume.html</guid>
+            <pubDate>Fri, 01 Jan 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[该简历是我在海康威视这家公司工作两年后写的，目的是通过这份简历找到一家互联网行业的工作 简历使用markdown语法编写，大致的分类比较明确，可以作为以后简历的参考]]></description>
+        </item>
+        <item>
+            <title><![CDATA[【FLAG】我组装了一台ITX小主机]]></title>
+            <link>http://yangquan666.github.io/post/computer.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/computer.html</guid>
+            <pubDate>Wed, 11 Nov 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[从基本的硬件介绍到主机的安装走线，希望能帮助你打造一台适合自己的完美主机]]></description>
+        </item>
+        <item>
+            <title><![CDATA[【FLAG】如何科学上网]]></title>
+            <link>http://yangquan666.github.io/post/great-firewall.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/great-firewall.html</guid>
+            <pubDate>Thu, 01 Oct 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[什么是VPN，在国内如何正确的科学上网，有哪些工具，如何购买相关的服务]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Java函数式编程入门]]></title>
+            <link>http://yangquan666.github.io/post/java-stream.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/java-stream.html</guid>
+            <pubDate>Tue, 01 Sep 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[本文介绍了Java函数式编程的基础知识和入门要点，读者将了解函数式编程的核心概念：Lambda表达式的使用、函数接口和Stream API等关键技术。帮助读者初步掌握Java函数式编程的基本原理和应用，为进一步深入学习提供基础。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[关于这个博客]]></title>
+            <link>http://yangquan666.github.io/post/about.html</link>
+            <guid isPermaLink="false">http://yangquan666.github.io/post/about.html</guid>
+            <pubDate>Fri, 01 May 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[我为什么想自己做一个博客，以及我是怎么搭建起来这个博客网站的]]></description>
+        </item>
+    </channel>
+</rss>
