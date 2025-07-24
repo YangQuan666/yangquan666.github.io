@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@mdi/js": "^7.4.47",
+    "feed": "^5.1.0",
     "vitepress": "^1.4.0"
   }
 }
