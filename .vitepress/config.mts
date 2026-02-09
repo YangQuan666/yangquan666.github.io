@@ -60,9 +60,9 @@ export default defineConfig({
     markdown: {
         headers: { level: [2, 3, 4, 5, 6] },
     },
-    // sitemap: {
-    //     hostname: hostname
-    // },
+    sitemap: {
+        hostname: hostname
+    },
     buildEnd: async (siteConfig: SiteConfig) => {
         const feed = new Feed({
             title: siteConfig.site.title,
