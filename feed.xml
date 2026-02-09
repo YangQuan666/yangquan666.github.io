@@ -2,71 +2,71 @@
 <rss version="2.0">
     <channel>
         <title>萨科的魔盒</title>
-        <link>http://yangquan666.github.io</link>
+        <link>https://yangquan666.github.io</link>
         <description>YangQuan的个人博客网站</description>
-        <lastBuildDate>Wed, 06 Aug 2025 10:27:49 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 09 Feb 2026 10:21:29 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <image>
             <title>萨科的魔盒</title>
-            <url>http://yangquan666.github.io/avatar.webp</url>
-            <link>http://yangquan666.github.io</link>
+            <url>https://yangquan666.github.io/avatar.webp</url>
+            <link>https://yangquan666.github.io</link>
         </image>
         <copyright>Released under the GPLv3 License. Copyright © 2019-present, YangQuan666</copyright>
         <item>
             <title><![CDATA[使用两年半后，我仍然推荐你学双拼输入法]]></title>
-            <link>http://yangquan666.github.io/post/shuangpin.html</link>
-            <guid isPermaLink="false">http://yangquan666.github.io/post/shuangpin.html</guid>
+            <link>https://yangquan666.github.io/post/shuangpin.html</link>
+            <guid isPermaLink="false">https://yangquan666.github.io/post/shuangpin.html</guid>
             <pubDate>Mon, 20 May 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[你还在为打字速度还烦恼吗，五笔学了又忘，老是记不住字形怎么办，别担心，使用小鹤双拼帮你重拾打字信心]]></description>
         </item>
         <item>
             <title><![CDATA[从零开始写一个RPC框架]]></title>
-            <link>http://yangquan666.github.io/post/rpc.html</link>
-            <guid isPermaLink="false">http://yangquan666.github.io/post/rpc.html</guid>
+            <link>https://yangquan666.github.io/post/rpc.html</link>
+            <guid isPermaLink="false">https://yangquan666.github.io/post/rpc.html</guid>
             <pubDate>Sun, 09 Apr 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[本文基于netty和springboot实现了一个基础的RPC框架服务，提供寻址、自动注入、远程调用等功能]]></description>
         </item>
         <item>
             <title><![CDATA[你真的了解消息队列吗]]></title>
-            <link>http://yangquan666.github.io/post/message-queue.html</link>
-            <guid isPermaLink="false">http://yangquan666.github.io/post/message-queue.html</guid>
+            <link>https://yangquan666.github.io/post/message-queue.html</link>
+            <guid isPermaLink="false">https://yangquan666.github.io/post/message-queue.html</guid>
             <pubDate>Fri, 11 Nov 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[消息队列是一种高效的异步通信机制，能够在分布式系统中实现解耦、削峰填谷和可靠性等优势。我们将深入探讨消息队列的工作原理、应用场景以及常见的消息队列系统，为读者提供全面的了解和应用指导]]></description>
         </item>
         <item>
             <title><![CDATA[几种常见的关键词匹配算法介绍]]></title>
-            <link>http://yangquan666.github.io/post/keyword-check.html</link>
-            <guid isPermaLink="false">http://yangquan666.github.io/post/keyword-check.html</guid>
+            <link>https://yangquan666.github.io/post/keyword-check.html</link>
+            <guid isPermaLink="false">https://yangquan666.github.io/post/keyword-check.html</guid>
             <pubDate>Sun, 10 Jul 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[本文介绍几种Java常见的关键词识别算法，包括暴力匹配、字典树和KMP。通过代码示例和详细解释，帮助读者深入理解和应用关键词识别算法在Java编程中的作用]]></description>
         </item>
         <item>
             <title><![CDATA[关于Android刷机相关的，看这篇文章就够了]]></title>
-            <link>http://yangquan666.github.io/post/android.html</link>
-            <guid isPermaLink="false">http://yangquan666.github.io/post/android.html</guid>
+            <link>https://yangquan666.github.io/post/android.html</link>
+            <guid isPermaLink="false">https://yangquan666.github.io/post/android.html</guid>
             <pubDate>Sun, 01 May 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[本文探讨了Android刷机的基本概念和步骤，包括解锁引导程序、刷入自定义固件和恢复原厂系统等操作。通过详细的指导和注意事项，读者将了解如何安全地刷机、定制系统和解锁更多功能]]></description>
         </item>
         <item>
             <title><![CDATA[面向小白的软路由入门指南]]></title>
-            <link>http://yangquan666.github.io/post/openwrt.html</link>
-            <guid isPermaLink="false">http://yangquan666.github.io/post/openwrt.html</guid>
+            <link>https://yangquan666.github.io/post/openwrt.html</link>
+            <guid isPermaLink="false">https://yangquan666.github.io/post/openwrt.html</guid>
             <pubDate>Sat, 30 Apr 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[OpenWrt是一款开源的路由器操作系统，能够把你们的路由器变成一台强大的网络工具。它的灵活性和可扩展性让用户能够定制路由器的功能，让路由器发挥最大的潜力。]]></description>
         </item>
         <item>
             <title><![CDATA[Java函数式编程入门]]></title>
-            <link>http://yangquan666.github.io/post/java-stream.html</link>
-            <guid isPermaLink="false">http://yangquan666.github.io/post/java-stream.html</guid>
+            <link>https://yangquan666.github.io/post/java-stream.html</link>
+            <guid isPermaLink="false">https://yangquan666.github.io/post/java-stream.html</guid>
             <pubDate>Tue, 01 Sep 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[本文介绍了Java函数式编程的基础知识和入门要点，读者将了解函数式编程的核心概念：Lambda表达式的使用、函数接口和Stream API等关键技术。帮助读者初步掌握Java函数式编程的基本原理和应用，为进一步深入学习提供基础。]]></description>
         </item>
         <item>
             <title><![CDATA[关于这个博客]]></title>
-            <link>http://yangquan666.github.io/post/about.html</link>
-            <guid isPermaLink="false">http://yangquan666.github.io/post/about.html</guid>
+            <link>https://yangquan666.github.io/post/about.html</link>
+            <guid isPermaLink="false">https://yangquan666.github.io/post/about.html</guid>
             <pubDate>Fri, 01 May 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[我为什么想自己做一个博客，以及我是怎么搭建起来这个博客网站的]]></description>
         </item>
