@@ -4,7 +4,7 @@ import { Feed } from 'feed'
 import path from 'path'
 import fs from 'fs'
 
-const hostname: string = 'http://yangquan666.github.io'
+const hostname: string = 'https://yangquan666.github.io'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
