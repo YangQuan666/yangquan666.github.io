@@ -11,6 +11,19 @@ export default defineConfig({
     title: "萨科的魔盒",
     description: "YangQuan的个人博客网站",
     lang: 'zh-CN',
+    srcExclude: [
+        'post/apple.md',
+        'post/cat.md',
+        'post/computer.md',
+        'post/desk-setup.md',
+        'post/great-firewall.md',
+        'post/hik-resume.md',
+        'post/infosec.md',
+        'post/maoism.md',
+        'post/piano.md',
+        'post/usb.md',
+        'post/xbox.md'
+    ],
     head: [
         // [
         //     'link',
