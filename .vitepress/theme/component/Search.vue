@@ -53,7 +53,7 @@ import {markRaw, ref, shallowRef, watch} from 'vue'
 import MiniSearch from 'minisearch'
 import localSearchIndex from '@localSearchIndex'
 import {useData, useRouter} from 'vitepress'
-import {computedAsync, onKeyStroke} from '@vueuse/core'
+import {onKeyStroke} from '@vueuse/core'
 import {mdiMagnify}  from '@mdi/js'
 
 const router = useRouter()
@@ -69,31 +69,50 @@ watch(val, (val) => {
     router.go(val.id)
   }
 })
-const searchIndex = computedAsync(async () =>
-    markRaw(
-        MiniSearch.loadJSON(
-            (await searchIndexData.value[localeIndex.value]?.())?.default,
-            {
-              fields: ['title', 'titles', 'text'],
-              storeFields: ['title', 'titles'],
-              searchOptions: {
-                fuzzy: 0.2,
-                prefix: true,
-                boost: {title: 4, text: 2, titles: 1},
-                ...theme.value.search.options?.miniSearch?.searchOptions
-              },
-              ...theme.value.search.options?.miniSearch?.options
-            }
-        )
-    )
-)
+let searchIndexPromise: Promise<MiniSearch> | undefined
+let searchRequestId = 0
+
+const getSearchIndex = () => {
+  if (!searchIndexPromise) {
+    searchIndexPromise = (async () => {
+      const loadIndex = searchIndexData.value[localeIndex.value]
+      if (!loadIndex) throw new Error('搜索索引不存在')
+
+      const indexData = (await loadIndex()).default
+      return markRaw(MiniSearch.loadJSON(indexData, {
+        fields: ['title', 'titles', 'text'],
+        storeFields: ['title', 'titles'],
+        searchOptions: {
+          fuzzy: 0.2,
+          prefix: true,
+          boost: {title: 4, text: 2, titles: 1},
+          ...theme.value.search.options?.miniSearch?.searchOptions
+        },
+        ...theme.value.search.options?.miniSearch?.options
+      }))
+    })()
+  }
+  return searchIndexPromise
+}
 
 const results = shallowRef([])
 
-const search = function (str: string) {
+const search = async (str: string) => {
+  const keyword = str?.trim()
+  const requestId = ++searchRequestId
+
+  if (!keyword) {
+    results.value = []
+    searching.value = false
+    return
+  }
+
   searching.value = true
-  computedAsync(async () => {
-    const resp = searchIndex.value.search(str)
+  try {
+    const searchIndex = await getSearchIndex()
+    if (requestId !== searchRequestId) return
+
+    const resp = searchIndex.search(keyword)
     results.value = resp.slice(0, 16)
     .sort((a, b) => b.score - a.score)
     .map((item) => ({
@@ -102,16 +121,20 @@ const search = function (str: string) {
       name: item.title,
       titles: [...item.titles, item.title],
     }))
-    searching.value = false
-  })
+  } catch (error) {
+    console.error(error)
+    if (requestId === searchRequestId) results.value = []
+  } finally {
+    if (requestId === searchRequestId) searching.value = false
+  }
 }
 
 const focused = ref()
 onKeyStroke('/', (e) => {
   e.preventDefault()
-  focused.value.focus()
+  focused.value?.focus()
 })
 onKeyStroke('Escape', () => {
-  focused.value.blur()
+  focused.value?.blur()
 })
 </script>

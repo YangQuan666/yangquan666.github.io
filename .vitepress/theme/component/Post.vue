@@ -36,11 +36,12 @@
 </template>
 
 <script setup>
-import { useData } from 'vitepress'
-import { ref, onMounted } from 'vue'
+import { useData, useRoute } from 'vitepress'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useDateFormat } from '@vueuse/core'
 
 const { page, frontmatter } = useData()
+const route = useRoute()
 const drawer = ref()
 const activeItem = ref('')
 const flattenJson = (data) => {
@@ -64,28 +65,38 @@ const flattenJson = (data) => {
   return result
 }
 
-const outline = flattenJson(page.value.headers)
+const outline = computed(() => flattenJson(page.value.headers ?? []))
 const activeStack = []
-const observer = typeof window !== 'undefined' ? new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      activeStack.push(entry.target)
-    } else if (activeStack.includes(entry.target)) {
-      activeStack.splice(activeStack.indexOf(entry.target), 1)
-    }
-    const href = activeStack.at(0)?.querySelector('a')?.getAttribute('href')
-    activeItem.value = href || activeItem.value
-  })
-}) : null
+let observer
 
-onMounted(() => {
+const observeHeaders = () => {
   activeItem.value = ''
+  activeStack.splice(0)
   observer?.disconnect()
+  observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !activeStack.includes(entry.target)) {
+        activeStack.push(entry.target)
+      } else if (!entry.isIntersecting && activeStack.includes(entry.target)) {
+        activeStack.splice(activeStack.indexOf(entry.target), 1)
+      }
+      const href = activeStack.at(0)?.querySelector('a')?.getAttribute('href')
+      activeItem.value = href || activeItem.value
+    })
+  })
+
   const headers = [
     ...document.querySelectorAll('.vp-doc :where(h1,h2,h3,h4,h5,h6)')
   ]
-  headers.forEach(item => {
-    item && observer?.observe(item)
-  })
+  headers.forEach(item => observer.observe(item))
+}
+
+onMounted(observeHeaders)
+
+watch(() => route.path, async () => {
+  await nextTick()
+  observeHeaders()
 })
+
+onBeforeUnmount(() => observer?.disconnect())
 </script>

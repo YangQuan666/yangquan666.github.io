@@ -12,11 +12,11 @@
                 <div class="pt-1 headline font-weight-bold" v-text="year + '年'"></div>
             </template>
             <v-card variant="text">
-                <div class="text-h6 font-weight-bold v-card-text" v-html="title"></div>
+                <div class="text-h6 font-weight-bold v-card-text">{{ title }}</div>
                 <v-card-subtitle v-if="display.mobile.value">{{ year + '年' }}</v-card-subtitle>
-                <v-card-text v-html="desc"></v-card-text>
+                <v-card-text>{{ desc }}</v-card-text>
                 <v-card-actions>
-                    <v-btn text :href="link" color="primary">更多</v-btn>
+                    <v-btn v-if="link" text :href="link" color="primary">更多</v-btn>
                 </v-card-actions>
             </v-card>
         </v-timeline-item>
@@ -32,6 +32,20 @@ const today = ref([])
 const loading = ref(true)
 const error = ref('')
 
+const toPlainText = (value) => {
+    const document = new DOMParser().parseFromString(String(value ?? ''), 'text/html')
+    return document.body.textContent ?? ''
+}
+
+const toSafeLink = (value) => {
+    try {
+        const url = new URL(value)
+        return url.protocol === 'https:' && url.hostname === 'baike.baidu.com' ? url.href : ''
+    } catch {
+        return ''
+    }
+}
+
 const fetchData = async () => {
     const date = new Date()
     const month = (date.getMonth() + 1).toString().padStart(2, '0')
@@ -40,7 +54,13 @@ const fetchData = async () => {
         const response = await fetch(`https://baike.baidu.com/cms/home/eventsOnHistory/${month}.json`)
         if (!response.ok) throw new Error('请求失败')
         const data = await response.json()
-        today.value = data?.[month]?.[month + day] ?? []
+        const events = data?.[month]?.[month + day] ?? []
+        today.value = events.map(event => ({
+            ...event,
+            title: toPlainText(event.title),
+            desc: toPlainText(event.desc),
+            link: toSafeLink(event.link)
+        }))
         if (today.value.length === 0) {
             error.value = '今天暂无历史事件数据'
         }
