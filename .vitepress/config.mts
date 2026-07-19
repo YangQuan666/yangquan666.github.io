@@ -12,6 +12,7 @@ export default defineConfig({
     description: "YangQuan的个人博客网站",
     lang: 'zh-CN',
     srcExclude: [
+        'AGENTS.md',
         'post/apple.md',
         'post/cat.md',
         'post/computer.md',

@@ -1,26 +1,45 @@
-// posts.data.js
-import {createContentLoader, ContentData} from 'vitepress'
+import { createContentLoader, type ContentData } from 'vitepress'
+
+interface ArticleSummary {
+    title: string
+    excerpt: string
+    date: string
+    formattedDate: string
+    url: string
+}
+
+const toTimestamp = (value: unknown) => {
+    const timestamp = new Date(value as string).getTime()
+    return Number.isNaN(timestamp) ? 0 : timestamp
+}
+
+const formatDate = (value: unknown) => {
+    const date = new Date(value as string)
+    if (Number.isNaN(date.getTime())) return '日期待补充'
+
+    const year = date.getUTCFullYear()
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0')
+    const day = String(date.getUTCDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+}
+
+const formatExcerpt = (value: unknown) => {
+    const excerpt = String(value).replace(/\s+/g, ' ').trim()
+    return excerpt.length > 90 ? `${excerpt.slice(0, 90)}…` : excerpt
+}
 
 export default createContentLoader('post/*.md', {
-    includeSrc: true, // 包含原始 markdown 源?
-    render: true,     // 包含渲染的整页 HTML?
-    excerpt: true,    // 包含摘录?
-    transform(rawData: ContentData[]) {
-        // 根据需要对原始数据进行 map、sort 或 filter
-        // 最终的结果是将发送给客户端的内容
+    transform(rawData: ContentData[]): ArticleSummary[] {
         return rawData
-            .sort((a, b) => {
-                return +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date)
-            })
-            .filter(a => a.frontmatter.display != false)
-            .map((page) => {
-                page.src     // 原始 markdown 源
-                page.html    // 渲染的整页 HTML
-                page.excerpt // 渲染的摘录 HTML（第一个 `---` 上面的内容）
-                return {
-                    url: page.url,
-                    ...page.frontmatter,
-                }
-            })
+            .filter(page => page.frontmatter.display !== false)
+            .filter(page => page.frontmatter.title && page.frontmatter.excerpt && page.frontmatter.date)
+            .sort((a, b) => toTimestamp(b.frontmatter.date) - toTimestamp(a.frontmatter.date))
+            .map(page => ({
+                title: String(page.frontmatter.title),
+                excerpt: formatExcerpt(page.frontmatter.excerpt),
+                date: String(page.frontmatter.date),
+                formattedDate: formatDate(page.frontmatter.date),
+                url: page.url
+            }))
     }
 })
