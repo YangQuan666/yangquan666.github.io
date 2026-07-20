@@ -32,7 +32,9 @@
       </div>
     </div>
   </v-parallax>
-  <Content class="vp-doc" />
+  <v-container>
+    <Content class="vp-doc" />
+  </v-container>
 </template>
 
 <script setup>

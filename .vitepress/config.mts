@@ -37,9 +37,9 @@ export default defineConfig({
         author: 'Yang Quan',
         signature: '一个爱折腾的程序员 )=￣ω￣=)',
         socialLinks: [
-            { icon: mdiGithub, link: 'https://github.com/YangQuan666' },
-            { icon: mdiRss, link: 'http://yangquan666.github.io/feed.xml' },
-            { icon: mdiEmail, link: 'mailto:quark.yeung@icloud.com' }
+            { icon: mdiGithub, link: 'https://github.com/YangQuan666', ariaLabel: 'GitHub' },
+            { icon: mdiRss, link: 'https://yangquan666.github.io/feed.xml', ariaLabel: 'RSS 订阅' },
+            { icon: mdiEmail, link: 'mailto:quark.yeung@icloud.com', ariaLabel: '发送邮件' }
         ],
         nav: [
             {

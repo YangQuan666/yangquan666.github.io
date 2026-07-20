@@ -17,23 +17,27 @@
   </v-parallax>
 
   <v-container class="py-10">
-    <v-row justify="center">
+    <v-row justify="center" class="mb-6">
       <v-col cols="12" lg="8">
-        <v-row align="center" justify="space-between" class="mb-6">
+        <v-row align="center" justify="space-between">
           <v-col cols="12" sm="auto">
-            <v-chip color="primary" variant="outlined" :prepend-icon="mdiPostOutline" class="mb-3">
-              文章归档
-            </v-chip>
             <v-card-title class="text-h4 font-weight-bold pa-0">最近更新</v-card-title>
             <v-card-subtitle class="text-body-1 pa-0 mt-2">持续记录值得分享的知识与经验</v-card-subtitle>
           </v-col>
           <v-col cols="12" sm="auto">
-            <v-chip variant="outlined" :prepend-icon="mdiBookOpenPageVariantOutline">
-              共 {{ summary.length }} 篇
-            </v-chip>
+            <v-card color="transparent" elevation="0" class="text-sm-end">
+              <v-card-subtitle class="pa-0">已发布文章</v-card-subtitle>
+              <v-card-title class="text-h4 font-weight-bold text-primary pa-0">
+                {{ summary.length }} 篇
+              </v-card-title>
+            </v-card>
           </v-col>
         </v-row>
+      </v-col>
+    </v-row>
 
+    <v-row justify="center">
+      <v-col cols="12" lg="8">
         <v-empty-state
           v-if="summary.length === 0"
           title="暂无文章"
@@ -93,7 +97,6 @@
 import { useRouter } from 'vitepress'
 import {
   mdiArrowRight,
-  mdiBookOpenPageVariantOutline,
   mdiCalendarMonth,
   mdiPostOutline
 } from '@mdi/js'

@@ -1,4 +1,5 @@
 <template>
+  <v-container>
     <div class="text-center text-h4 font-weight-bold ma-10">历史上今天都发生了什么？</div>
     <div v-if="loading" class="d-flex justify-center ma-10">
         <v-progress-circular color="primary" indeterminate></v-progress-circular>
@@ -21,6 +22,7 @@
             </v-card>
         </v-timeline-item>
     </v-timeline>
+  </v-container>
 </template>
 
 <script setup>
